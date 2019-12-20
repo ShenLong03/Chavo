@@ -1,0 +1,36 @@
+﻿@model Chavo.Web.Models.CustomerViewModel
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>@ViewBag.Title</h2>
+<h4>Customer</h4>
+<ol class="breadcrumb">
+    <li><a href="@Url.Action("Index","Home")">Inicio</a></li>
+    <li><a href="@Url.Action("Index")">Customers</a></li>
+    <li class="active">@ViewBag.Title</li>
+</ol>
+<hr />
+@using (Html.BeginForm("Edit", "Customers", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.CustomerId)
+    @Html.HiddenFor(model => model.CreateDate)
+    @Html.HiddenFor(model => model.Picture)
+    @Html.HiddenFor(model => model.BirthDate)
+    @Html.HiddenFor(model => model.UserName)
+
+    { Html.RenderPartial("_CustomerItems", Model); }
+    <div class="col-md-6">
+        <div class="form-horizontal">
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i>&nbsp;Save</button>
+                <a href="@Url.Action("Index","Account",new { userName=Model.UserName, control="Customers"})" class="btn btn-outline-primary"><i class="fa fa-user"></i>&nbsp;User</a>
+                <a href="@Url.Action("Index")" class="btn btn-secondary"><i class="fa fa-arrow-left"></i>&nbsp;To Back</a>
+            </div>
+        </div>
+    </div>
+}
+

@@ -1,0 +1,113 @@
+﻿@model Chavo.Web.Models.CustomerProductViewModel
+
+@{
+    ViewBag.Title = "Add Products";
+}
+
+<h4>@ViewBag.Title</h4>
+<h4>Customer</h4>
+<ol class="breadcrumb">
+    <li><a href="@Url.Action("Index","Home")">Inicio</a></li>
+    <li><a href="@Url.Action("Index")">Customers</a></li>
+    <li><a href="@Url.Action("Details", new { id=Model.CustomerId})">@Model.Customer.AllName</a></li>
+    <li class="active">@ViewBag.Title</li>
+</ol>
+<hr />
+@if (!string.IsNullOrEmpty(ViewBag.Message))
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        @ViewBag.Message.ToString()
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div> 
+}
+<div>
+    <div class="form-inline">
+        @Html.Editor(" ", new { htmlAttributes = new { @class = "form-control buscar0", @placeholder = "Buscar..." } })       
+        <a href="@Url.Action("Details", new { id=Model.CustomerId})" class="btn btn-secondary"><i class="fa fa-arrow-left"></i>&nbsp;To Back</a>
+    </div>
+</div>
+<hr />
+<div class="table-responsive">
+    <table class="table table-striped table-hover listIndex">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Products.FirstOrDefault().Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Products.FirstOrDefault().Picture)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Products.FirstOrDefault().Code)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Products.FirstOrDefault().Serie)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Products.FirstOrDefault().Model)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Products.FirstOrDefault().Age)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Products.FirstOrDefault().PriceAmount)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Products.FirstOrDefault().SubCategory.Category.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Products.FirstOrDefault().SubCategory.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Products.FirstOrDefault().Active)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Products)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @if (!string.IsNullOrEmpty(item.Picture))
+                    {
+                        <img src="@Url.Content(item.Picture)" alt="Picture Profile" class="img-thumbnail rounded-circle img-profile-sm" />
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Code)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Serie)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Model)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Age)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PriceAmount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SubCategory.Category.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SubCategory.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Active)
+                </td>
+                <td>
+                    <a href="@Url.Action("AddCustomerProduct", new { productId=item.ProductId, customerId=Model.CustomerId})" class="btn btn-sm btn-primary"><span class="fa fa-plus"></span>&nbsp;Add</a>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>

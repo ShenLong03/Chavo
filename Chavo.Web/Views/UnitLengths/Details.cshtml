@@ -1,0 +1,25 @@
+﻿@model Chavo.Web.Data.Entity.UnitLength
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>@ViewBag.Title</h2>
+<h4>Unit Length</h4>
+<ol class="breadcrumb">
+    <li><a href="@Url.Action("Index","Home")">Inicio</a></li>
+    <li><a href="@Url.Action("Index")">Unit Lengths</a></li>
+    <li class="active">@ViewBag.Title</li>
+</ol>
+<hr />
+<div id="myForm">
+    @{ Html.RenderPartial("_UnitLengthItems", Model); }
+</div>
+<div class="col-md-6">
+    <div class="form-horizontal">
+        <div class="form-group">
+            <a href="@Url.Action("Edit",new { id=Model.UnitLengthId})" class="btn btn-warning"><i class="fa fa-pencil"></i>&nbsp;Edit</a>
+            <a href="@Url.Action("Index")" class="btn btn-secondary"><i class="fa fa-arrow-left"></i>&nbsp;To Back</a>
+        </div>
+    </div>
+</div>

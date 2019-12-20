@@ -1,0 +1,26 @@
+﻿@model Chavo.Web.Data.Entity.CustomerProduct
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>@ViewBag.Title</h2>
+<h4>Customer</h4>
+<ol class="breadcrumb">
+    <li><a href="@Url.Action("Index","Home")">Inicio</a></li>
+    <li><a href="@Url.Action("Index")">Customers</a></li>
+    <li><a href="@Url.Action("Details", new { id=Model.CustomerId})">@Model.Customer.AllName</a></li>
+    <li class="active">@ViewBag.Title</li>
+</ol>
+<hr />
+<div id="myForm">
+    @{ Html.RenderPartial("_CustomerProductItems", Model); }
+</div>
+<div class="col-md-6">
+    <div class="form-horizontal">
+        <div class="form-group">
+            <a href="@Url.Action("EditCustomerProduct",new { id=Model.CustomerProductId})" class="btn btn-warning"><i class="fa fa-pencil"></i>&nbsp;Edit</a>
+            <a href="@Url.Action("Details", new { id=Model.CustomerId})" class="btn btn-secondary"><i class="fa fa-arrow-left"></i>&nbsp;To Back</a>
+        </div>
+    </div>
+</div>

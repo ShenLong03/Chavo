@@ -1,0 +1,108 @@
+﻿body {
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+.file-object {
+    margin: 0 0 -4px 0;
+    padding: 0;
+}
+
+
+
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    text-align: right;
+    opacity: 0;
+    background: none repeat scroll 0 0 transparent;
+    cursor: inherit;
+    display: block;
+}
+
+
+.file-caption-name {
+    display: inline-block;
+    word-break: break-all;
+    display: inline-block;
+    height: auto;
+}
+
+.input-group-lg .file-caption-name {
+    height: auto;
+}
+
+.file-caption-disabled {
+    background-color: #EEEEEE;
+    cursor: not-allowed;
+    opacity: 1;
+}
+
+.file-actions, .file-other-error {
+    text-align: left;
+}
+
+.file-icon-lg {
+    font-size: 1.2em;
+}
+
+.file-icon-2x {
+    font-size: 2.4em;
+}
+
+.file-icon-4x {
+    font-size: 4.8em;
+}
+
+.file-input-new .file-preview, .file-input-new .close, .file-input-new .glyphicon-file,
+.file-input-new .fileinput-remove-button, .file-input-new .fileinput-upload-button,
+.file-input-ajax-new .fileinput-remove-button, .file-input-ajax-new .fileinput-upload-button {
+    display: none;
+}
+
+.file-actions {
+    margin-top: 0px;
+}
+
+.highlighted {
+    border: 2px dashed #999 !important;
+    background-color: #f0f0f0;
+}
+
+.breadcrumb li + li:before {
+    content: "» ";
+}
+
+.img-profile {
+    max-width: 150px;
+    width: 150px;
+    height: auto;
+    max-height: 100%;
+}
+
+.img-profile-sm {
+    max-width: 75px;
+    width: 75px;
+    height: auto;
+    max-height: 100%;
+}
+
+.tab-pane
+{
+    margin-top:25px;
+}

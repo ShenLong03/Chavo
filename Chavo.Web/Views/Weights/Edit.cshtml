@@ -1,0 +1,31 @@
+﻿@model Chavo.Web.Data.Entity.Weight
+
+@{
+    ViewBag.Title = "Edit";
+    ViewBag.SubTitle = "Weight";
+}
+
+<h2>@ViewBag.Title</h2>
+<h4>@ViewBag.SubTitle</h4>
+<ol class="breadcrumb">
+    <li><a href="@Url.Action("Index","Home")">Inicio</a></li>
+    <li><a href="@Url.Action("Index")">Weights</a></li>
+    <li class="active">@ViewBag.Title</li>
+</ol>
+<hr />
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model=>model.WeightId)
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    { Html.RenderPartial("_WeightItems", Model); }
+    <div class="col-md-6">
+        <div class="form-horizontal">
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i>&nbsp;Save</button>
+                <a href="@Url.Action("Index")" class="btn btn-secondary"><i class="fa fa-arrow-left"></i>&nbsp;To Back</a>
+            </div>
+        </div>
+    </div>
+}

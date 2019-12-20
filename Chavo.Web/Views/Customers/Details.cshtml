@@ -1,0 +1,41 @@
+﻿@model Chavo.Web.Models.CustomerViewModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>@ViewBag.Title</h2>
+<h4>Customer</h4>
+<ol class="breadcrumb">
+    <li><a href="@Url.Action("Index","Home")">Inicio</a></li>
+    <li><a href="@Url.Action("Index")">Customers</a></li>
+    <li class="active">@ViewBag.Title</li>
+</ol>
+<hr />
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item">
+        <a class="nav-link active" id="data-tab" data-toggle="tab" href="#data" role="tab" aria-controls="data" aria-selected="true">Data</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="products-tab" data-toggle="tab" href="#products" role="tab" aria-controls="products" aria-selected="false">Products</a>
+    </li>   
+</ul>
+<div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active" id="data" role="tabpanel" aria-labelledby="data-tab">
+        <div id="myForm">
+            @{ Html.RenderPartial("_CustomerItems", Model); }
+        </div>
+        <div class="col-md-6">
+            <div class="form-horizontal">
+                <div class="form-group">
+                    <a href="@Url.Action("Edit",new { id=Model.CustomerId})" class="btn btn-warning"><i class="fa fa-pencil"></i>&nbsp;Edit</a>
+                    <a href="@Url.Action("Index","Account",new { userName=Model.UserName, control="Customers"})" class="btn btn-outline-primary"><i class="fa fa-user"></i>&nbsp;User</a>
+                    <a href="@Url.Action("Index")" class="btn btn-secondary"><i class="fa fa-arrow-left"></i>&nbsp;To Back</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="tab-pane fade" id="products" role="tabpanel" aria-labelledby="products-tab">
+        @{ Html.RenderPartial("_ProductsList", Model); }
+    </div>
+</div>
