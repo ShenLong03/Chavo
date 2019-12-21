@@ -5,6 +5,10 @@ VisualStudioVersion = 16.0.29609.76
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chavo.Web", "Chavo.Web\Chavo.Web.csproj", "{52D7BC31-D4ED-4F05-AA03-E7B6CE49E264}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chavo.ECommerce", "Chavo.ECommerce\Chavo.ECommerce.csproj", "{75B65133-7A25-4804-9D9C-2B96A8A0D9B8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chavo.Common", "Chavo.Common\Chavo.Common.csproj", "{F9E21E50-0056-410C-8BD0-F040314C353D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{52D7BC31-D4ED-4F05-AA03-E7B6CE49E264}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{52D7BC31-D4ED-4F05-AA03-E7B6CE49E264}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{52D7BC31-D4ED-4F05-AA03-E7B6CE49E264}.Release|Any CPU.Build.0 = Release|Any CPU
+		{75B65133-7A25-4804-9D9C-2B96A8A0D9B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75B65133-7A25-4804-9D9C-2B96A8A0D9B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75B65133-7A25-4804-9D9C-2B96A8A0D9B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75B65133-7A25-4804-9D9C-2B96A8A0D9B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F9E21E50-0056-410C-8BD0-F040314C353D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9E21E50-0056-410C-8BD0-F040314C353D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9E21E50-0056-410C-8BD0-F040314C353D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9E21E50-0056-410C-8BD0-F040314C353D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
