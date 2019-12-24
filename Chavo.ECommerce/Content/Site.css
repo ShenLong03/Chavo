@@ -1,5 +1,4 @@
 ﻿body {
-    padding-top: 50px;
     padding-bottom: 20px;
 }
 
@@ -21,4 +20,23 @@ input,
 select,
 textarea {
     max-width: 280px;
+}
+
+footer.page-footer {
+    bottom: 0;
+    color: #fff;
+}
+
+    footer.page-footer a {
+        color: #fff;
+    }
+
+.blue {
+    background-color: #2196f3 !important;
+}
+
+footer.page-footer .footer-copyright {
+    overflow: hidden;
+    color: rgba(255,255,255,0.6);
+    background-color: rgba(0,0,0,0.2);
 }

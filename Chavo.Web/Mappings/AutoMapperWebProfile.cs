@@ -17,6 +17,7 @@
             CreateMap<Category, CategoryViewModel>();
             CreateMap<SubCategory, SubCategoryViewModel>();
             CreateMap<Product, ProductViewModel>();
+            CreateMap<GeneralConfiguration, GeneralConfigurationViewModel>();
 
 
             //Reverese mapping
@@ -25,6 +26,7 @@
             CreateMap<CategoryViewModel, Category>();
             CreateMap<SubCategoryViewModel, SubCategory>();
             CreateMap<ProductViewModel, Product>();
+            CreateMap<GeneralConfigurationViewModel, GeneralConfiguration>();
 
         }
         public static void Run()

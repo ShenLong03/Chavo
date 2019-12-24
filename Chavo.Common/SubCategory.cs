@@ -10,8 +10,8 @@
         [Key]
         public int SubCategoryId { get; set; }
 
-        [Required(ErrorMessage = "El campo {0} es requerido")]
-        [MaxLength(50, ErrorMessage = "El tamaño maximo del campo {0} es {1} caracteres")]
+        [Required(ErrorMessage = "{0} is requerid")]
+        [MaxLength(50, ErrorMessage = "Length {0} is {1} caracters")]
         [Display(Name = "SubCategory")]
         public string Name { get; set; }
 

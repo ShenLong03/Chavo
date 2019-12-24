@@ -27,5 +27,7 @@
         public DbSet<Product> Products { get; set; }
 
         public DbSet<CustomerProduct> CustomerProducts { get; set; }
+
+        public DbSet<GeneralConfiguration> GeneralConfigurations { get; set; }
     }
 }

@@ -1,0 +1,41 @@
+﻿@model Chavo.Web.Models.GeneralConfigurationViewModel
+
+@{
+    ViewBag.Title = "Create";
+    ViewBag.Subtitle = "General Configuration";
+}
+
+<h2>@ViewBag.Title</h2>
+<h4>@ViewBag.Subtitle</h4>
+<ol class="breadcrumb">
+    <li><a href="@Url.Action("Index","Home")">Inicio</a></li>
+    <li><a href="@Url.Action("Index")">General Configurations</a></li>
+    <li class="active">@ViewBag.Title</li>
+</ol>
+<hr />
+@if (!string.IsNullOrEmpty(ViewBag.Message))
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        @ViewBag.Message.ToString()
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
+@using (Html.BeginForm("Edit", "GeneralConfigurations", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.GeneralConfigurationId)
+    @Html.HiddenFor(model => model.Logo)
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    { Html.RenderPartial("_GeneralConfigurationItems", Model); }
+    <div class="col-md-6">
+        <div class="form-horizontal">
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i>&nbsp;Save</button>
+                <a href="@Url.Action("Index")" class="btn btn-secondary"><i class="fa fa-arrow-left"></i>&nbsp;To Back</a>
+            </div>
+        </div>
+    </div>
+}

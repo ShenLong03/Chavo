@@ -40,7 +40,7 @@
         public string Picture { get; set; }
 
         [NotMapped]
-        public string PictureRutComplet { get { return string.Concat(ConfigurationManager.AppSettings["ImagenRutaCompleta"], Picture.Substring(1)); } }
+        public string PictureRutComplet { get { return string.Concat("http://djarquin01-002-site1.1tempurl.com", Picture.Substring(1)); } }
 
         [AllowHtml]
         [Display(Name = "Description")]
