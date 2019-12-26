@@ -33,7 +33,17 @@
         public string Picture { get; set; }
 
         [NotMapped]
-        public string PictureRuthComplete { get { return string.Concat(WebConfigurationManager.AppSettings["RutComplet"], Picture.Substring(1)); } }
+        public string FullRoutePicture
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty(Picture))
+                {
+                    return string.Concat(WebConfigurationManager.AppSettings["RutComplet"], Picture.Substring(1));
+                }
+                return string.Empty;
+            }
+        }
 
         public double? Credit { get; set; } = 0;
 

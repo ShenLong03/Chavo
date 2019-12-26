@@ -25,9 +25,19 @@
         public int CategoryId { get; set; }
 
         [NotMapped]
-        public string PictureRuthComplete { get { return string.Concat(WebConfigurationManager.AppSettings["RutComplet"], Picture.Substring(1)); } }
+        public string FullRoutePicture
+        { 
+            get 
+            {
+                if (!string.IsNullOrEmpty(Picture))
+                {
+                    return string.Concat(WebConfigurationManager.AppSettings["RutComplet"], Picture.Substring(1));
+                }
+                return string.Empty;
+            } 
+        }
 
-        public bool Active { get; set; } = true;
+    public bool Active { get; set; } = true;
 
         public virtual ICollection<Product> Products { get; set; }
 

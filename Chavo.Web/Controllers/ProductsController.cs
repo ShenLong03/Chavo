@@ -67,28 +67,40 @@ namespace Chavo.Web.Controllers
         [ValidateInput(false)]
         public async Task<ActionResult> Create(ProductViewModel view)
         {
-            if (ModelState.IsValid)
+            ;
+            try
             {
-                var pic = string.Empty;
-                var folder = "~/Content/Products";
-
-                if (view.PictureFile != null)
+                if (ModelState.IsValid)
                 {
-                    pic = FilesHelper.UploadPhoto(view.PictureFile, folder);
-                    pic = string.Format("{0}/{1}", folder, pic);
-                }
-                view.Picture = pic;              
+                    var pic = string.Empty;
+                    var folder = "~/Content/Products";
 
-                var product = new Product();
-                AutoMapper.Mapper.Map(view, product);
-                db.Products.Add(product);
-                await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                    if (view.PictureFile != null)
+                    {
+                        pic = FilesHelper.UploadPhoto(view.PictureFile, folder);
+                        pic = string.Format("{0}/{1}", folder, pic);
+                    }
+                    view.Picture = pic;
+
+                    var product = new Product();
+                    AutoMapper.Mapper.Map(view, product);
+                    db.Products.Add(product);
+                    await db.SaveChangesAsync();
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (Exception ex)
+            {               
+                ViewBag.Error = ex.InnerException != null
+                    ? ex.InnerException.InnerException !=null
+                        ? ex.InnerException.InnerException.Message
+                        : ex.InnerException.Message
+                    : ex.Message.ToString();
             }
 
             ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "Name", view.CategoryId);
             ViewBag.SubCategoryId = new SelectList(db.SubCategories.Where(s => s.CategoryId == view.CategoryId), "SubCategoryId", "Name", view.SubCategoryId);
-            ViewBag.WeightId = new SelectList(db.Weights, "WeightId", "Name", view.WeightId);
+            ViewBag.WeightId = new SelectList(db.Weights, "WeightId", "Nomenclature", view.WeightId);
             ViewBag.CurrencyId = new SelectList(db.Currencies, "CurrencyId", "Nomenclature", view.CurrencyId);
             ViewBag.UnitLengthId = new SelectList(db.UnitLengths, "UnitLengthId", "Nomenclature", view.UnitLengthId);
             return View(view);
@@ -113,8 +125,7 @@ namespace Chavo.Web.Controllers
             model.CategoryId = model.SubCategory.CategoryId;
             ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "Name", model.CategoryId);
             ViewBag.SubCategoryId = new SelectList(db.SubCategories.Where(s => s.CategoryId == model.CategoryId), "SubCategoryId", "Name", model.SubCategoryId);
-            ViewBag.SubCategoryId = new SelectList(db.SubCategories, "SubCategoryId", "Name", product.SubCategoryId);
-            ViewBag.WeightId = new SelectList(db.Weights, "WeightId", "Name", model.WeightId);
+            ViewBag.WeightId = new SelectList(db.Weights, "WeightId", "Nomenclature", model.WeightId);
             ViewBag.CurrencyId = new SelectList(db.Currencies, "CurrencyId", "Nomenclature", model.CurrencyId);
             ViewBag.UnitLengthId = new SelectList(db.UnitLengths, "UnitLengthId", "Nomenclature", model.UnitLengthId);
             return View(model);
@@ -147,8 +158,7 @@ namespace Chavo.Web.Controllers
 
             ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "Name", view.CategoryId);
             ViewBag.SubCategoryId = new SelectList(db.SubCategories.Where(s => s.CategoryId == view.CategoryId), "SubCategoryId", "Name", view.SubCategoryId);
-            ViewBag.SubCategoryId = new SelectList(db.SubCategories, "SubCategoryId", "Name", view.SubCategoryId);
-            ViewBag.WeightId = new SelectList(db.Weights, "WeightId", "Name", view.WeightId);
+            ViewBag.WeightId = new SelectList(db.Weights, "WeightId", "Nomenclature", view.WeightId);
             ViewBag.CurrencyId = new SelectList(db.Currencies, "CurrencyId", "Nomenclature", view.CurrencyId);
             ViewBag.UnitLengthId = new SelectList(db.UnitLengths, "UnitLengthId", "Nomenclature", view.UnitLengthId);
 

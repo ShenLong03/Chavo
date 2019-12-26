@@ -25,7 +25,17 @@
         public int CategoryId { get; set; }
 
         [NotMapped]
-        public string PictureRuthComplete { get { return string.Concat(ConfigurationManager.AppSettings["RutComplet"], Picture.Substring(1)); } }
+        public string FullRoutePicture
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty(Picture))
+                {
+                    return string.Concat("http://djarquin01-002-site1.1tempurl.com", Picture.Substring(1));
+                }
+                return string.Empty;
+            }
+        }
 
         public bool Active { get; set; } = true;
 

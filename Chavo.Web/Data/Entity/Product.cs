@@ -40,7 +40,17 @@
         public string Picture { get; set; }
 
         [NotMapped]
-        public string PictureRutComplet { get { return string.Concat(WebConfigurationManager.AppSettings["ImagenRutaCompleta"], Picture.Substring(1)); } }
+        public string FullRoutePicture
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty(Picture))
+                {
+                    return string.Concat(WebConfigurationManager.AppSettings["RutComplet"], Picture.Substring(1));
+                }
+                return string.Empty;
+            }
+        }
 
         [AllowHtml]
         [Display(Name = "Description")]

@@ -994,6 +994,7 @@
     <Content Include="Views\GeneralConfigurations\Edit.cshtml" />
     <Content Include="Views\GeneralConfigurations\Index.cshtml" />
     <Content Include="Views\GeneralConfigurations\_GeneralConfigurationItems.cshtml" />
+    <Content Include="Views\Shared\_Messages.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
