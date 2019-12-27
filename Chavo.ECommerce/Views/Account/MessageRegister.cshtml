@@ -1,0 +1,22 @@
+﻿@model Chavo.Common.Register
+@{
+    ViewBag.Title = "Message Register";
+}
+
+<center style="padding-top:2em;">
+    <div class="cuadro-login" style="border-radius:15px">
+        <div class="panel-primary">
+            <div class="panel-heading" style="border-top-left-radius:15px; border-top-right-radius:15px">
+                <h5>Estamos validando sus datos</h5>
+            </div>
+            <div class="panel-body">
+                <section id="loginForm">
+                    Su cuenta esta siendo validada con el correo : @Model.Email y el número de transacción : @Model.Transaction.
+                    Serás notificado a este email:  @Model.Email para acceder a su zona privada de Románico GR a más tardar en 24 horas,
+                    si tienes alguna duda puedes comunicarte a este correo soporte@miprimeringresopasivo.com
+                </section>
+            </div>
+        </div>
+    </div>
+</center>
+

@@ -29,5 +29,7 @@
         public DbSet<CustomerProduct> CustomerProducts { get; set; }
 
         public DbSet<GeneralConfiguration> GeneralConfigurations { get; set; }
+
+        public DbSet<Register> Registers { get; set; }
     }
 }

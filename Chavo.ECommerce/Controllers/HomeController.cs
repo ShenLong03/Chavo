@@ -1,30 +1,72 @@
-﻿using Chavo.ECommerce.Data;
-using Chavo.ECommerce.Models;
-using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Web;
-using System.Web.Mvc;
-
-namespace Chavo.ECommerce.Controllers
+﻿namespace Chavo.ECommerce.Controllers
 {
+    using Common;
+    using Data;
+    using Models;
+    using System.Data.Entity;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
+
     public class HomeController : Controller
     {
         DataContextLocal db = new DataContextLocal();
 
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(int? orden, int[] categories, int[] subCategories, double? min, double? max)
         {
             var view = new HomeViewModel();
-            if (db.GeneralConfigurations.Count()>0)
+            if (db.GeneralConfigurations.Count() > 0)
             {
                 if (!string.IsNullOrEmpty(db.GeneralConfigurations.FirstOrDefault().VideoBanner))
                 {
                     view.VideoBanner = db.GeneralConfigurations.FirstOrDefault().VideoBanner;
                 }
             }
-            view.Products = await db.Products.ToListAsync();
+
+            IQueryable<Product> productsSelect = db.Products;
+
+            if (categories != null && subCategories != null)
+            {
+                if (categories[0] != 0 && subCategories[0] != 0)
+                {
+                    productsSelect = productsSelect.Where(p => categories.Contains(p.SubCategory.CategoryId) || subCategories.Contains(p.SubCategoryId));
+                }
+                else if (categories[0] != 0 && subCategories[0] == 0)
+                {
+                    productsSelect = productsSelect.Where(p => categories.Contains(p.SubCategory.CategoryId));
+                }
+                else if (categories[0] == 0 && subCategories[0] != 0)
+                {
+                    productsSelect = productsSelect.Where(p => subCategories.Contains(p.SubCategoryId));
+                }
+            }
+            if (min != null)
+            {
+                productsSelect = productsSelect.Where(p => p.PriceAmount >= min);
+            }
+            if (max != null)
+            {
+                productsSelect = productsSelect.Where(p => p.PriceAmount <= max);
+            }
+            switch (orden)
+            {
+                case 0:
+                    productsSelect = productsSelect.OrderBy(p => p.Name);
+                    break;
+                case 1:
+                    productsSelect = productsSelect.OrderByDescending(p => p.Name);
+                    break;
+                case 2:
+                    productsSelect = productsSelect.OrderBy(p => p.PriceAmount);
+                    break;
+                case 3:
+                    productsSelect = productsSelect.OrderByDescending(p => p.PriceAmount);
+                    break;
+                default:
+                    break;
+            }
+            view.Products = await productsSelect.ToListAsync();
+            view.Categories = await db.Categories.Include(c => c.SubCategories).ToListAsync();
             return View(view);
         }
 

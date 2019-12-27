@@ -5,7 +5,9 @@
 
 @if (!string.IsNullOrEmpty(Model.VideoBanner))
 {
-    <iframe style="width:100%; min-height:315px; height:auto" src=@Model.VideoBanner allow="autoplay"></iframe>
+    <div class="border-bottom">
+        <iframe style="width:100%; min-height:315px; height:auto" src=@Model.VideoBanner allow="autoplay"></iframe>
+    </div>
 }
 else
 {
@@ -17,34 +19,67 @@ else
 }
 
 <div class="row">
-    <div class="col-3">
+    <div class="col-2 border-right">
         <div class="container">
             <h2>Filtros</h2>
+            <hr />
+            <p>  
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <label class="control-label">Orden</label>
+                        <select id="orden" name="orden" class="form-control">
+                            <option value="0">A-Z</option>
+                            <option value="1">Z-A</option>
+                            <option value="2">Menor a Mayor</option>
+                            <option value="3">Mayor a Menor</option>
+                        </select>
+                    </div>                    
+                </div>
+            </p>
+            <hr />
             <p>
-                <ul>
-                    <li>
-                        Tecnologia
-                        <ul>
-                            <li>
-                                Tecnologicos
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        Casino
-                    </li>
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <label class="control-label">Máximo</label>
+                        <input name="max" id="max" class="form-control" placeholder="0.00" />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Mínimo</label>
+                        <input name="min" id="min" class="form-control" placeholder="0.00" />
+                    </div>
+                </div>
+            </p>
+            <hr />
+            <p>
+                <label class="control-label">Categorias</label>
+                <ul style="list-style: none;">
+                    @foreach (var category in Model.Categories)
+                    {
+                        <li>
+                            <input value="@category.CategoryId" class="category" type="checkbox" />&nbsp;@category.Name
+                            @if (category.SubCategories.Count() > 0)
+                            {
+                                <ul style="list-style: none;">
+                                    @foreach (var subCategory in category.SubCategories)
+                                    {
+                                        <li>
+                                            <input value="@subCategory.SubCategoryId" class="subCategory" type="checkbox" />&nbsp;@subCategory.Name
+                                        </li>
+                                    }
+                                </ul>
+                            }
+                        </li>
+                    }
                 </ul>
             </p>
             <p>
-                ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-                enables a clean separation of concerns and gives you full control over markup
-                for enjoyable, agile development.
+                <button class="btn btn-light" onclick="Find();"><i class="fa fa-search"></i>&nbsp;Buscar</button>
             </p>
-            <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
         </div>
     </div>
-    <div class="col-9">
+    <div class="col-10">
         <h2>Productos</h2>
+        <hr />
         <div class="row">
             @foreach (var item in Model.Products)
             {
@@ -52,6 +87,7 @@ else
                 <div class="card">
                     <img src="@Url.Content(item.FullRoutePicture)" class="card-img-top img-thumbnail" alt="@item.Name">
                     <div class="card-body">
+                        <span class="font-weight-bold text-muted pull-right">@string.Format("{0}{1}", item.Currency.Nomenclature, item.PriceAmount)</span>
                         <h5 class="card-title">@item.Name</h5>
                         <p class="card-text">@Html.Raw(item.Description)</p>
                         <div class="form-group" style="text-align:center">
@@ -66,3 +102,72 @@ else
         </div>
     </div>    
 </div>
+
+@section scripts
+{
+    <script type="text/javascript">
+        var categories = [];
+        var subCategories = [];
+
+        $('input[type=checkbox]').click(function(){
+            if(this.checked){ // if checked - check all parent checkboxes
+                $(this).parents('li').children('input[type=checkbox]').prop('checked',true);
+            }
+            // children checkboxes depend on current checkbox
+            $(this).parent().find('input[type=checkbox]').prop('checked',this.checked); 
+        });
+
+        
+        function Seleccionar(id, type, trans)
+        {
+            if (type==="category") {
+                if (trans==="push")
+                {
+                    var find = categories.find(f=>f===id);
+                    if (find!==id) {
+                        categories.push(id);
+                    }                      
+                } else {
+                    categories.pop(id);
+                }
+                
+            } else {
+                    if (trans==="push")
+                    {
+                        var find = subCategories.find(f=>f===id);
+                        if (find!==id) {
+                            subCategories.push(id);
+                        }                      
+                    } else {
+                        subCategories.pop(id);
+                    }
+            }   
+        }
+
+        $(".category").change(function (e) {
+               if(this.checked){ // if checked - check all parent checkboxes
+                   Seleccionar($(this).val(), "category", "push");
+               } else {
+                   Seleccionar($(this).val(), "category", "pop");
+               }
+            
+        });
+
+        $(".subCategory").change(function (e) {
+              if(this.checked){ // if checked - check all parent checkboxes
+                   Seleccionar($(this).val(), "subCategory", "push");
+               } else {
+                   Seleccionar($(this).val(), "subCategory", "pop");
+               }
+        });
+
+        function Find()
+        {
+            location.href = "/Home/Index?orden=" + $('#orden').val() +
+                "&categories=" + categories +
+                "&subCategories=" + subCategories +
+                "&min=" + $('#min').val() +
+                "&max=" + $('#max').val();
+        }
+    </script>
+}

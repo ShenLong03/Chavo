@@ -45,3 +45,10 @@ footer.page-footer .footer-copyright {
     width: 50%;
     position:fixed;
 }
+
+.cuadro-login {
+    width: 30%;
+    border-style: groove;
+    border-width: 2px;
+    border-radius: 25px;
+}

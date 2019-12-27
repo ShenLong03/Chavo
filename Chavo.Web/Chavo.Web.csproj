@@ -196,6 +196,7 @@
     <Compile Include="Data\Entity\Functionary.cs" />
     <Compile Include="Data\Entity\GeneralConfiguration.cs" />
     <Compile Include="Data\Entity\Product.cs" />
+    <Compile Include="Data\Entity\Register.cs" />
     <Compile Include="Data\Entity\SubCategory.cs" />
     <Compile Include="Data\Entity\UnitLength.cs" />
     <Compile Include="Data\Entity\Weight.cs" />
@@ -274,6 +275,10 @@
     <Compile Include="Migrations\201912241434342_Create_GeneralConfiguration.cs" />
     <Compile Include="Migrations\201912241434342_Create_GeneralConfiguration.Designer.cs">
       <DependentUpon>201912241434342_Create_GeneralConfiguration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201912272117422_Create_Register.cs" />
+    <Compile Include="Migrations\201912272117422_Create_Register.Designer.cs">
+      <DependentUpon>201912272117422_Create_Register.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -1061,6 +1066,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201912241434342_Create_GeneralConfiguration.resx">
       <DependentUpon>201912241434342_Create_GeneralConfiguration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912272117422_Create_Register.resx">
+      <DependentUpon>201912272117422_Create_Register.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
