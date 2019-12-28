@@ -1,5 +1,6 @@
 ﻿namespace Chavo.Web.Controllers
 {
+    using Chavo.Web.Data.Entity;
     using Data;
     using Data.Entity;
     using Helpers;
@@ -224,7 +225,7 @@
 
         [HandleError]
         public async Task<ActionResult> AddCustomerProduct(int productId, int customerId)
-        {           
+        {
             Customer customer = await db.Customers.FindAsync(customerId);
             if (customer == null)
             {
@@ -300,6 +301,130 @@
             return RedirectToAction("Details", new { id=customerProduct.CustomerId});
         }
 
+        #endregion
+
+        #region Revenue
+        [HandleError]
+        public async Task<ActionResult> DetailsRevenue(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Revenue revenue = await db.Revenues.FindAsync(id);
+            if (revenue == null)
+            {
+                return HttpNotFound();
+            }
+            return View(revenue);
+        }
+
+        [HandleError]
+        public async Task<ActionResult> CreateRevenue(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Customer customer = await db.Customers.FindAsync(id);
+            if (customer == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(new Revenue()
+            {
+                CustomerId = customer.CustomerId,
+                Customer = customer
+            });
+        }
+
+        [HandleError]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> CreateRevenue(Revenue revenue)
+        {
+            if (ModelState.IsValid)
+            {
+                revenue.FunctionaryId = db.Functionaries.Where(f => f.UserName == User.Identity.Name).FirstOrDefault().FunctionaryId;
+                db.Revenues.Add(revenue);
+                await db.SaveChangesAsync();
+                await AddRevenue(revenue);
+                return RedirectToAction("Details", new { id = revenue.CustomerId });
+            }
+
+            return View(revenue);
+        }
+
+        private async Task AddRevenue(Revenue revenue)
+        {
+            var customer = await db.Customers.FindAsync(revenue.CustomerId);
+            switch (revenue.RevenueType)
+            {
+                case RevenueType.Short:
+                    customer.ShortRevenue += revenue.Amount;
+                    break;
+                case RevenueType.Medium:
+                    customer.MediumRevenue += revenue.Amount;
+                    break;
+                case RevenueType.Long:
+                    customer.LongRevenue += revenue.Amount;
+                    break;
+                default:
+                    break;
+            }
+            db.Entry(customer).State = EntityState.Modified;
+            await db.SaveChangesAsync();
+        }
+
+        [HandleError]
+        public async Task<ActionResult> EditRevenue(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Revenue revenue = await db.Revenues.FindAsync(id);
+            if (revenue == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(revenue);
+        }
+
+        [HandleError]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> EditRevenue(Revenue revenue)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(revenue).State = EntityState.Modified;
+                await db.SaveChangesAsync();
+                return RedirectToAction("Details", new { id = revenue.CustomerId });
+            }
+
+            return View(revenue);
+        }
+
+        [HandleError]
+        public async Task<ActionResult> DeleteRevenue(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Revenue revenue = await db.Revenues.FindAsync(id);
+            if (revenue == null)
+            {
+                return HttpNotFound();
+            }
+   
+            db.Revenues.Remove(revenue);
+            await db.SaveChangesAsync();
+            return RedirectToAction("Details", new { id = revenue.CustomerId });
+        }
         #endregion
 
         protected override void Dispose(bool disposing)

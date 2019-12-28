@@ -119,5 +119,7 @@ namespace Chavo.Web.Models
         public string Controller { get; set; }
 
         public Customer Customer { get; set; }
+
+        public Functionary Functionary { get; set; }
     }
 }

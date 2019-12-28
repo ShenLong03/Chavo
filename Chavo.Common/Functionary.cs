@@ -1,12 +1,9 @@
-﻿namespace Chavo.Web.Data.Entity
+﻿namespace Chavo.Common
 {
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
-    using System.Linq;
-    using System.Web;
-    using System.Web.Configuration;
 
     public class Functionary
     {
@@ -39,7 +36,7 @@
             {
                 if (!string.IsNullOrEmpty(Picture))
                 {
-                    return string.Concat(WebConfigurationManager.AppSettings["RutComplet"], Picture.Substring(1));
+                    return string.Concat("http://djarquin01-002-site1.1tempurl.com", Picture.Substring(1));
                 }
                 return string.Empty;
             }

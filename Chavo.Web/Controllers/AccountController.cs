@@ -258,6 +258,9 @@
                     case "Customers":
                         model.Customer = db.Customers.FirstOrDefault(c => c.UserName == userName);
                         break;
+                    case "Functionaries":
+                        model.Functionary = db.Functionaries.FirstOrDefault(c => c.UserName == userName);
+                        break;
                     default:
                         break;
                 }

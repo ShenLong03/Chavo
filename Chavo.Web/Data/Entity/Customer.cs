@@ -71,11 +71,25 @@
 
         public Genero Genero { get; set; }
 
+        [Display(Name = "Short Revenue")]
+        public double ShortRevenue { get; set; } = 0;
+
+        [Display(Name = "Medium Revenue")]
+        public double MediumRevenue { get; set; } = 0;
+
+        [Display(Name = "Long Revenue")]
+        public double LongRevenue { get; set; } = 0;
+
         public virtual ICollection<CustomerProduct> Products { get; set; }
+
+        public virtual ICollection<Revenue> Revenues { get; set; }
 
         public Customer()
         {
             Active = true;
+            ShortRevenue = 0;
+            MediumRevenue = 0;
+            LongRevenue = 0;
         }
     }
 

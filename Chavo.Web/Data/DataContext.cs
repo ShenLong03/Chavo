@@ -7,8 +7,8 @@
     {
         public DataContext() : base("DefaultConnection")
         {
-
-        }
+           
+        }   
 
         public DbSet<Customer> Customers { get; set; }
 
@@ -31,5 +31,7 @@
         public DbSet<GeneralConfiguration> GeneralConfigurations { get; set; }
 
         public DbSet<Register> Registers { get; set; }
+
+        public DbSet<Revenue> Revenues { get; set; }
     }
 }

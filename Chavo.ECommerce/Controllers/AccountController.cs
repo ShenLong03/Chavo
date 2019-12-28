@@ -163,7 +163,8 @@ namespace Chavo.ECommerce.Controllers
                 {
                     db.Registers.Add(register);
                     await db.SaveChangesAsync();
-                    return RedirectToAction("MessageRegister", register.RegisterId);
+                    int id = register.RegisterId;
+                    return RedirectToAction("MessageRegister", new { id= id } );
                 }               
             }
 
@@ -173,7 +174,7 @@ namespace Chavo.ECommerce.Controllers
 
 
         [AllowAnonymous]
-        public async Task<ActionResult> MessageRegister(string id)
+        public async Task<ActionResult> MessageRegister(int id)
         {
             using (DataContextLocal db= new DataContextLocal())
             {

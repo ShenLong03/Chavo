@@ -19,8 +19,8 @@ else
 }
 
 <div class="row">
-    <div class="col-2 border-right">
-        <div class="container">
+    <div class="d-none col-xl-2 d-xl-block col-lg-3 d-lg-block col-md-4 d-md-block border-right">
+        <div class="container" style="position: sticky;top:4em;">
             <h2>Filtros</h2>
             <hr />
             <p>  
@@ -77,10 +77,10 @@ else
             </p>
         </div>
     </div>
-    <div class="col-10">
+    <div class="col-xl-10 col-lg-9 col-md-8 col-sm-12">
         <h2>Productos</h2>
         <hr />
-        <div class="row">
+        <div class="row justify-content-start">
             @foreach (var item in Model.Products)
             {
             <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 mb-4">

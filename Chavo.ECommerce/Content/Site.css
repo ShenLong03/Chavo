@@ -52,3 +52,20 @@ footer.page-footer .footer-copyright {
     border-width: 2px;
     border-radius: 25px;
 }
+
+.footer-modal {
+    position:absolute;
+    bottom: 0;
+    width:100%;
+}
+.clearfix {
+    margin-top: 2em;
+}
+
+.transparent-control input[type="text"] {
+    background: transparent;
+    border: none;
+    font-size: 2em;
+}
+
+
