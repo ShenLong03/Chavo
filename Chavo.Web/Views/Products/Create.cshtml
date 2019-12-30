@@ -29,29 +29,8 @@
         </div>
     </div>
 }
-
 @section scripts
 {
-    <script type="text/javascript">
-        $("#CategoryId").change(function () {
-            $("#SubCategoryId").empty();
-            $.ajax({
-                type: 'POST',
-                url: '@Url.Action("GetSubCategories")',
-                dataType: 'json',
-                data: { id: $("#CategoryId").val() },
-                success: function (items) {
-                    $.each(items, function (i, item) {
-                        $("#SubCategoryId").append('<option value="'
-                            + item.CategoryId + '">'
-                            + item.Name + '</option>');
-                    });
-                },
-                error: function (ex) {
-                    alert.alert('Alert', 'Error al mostrar los SubCategory.' + ex);
-                }
-            });
-        });       
-    </script>
+    <script src="~/Scripts/Products/products.js"></script>
 }
 

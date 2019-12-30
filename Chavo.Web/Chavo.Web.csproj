@@ -288,6 +288,14 @@
     <Compile Include="Migrations\201912281741453_Update_Customer_ItemRevenues.Designer.cs">
       <DependentUpon>201912281741453_Update_Customer_ItemRevenues.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201912301600163_Update_Product_ShortDescription.cs" />
+    <Compile Include="Migrations\201912301600163_Update_Product_ShortDescription.Designer.cs">
+      <DependentUpon>201912301600163_Update_Product_ShortDescription.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201912301631569_Update_Products.cs" />
+    <Compile Include="Migrations\201912301631569_Update_Products.Designer.cs">
+      <DependentUpon>201912301631569_Update_Products.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\CustomerProductViewModel.cs" />
@@ -834,6 +842,7 @@
     <Content Include="Scripts\popper-utils.min.js" />
     <Content Include="Scripts\popper.js" />
     <Content Include="Scripts\popper.min.js" />
+    <Content Include="Scripts\Products\products.js" />
     <Content Include="Scripts\site.js" />
     <Content Include="Scripts\src\index.js" />
     <Content Include="Scripts\src\methods\defaults.js" />
@@ -1084,6 +1093,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201912281741453_Update_Customer_ItemRevenues.resx">
       <DependentUpon>201912281741453_Update_Customer_ItemRevenues.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912301600163_Update_Product_ShortDescription.resx">
+      <DependentUpon>201912301600163_Update_Product_ShortDescription.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912301631569_Update_Products.resx">
+      <DependentUpon>201912301631569_Update_Products.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

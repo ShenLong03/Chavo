@@ -47,21 +47,21 @@
                 <div class="card">
                     <div class="card-header bg-primary text-light"><h5>Corto Plazo</h5></div>
                     <div class="card-body text-center">
-                        <input type="text" class="form-control-lg form-control-plaintext" onchange="ChangeAmount(this.value,'c');" value="$5 000.00" style="font-size:2.5em;color:#6c757d !important;text-align:center;font-weight:500" />                  
+                        <input id="shortRevenue" type="text" class="form-control-lg form-control-plaintext" onchange="ChangeAmount(this.value,'s', '@Model.CustomerId');" value="@string.Format("{0}{1}","$",Model.ShortRevenue.ToString("N2"))" style="font-size:2.5em;color:#6c757d !important;text-align:center;font-weight:500" />                  
                     </div>
                 </div>
                 <br />
                 <div class="card">
                     <div class="card-header bg-success text-light"><h5>Mediano Plazo</h5></div>
                     <div class="card-body text-center">
-                        <input type="text" class="form-control-lg form-control-plaintext" onchange="ChangeAmount(this.value,'c');" value="$0.00" style="font-size:2.5em;color:#6c757d !important;text-align:center;font-weight:500" />
+                        <input id="mediumRevenue" type="text" class="form-control-lg form-control-plaintext" onchange="ChangeAmount(this.value,'m', '@Model.CustomerId');" value="@string.Format("{0}{1}","$",Model.MediumRevenue.ToString("N2"))" style="font-size:2.5em;color:#6c757d !important;text-align:center;font-weight:500" />
                     </div>
                 </div>
                 <br />
                 <div class="card">
                     <div class="card-header bg-warning text-dark"><h5>Largo Plazo</h5></div>
                     <div class="card-body text-center">
-                        <input type="text" class="form-control-lg form-control-plaintext" onchange="ChangeAmount(this.value,'c');" value="$2 500.00" style="font-size:2.5em;color:#6c757d !important;text-align:center;font-weight:500" />
+                        <input id="longRevenue" type="text" class="form-control-lg form-control-plaintext" onchange="ChangeAmount(this.value,'l', '@Model.CustomerId');" value="@string.Format("{0}{1}","$",Model.LongRevenue.ToString("N2"))" style="font-size:2.5em;color:#6c757d !important;text-align:center;font-weight:500" />
                     </div>
                 </div>
             </div>
@@ -75,5 +75,47 @@
 
 @section scripts
 {
+    <script type="text/javascript">
+        function ChangeAmount(value, type, id)
+        {
+            $.ajax(
+            {
+                type: "GET",
+                url: '@Url.Action("ChangeRevenue")',
+                    data: {
+                        value:convert(value),
+                        type:type,
+                        id: id,                    
+                },
+                success: function (result) {
+                    if (result) {
+                        alertify.success("<i class='fa fa-check-circle'></i>&nbsp;Change success");
+                        switch (type) {
+                            case "s":
+                                $("#shortRevenue").val("$" + convert(value).toFixed(2));
+                                break;
+                            case "m":
+                                $("#mediumRevenue").val("$" + convert(value).toFixed(2));
+                                break;
+                            case "l":
+                                $("#longRevenue").val("$" + convert(value).toFixed(2));
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                    else {
+                        alertify.success("<i class='fa fa-times-circle'></i>&nbsp;Change error");
+                    }
+                }
+            }); 
+        }
 
+        // Function to convert 
+    function convert(currency){ 
+        var temp = currency.replace(/[^0-9.-]+/g,""); 
+        return parseFloat(temp); 
+      
+    } 
+    </script>
 }

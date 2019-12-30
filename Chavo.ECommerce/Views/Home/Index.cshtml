@@ -84,12 +84,12 @@ else
             @foreach (var item in Model.Products)
             {
             <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 mb-4">
-                <div class="card">
-                    <img src="@Url.Content(item.FullRoutePicture)" class="card-img-top img-thumbnail" alt="@item.Name">
+                <div class="card card-product">
+                    <img src="@Url.Content(item.FullRoutePicture)" class="card-img-top img-thumbnail" style="height:300px" alt="@item.Name">
                     <div class="card-body">
                         <span class="font-weight-bold text-muted pull-right">@string.Format("{0}{1}", item.Currency.Nomenclature, item.PriceAmount)</span>
                         <h5 class="card-title">@item.Name</h5>
-                        <p class="card-text">@Html.Raw(item.Description)</p>
+                        <p class="card-text">@Html.Raw(item.ShortDescription)</p>
                         <div class="form-group" style="text-align:center">
                             <a href="#" class="btn btn-warning">Seleccionar este para mi</a><br />
                             <a href="#" class="btn btn-warning mt-2">Adquirir este producto</a>

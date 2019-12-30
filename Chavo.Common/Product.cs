@@ -50,7 +50,13 @@
                 }
                 return string.Empty;
             }
-        }       
+        }
+
+        [AllowHtml]
+        [Display(Name = "Short Description")]
+        [DataType(DataType.MultilineText)]
+        [MaxLength(100)]
+        public string ShortDescription { get; set; }
 
         [AllowHtml]
         [Display(Name = "Description")]

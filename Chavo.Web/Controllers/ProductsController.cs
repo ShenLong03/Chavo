@@ -53,7 +53,8 @@ namespace Chavo.Web.Controllers
         public ActionResult Create()
         {
             ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "Name");
-            ViewBag.SubCategoryId = new SelectList(db.SubCategories.Where(s=>s.CategoryId==db.Categories.FirstOrDefault().CategoryId), "SubCategoryId", "Name");
+            var category= db.Categories.FirstOrDefault();
+            ViewBag.SubCategoryId = new SelectList(db.SubCategories.Where(s=>s.CategoryId==category.CategoryId), "SubCategoryId", "Name");
             ViewBag.WeightId = new SelectList(db.Weights, "WeightId", "Nomenclature");
             ViewBag.CurrencyId = new SelectList(db.Currencies, "CurrencyId", "Nomenclature");
             ViewBag.UnitLengthId = new SelectList(db.UnitLengths, "UnitLengthId", "Nomenclature");
@@ -195,7 +196,7 @@ namespace Chavo.Web.Controllers
 
                 return Json(new List<SubCategory>(), JsonRequestBehavior.AllowGet);
             }
-        }
+        }     
 
         protected override void Dispose(bool disposing)
         {

@@ -53,9 +53,15 @@
         }
 
         [AllowHtml]
+        [Display(Name = "Short Description")]
+        [MaxLength(100)]
+        [DataType(DataType.MultilineText)]
+        public string ShortDescription { get; set; }
+
+        [AllowHtml]
         [Display(Name = "Description")]
         [DataType(DataType.MultilineText)]
-        public string Description { get; set; }
+        public string Description { get; set; }  
 
         [Display(Name = "Cost Amount")]
         public double CostAmount { get; set; }

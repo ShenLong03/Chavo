@@ -427,6 +427,38 @@
         }
         #endregion
 
+        #region Functions
+        public bool ChangeRevenue(double value, string type, int id)
+        {
+            try
+            {
+                var customer = db.Customers.Find(id);
+                switch (type)
+                {
+                    case "s":
+                        customer.ShortRevenue = value;
+                        break;
+                    case "m":
+                        customer.MediumRevenue = value;
+                        break;
+                    case "l":
+                        customer.LongRevenue = value;
+                        break;
+                    default:
+                        break;
+                }
+                db.Entry(customer).State = EntityState.Modified;
+                db.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+
+                return false;
+            }
+        }
+        #endregion
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
