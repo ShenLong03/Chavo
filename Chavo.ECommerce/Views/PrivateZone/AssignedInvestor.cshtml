@@ -1,0 +1,67 @@
+﻿
+@{
+    ViewBag.Title = "Inversor Asignado";
+    Layout = "~/Views/Shared/_LayoutModal.cshtml";
+}
+
+<center style="padding-top:10%">
+    <div class="cuadro-login" style="border-radius:15px; width:50%">
+        <div class="panel panel-primary m-4">
+            <div class="panel-heading" style="border-top-left-radius:15px; border-top-right-radius:15px">
+                <h5>@ViewBag.Title</h5>
+            </div>
+            <div class="panel-body">
+                <section id="loginForm" style="text-align:justify">
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.ID)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.ID)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.FirstName)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.FirstName)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.LastName)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.LastName)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Email)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Email)
+                        </dd>                      
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Active)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Active)
+                        </dd>                      
+                    </dl>
+                    <hr />
+                    <a class="btn btn-primary" href="@Url.Action("Index","Home")">Ok</a>
+                </section>
+            </div>
+        </div>
+    </div>
+</center>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+

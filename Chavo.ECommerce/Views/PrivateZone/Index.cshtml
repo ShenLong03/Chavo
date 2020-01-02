@@ -1,0 +1,169 @@
+﻿@model Chavo.Common.Customer
+
+@{
+    ViewBag.Title = "Private Zone";
+}
+<div class="row pb-2 mb-2">
+    <section id="ingresos" class="col-12">
+        <span class="pull-right">
+            <button class="btn btn-lg btn-success"><i class="fa fa-user"></i>&nbsp;Inversor Asignado</button>
+            <button class="btn btn-lg btn-primary"><i class="fa fa-facebook-official"></i>&nbsp;Grupo de Facebook</button>
+        </span>
+        <h2>
+            Mis Ingresos <span class="small">$0.00/$300.00</span>
+        </h2>
+        <hr />
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-sm-12 pb-sm-3">
+                <div class="card">
+                    <div class="card-header bg-primary text-light"><h5>Corto Plazo <span class="small">- Inversor Asignado</span></h5></div>
+                    <div class="card-body">
+                        @*TODO: Quitar el currency quemado*@
+                        <span style="font-size:3em;color:#6c757d !important;font-weight:500">$&nbsp;<span class="pull-right text-right">@Model.ShortRevenue.ToString("N2")</span></span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-12 pb-sm-3">
+                <div class="card">
+                    <div class="card-header bg-success text-light"><h5>Mediano Plazo <span class="small">- GIROALA</span></h5></div>
+                    <div class="card-body">
+                        <span style="font-size:3em;color:#6c757d !important;font-weight:500">$&nbsp;<span class="pull-right text-right">@Model.MediumRevenue.ToString("N2")</span></span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-12 pb-sm-3">
+                <div class="card">
+                    <div class="card-header bg-warning text-dark"><h5>Largo Plazo <span class="small">- Bienes Raíces Románico</span></h5></div>
+                    <div class="card-body">
+                        <span style="font-size:3em;color:#6c757d !important;font-weight:500">$&nbsp;<span class="pull-right text-right">@Model.LongRevenue.ToString("N2")</span></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="pt-sm-2 mt-sm-2">
+            <span class="pull-right pt-sm-2 mt-sm-2">
+                @* TODO: Cambiar por links dinamicos *@
+                <button class="btn btn-light">Retirar dinero</button>
+                <button class="btn btn-light">Video explicativo</button>
+            </span>
+        </div>
+    </section>
+</div>
+<hr />
+<div class="row">
+    <section id="productos" class="col-lg-4 col-md-5 col-sm-6">
+        <h2>Productos</h2>
+        <hr />
+        <div class="card mb-2">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-2">
+                        <div class="card-img">
+                            <img src="~/Content/imgs/Logo.jpeg" width="75" height="75" />
+                        </div>
+                    </div>
+                    <div class="col-10 text-truncate">
+                        <div class="ml-lg-2 ml-md-3" style="margin:auto;padding: 10px;">
+                            <h3>Producto de Naipe</h3>
+                            <div style="width:100%" class="text-truncate">
+                                Descripcion del producto, pero eso si sale solo la corta
+                            </div>                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-2">
+                        <div class="card-img">
+                            <img src="~/Content/imgs/Logo.jpeg" width="75" height="75" />
+                        </div>
+                    </div>
+                    <div class="col-10 text-truncate">
+                        <div class="ml-lg-2 ml-md-3" style="margin:auto;padding: 10px;">
+                            <h3>Producto de Naipe</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr />
+    </section>
+    <div class="col-lg-8 col-md-7 col-sm-6">
+        <section id="bienesRaices">
+            <h2>Bienes Raíces</h2>
+            <hr />
+            <div class="card mb-2" style="width:100%">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-1 col-md-2 col-sm-2">
+                            <div class="card-img">
+                                <img src="~/Content/imgs/Logo.jpeg" width="75" height="75" />
+                            </div>
+                        </div>
+                        <div class="col-lg-11 col-md-10 col-sm-10  text-truncate">
+                            <div class="ml-lg-2 ml-md-3" style="margin:auto;padding: 10px;">
+                                <h3>Producto de Naipe</h3>
+                                <div style="width:100%" class="text-truncate">
+                                    Descripcion del producto, pero eso si sale solo la corta
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card mb-2" style="width:100%">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-1 col-md-2 col-sm-2">
+                            <div class="card-img">
+                                <img src="~/Content/imgs/Logo.jpeg" width="75" height="75" />
+                            </div>
+                        </div>
+                        <div class="col-lg-11 col-md-10 col-sm-10 text-truncate">
+                            <div class="ml-lg-2 ml-md-3" style="margin:auto;padding: 10px;">
+                                <h3>Producto de Naipe</h3>
+                                <div style="width:100%" class="text-truncate">
+                                    Descripcion del producto, pero eso si sale solo la corta
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card mb-2" style="width:100%">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-1 col-md-2 col-sm-2">
+                            <div class="card-img">
+                                <img src="~/Content/imgs/Logo.jpeg" width="75" height="75" />
+                            </div>
+                        </div>
+                        <div class="col-lg-11 col-md-10 col-sm-10 text-truncate">
+                            <div class="ml-lg-2 ml-md-3" style="margin:auto;padding: 10px;">
+                                <h3>Producto de Naipe</h3>
+                                <div style="width:100%" class="text-truncate">
+                                    Descripcion del producto, pero eso si sale solo la corta
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <hr />
+        <div class="pb-5">
+            <section id="sectionLinks" style="padding-bottom:1em;">
+                <span class="pull-right">
+                    <a href="@Url.Action("AssignedInvestor")" class="btn btn-lg btn-success"><i class="fa fa-user"></i>&nbsp;Inversor Asignado</a>
+                    <button class="btn btn-lg btn-primary"><i class="fa fa-facebook-square"></i>&nbsp;Grupo de Facebook</button>
+                </span>
+            </section>
+        </div>       
+    </div>    
+</div>
+@* TODO: Cambiar link dinamico *@
+<a href="#" class="btn-flotante btn-success" title="Seleccionar Prenda"> <i class="flotante-icon fa fa-tshirt"></i></a>
+

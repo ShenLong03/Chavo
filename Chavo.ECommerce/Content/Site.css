@@ -73,3 +73,80 @@ footer.page-footer .footer-copyright {
 }
 
 
+#ingresos {
+    padding-top: 2em;
+    padding-left: 2em;
+    padding-right: 2em;
+}
+
+#productos {
+    padding-left: 2em;
+    padding-right: 2em;
+}
+
+#bienesRaices {
+    padding-left: 1em;
+    padding-right: 1em;
+}
+
+#sectionLinks {
+    padding-left: 1em;
+    padding-right: 1em;
+}
+
+.btn-flotante {
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    bottom: 40px;
+    right: 40px;
+    color: #FFF;
+    border-radius: 50px;
+    text-align: center;
+    font-size: 30px;
+    z-index: 100;
+}
+
+.flotante-icon {
+    margin-top: 13px;
+}
+
+@media (min-width: 576px) {
+    .card card-body img {
+        width:50px;
+        height:50px;
+    }
+    .card card-body h3 {
+        font-size: 1.17em
+    }
+}
+
+@media (min-width: 768px) {
+    .card card-body img {
+        width: 50px;
+        height: 50px;
+    }
+    .card card-body h3 {
+        font-size: 1.17em
+    }
+}
+
+@media (min-width: 992px) {
+    .card card-body img {
+        width: 75px;
+        height: 75px;
+    }
+    .card card-body h3 {
+        font-size: 1em
+    }
+}
+
+@media (min-width: 1200px) {
+    .card card-body img {
+        width: 75px;
+        height: 75px;
+    }
+    .card card-body h3 {
+        font-size: 1em
+    }
+}

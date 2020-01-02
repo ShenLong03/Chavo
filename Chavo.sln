@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chavo.ECommerce", "Chavo.EC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chavo.Common", "Chavo.Common\Chavo.Common.csproj", "{F9E21E50-0056-410C-8BD0-F040314C353D}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BackEnd", "BackEnd", "{DFF3F34D-15C6-462D-8308-1C705D35AAD9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FrontEnd", "FrontEnd", "{6F767E3E-26CC-409D-A309-C4E8A912AF4D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,6 +34,10 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{52D7BC31-D4ED-4F05-AA03-E7B6CE49E264} = {DFF3F34D-15C6-462D-8308-1C705D35AAD9}
+		{75B65133-7A25-4804-9D9C-2B96A8A0D9B8} = {6F767E3E-26CC-409D-A309-C4E8A912AF4D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7B62CE07-80AF-4952-873F-604CF42A6703}
