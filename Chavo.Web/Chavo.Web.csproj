@@ -178,6 +178,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CurrenciesController.cs" />
     <Compile Include="Controllers\GeneralConfigurationsController.cs" />
+    <Compile Include="Controllers\PicturesProductsController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\SubCategoriesController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
@@ -194,6 +195,7 @@
     <Compile Include="Data\Entity\CustomerProduct.cs" />
     <Compile Include="Data\Entity\Functionary.cs" />
     <Compile Include="Data\Entity\GeneralConfiguration.cs" />
+    <Compile Include="Data\Entity\PicturesProduct.cs" />
     <Compile Include="Data\Entity\Product.cs" />
     <Compile Include="Data\Entity\Register.cs" />
     <Compile Include="Data\Entity\Revenue.cs" />
@@ -296,10 +298,19 @@
     <Compile Include="Migrations\201912301631569_Update_Products.Designer.cs">
       <DependentUpon>201912301631569_Update_Products.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202001041932205_Create_PicturesProduct.cs" />
+    <Compile Include="Migrations\202001041932205_Create_PicturesProduct.Designer.cs">
+      <DependentUpon>202001041932205_Create_PicturesProduct.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202001041953566_Update_DataBase.cs" />
+    <Compile Include="Migrations\202001041953566_Update_DataBase.Designer.cs">
+      <DependentUpon>202001041953566_Update_DataBase.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\CustomerProductViewModel.cs" />
     <Compile Include="Models\GeneralConfigurationViewModel.cs" />
+    <Compile Include="Models\PicturesProductViewModel.cs" />
     <Compile Include="Models\ProductViewModel.cs" />
     <Compile Include="Models\SubCategoryViewModel.cs" />
     <Compile Include="Models\CategoryViewModel.cs" />
@@ -1019,6 +1030,15 @@
     <Content Include="Views\Customers\_RevenuesList.cshtml" />
     <Content Include="Views\Customers\View.cshtml" />
     <Content Include="Views\Customers\View1.cshtml" />
+    <Content Include="Views\PicturesProducts\Create.cshtml" />
+    <Content Include="Views\PicturesProducts\Delete.cshtml" />
+    <Content Include="Views\PicturesProducts\Details.cshtml" />
+    <Content Include="Views\PicturesProducts\Edit.cshtml" />
+    <Content Include="Views\PicturesProducts\Index.cshtml" />
+    <Content Include="Views\Products\CreatePicturesProduct.cshtml" />
+    <Content Include="Views\Products\_PicturesProductItems.cshtml" />
+    <Content Include="Views\Products\_GetPicturesProduct.cshtml" />
+    <Content Include="Views\Products\EditPicturesProduct.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1026,6 +1046,7 @@
     <Folder Include="Content\Customers\" />
     <Folder Include="Content\Functionaries\" />
     <Folder Include="Content\GeneralConfigurations\" />
+    <Folder Include="Content\PicturesProducts\" />
     <Folder Include="Content\Products\" />
     <Folder Include="Content\SubCategories\" />
   </ItemGroup>
@@ -1100,6 +1121,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201912301631569_Update_Products.resx">
       <DependentUpon>201912301631569_Update_Products.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001041932205_Create_PicturesProduct.resx">
+      <DependentUpon>202001041932205_Create_PicturesProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001041953566_Update_DataBase.resx">
+      <DependentUpon>202001041953566_Update_DataBase.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

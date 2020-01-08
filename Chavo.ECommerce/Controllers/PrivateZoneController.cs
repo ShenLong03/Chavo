@@ -19,7 +19,7 @@
         public ActionResult AssignedInvestor()
         {
             var customer = db.Customers.FirstOrDefault();
-            return View(db.Customers.FirstOrDefault());
+            return View(customer);
         }
     }
 }

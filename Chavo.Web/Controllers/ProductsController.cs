@@ -68,7 +68,6 @@ namespace Chavo.Web.Controllers
         [ValidateInput(false)]
         public async Task<ActionResult> Create(ProductViewModel view)
         {
-            ;
             try
             {
                 if (ModelState.IsValid)
@@ -196,7 +195,134 @@ namespace Chavo.Web.Controllers
 
                 return Json(new List<SubCategory>(), JsonRequestBehavior.AllowGet);
             }
-        }     
+        }
+
+        #region PicturesProduct
+        [HandleError]
+        public async Task<ActionResult> DetailsPicturesProduct(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            PicturesProduct picturesProduct = await db.PicturesProducts.FindAsync(id);
+            if (picturesProduct == null)
+            {
+                return HttpNotFound();
+            }
+            return View(picturesProduct);
+        }
+
+        [HandleError]
+        public async Task<ActionResult> CreatePicturesProduct(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Product product = await db.Products.FindAsync(id);
+            if (product == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(new PicturesProductViewModel
+            {
+                ProductId = product.ProductId,
+                Product=product,
+                Active=true
+            });
+        }
+
+        [HandleError]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> CreatePicturesProduct(PicturesProductViewModel view)
+        {
+            if (ModelState.IsValid)
+            {
+                var pic = string.Empty;
+                var folder = "~/Content/PicturesProducts";
+
+                if (view.PictureFile != null)
+                {
+                    pic = FilesHelper.UploadPhoto(view.PictureFile, folder);
+                    pic = string.Format("{0}/{1}", folder, pic);
+                }
+                view.Picture = pic;
+
+                var picturesProduct = new PicturesProduct();
+                AutoMapper.Mapper.Map(view, picturesProduct);
+                db.PicturesProducts.Add(picturesProduct);
+                await db.SaveChangesAsync();
+                return RedirectToAction("Details", new { id=view.ProductId});
+            }
+
+            return View(view);
+        }
+
+        [HandleError]
+        public async Task<ActionResult> EditPicturesProduct(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            PicturesProduct picturesProduct = await db.PicturesProducts.FindAsync(id);
+            if (picturesProduct == null)
+            {
+                return HttpNotFound();
+            }
+            var view = new PicturesProductViewModel();
+            AutoMapper.Mapper.Map(picturesProduct, view);
+            return View(view);
+        }
+
+        [HandleError]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> EditPicturesProduct(PicturesProductViewModel view)
+        {
+            if (ModelState.IsValid)
+            {
+                var pic = view.Picture;
+                var folder = "~/Content/PicturesProducts";
+
+                if (view.PictureFile != null)
+                {
+                    pic = FilesHelper.UploadPhoto(view.PictureFile, folder);
+                    pic = string.Format("{0}/{1}", folder, pic);
+                }
+                view.Picture = pic;
+
+                var picturesProduct = new PicturesProduct();
+                AutoMapper.Mapper.Map(view, picturesProduct);
+                db.Entry(picturesProduct).State = EntityState.Modified;
+                await db.SaveChangesAsync();
+                return RedirectToAction("Details", new { id = view.ProductId });
+            }
+            return View(view);
+        }
+
+        [HandleError]
+        public async Task<ActionResult> DeletePicturesProduct(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            PicturesProduct picturesProduct = await db.PicturesProducts.FindAsync(id);
+            if (picturesProduct == null)
+            {
+                return HttpNotFound();
+            }
+
+            db.PicturesProducts.Remove(picturesProduct);
+            await db.SaveChangesAsync();
+            return RedirectToAction("Details", new { id = picturesProduct.ProductId });
+        }
+
+        #endregion
 
         protected override void Dispose(bool disposing)
         {

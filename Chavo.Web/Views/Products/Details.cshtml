@@ -21,6 +21,15 @@
         <div class="form-group">
             <a href="@Url.Action("Edit",new { id=Model.ProductId})" class="btn btn-warning"><i class="fa fa-pencil"></i>&nbsp;Edit</a>
             <a href="@Url.Action("Index")" class="btn btn-secondary"><i class="fa fa-arrow-left"></i>&nbsp;To Back</a>
+            <a href="@Url.Action("CreatePicturesProduct", new { id=Model.ProductId})" class="btn btn-primary"><i class="fa fa-photo"></i>&nbsp;Add Picture</a>
         </div>
     </div>
+</div> 
+<div id="picturesProduct">
+    @if(Model.Pictures.Count()>0)
+    {
+        Html.RenderPartial("_GetPicturesProduct", Model);
+    }
 </div>
+
+

@@ -25,12 +25,20 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="@Url.Action("Index","Customers")">
+                        <a class="nav-link" href="@Url.Action("Index","LearningZone")">
                             Zona de Aprendizaje
                         </a>
                     </li>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("Index","PrivateZone")">
+                                Zona Privada
+                            </a>
+                        </li>
+                    }
                     <li class="nav-item">
-                        <a class="nav-link" href="@Url.Action("Index","Customers")">
+                        <a class="nav-link" href="/Home/Index#sectionProducts">
                             Producto Romanico GR
                         </a>
                     </li>

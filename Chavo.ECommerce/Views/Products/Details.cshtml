@@ -3,176 +3,98 @@
 @{
     ViewBag.Title = "Details";
 }
+    <div style="padding-left:2em;padding-right:2em;">
+        <div class="row mb-4 mt-4">
+            <div class="col-md-4">
+                <div class="row">
+                    <div class="itemProduct">
+                        <img id="imagePrincipal" src="@Url.Content(Model.FullRoutePicture)" class="img-thumbnail" alt="Product">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-inline mt-2">
+                        <img onclick="ChangeImage('@Model.FullRoutePicture');" src="@Url.Content(Model.FullRoutePicture)" alt="@Model.Name" width="75" height="75" class="img-thumbnail" />
+                        @foreach (var item in Model.Pictures)
+                        {
+                            if (!string.IsNullOrEmpty(item.Picture))
+                            {
+                                <img onclick="ChangeImage('@item.FullRoutePicture');" src="@Url.Content(item.FullRoutePicture)" alt="@item.Name" width="75" height="75" class="img-thumbnail" />
 
-<h2>Details</h2>
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <!-- Product Tabs-->
+                <div class="row padding-top-3x mb-3">
+                    <div class="col-lg-10 offset-lg-1">
+                        <h1>@Model.Name</h1>
+                        <h4><small>@Model.ShortDescription</small></h4>
+                        <div>
+                            <h2><small>Precio</small>  $ @Model.PriceAmount.ToString("N2")</h2>
+                            <button class="btn btn-lg btn-primary">Elegir para mi</button>
+                        </div>
+                        <hr />
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li class="nav-item"><a class="nav-link active" href="#description" data-toggle="tab" role="tab">Descripción</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane fade show active" id="description" role="tabpanel">
+                                <p>@Html.Raw(Model.Description)</p>
+                                <p><div class="pt-1 mb-2"><span class="text-medium">SKU:</span> #@Model.Code</div></p>
+                            </div>
+                            @if (Model.Video != null)
+                            {
+                                <iframe width="560" height="315"
+                                        src="@Url.Content(Model.Video)"
+                                        frameborder="0"
+                                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                        allowfullscreen></iframe>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+@section Scripts {
+    <script type="text/javascript">
 
-<div>
-    <h4>Product</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Currency.Name)
-        </dt>
+        function ChangeImage(patch)
+        {
+            $("#imagePrincipal").attr("src",patch);
+        }
 
-        <dd>
-            @Html.DisplayFor(model => model.Currency.Name)
-        </dd>
+        function AgregarProducto(id)
+        {
+            $.ajax(
+                {
+                    type: "GET",
+                    traditional: true,
+                    url: '@Url.Action("AgregarProducto")',
+                    data: {
+                        id: id,
+                        cantidad: $('#cantidad').val(),
+                        talla: $('#size').val(),
+                        color: $('#color').val(),
+                        detallePersonalizado: $('#detallePersonalizado').val(),
+                    },
+                    success: function (result) {
+                        loadPartialView();
+                    }
+                });
+        }
 
-        <dt>
-            @Html.DisplayNameFor(model => model.SubCategory.Name)
-        </dt>
+        $('#color').change(function () {
+            location.href = '@Url.Action("Detalle")?id=' + @Model.ProductId
 
-        <dd>
-            @Html.DisplayFor(model => model.SubCategory.Name)
-        </dd>
+        });
 
-        <dt>
-            @Html.DisplayNameFor(model => model.UnitLength.Name)
-        </dt>
+            function loadPartialView() {
+        //load cartitems to div
+        $('#_toolbar').load('@Url.Action("ToolBar","Home")');
+    };
 
-        <dd>
-            @Html.DisplayFor(model => model.UnitLength.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.WeightType.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.WeightType.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Code)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Code)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Serie)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Serie)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Model)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Model)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Age)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Age)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Weight)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Weight)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Width)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Width)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Height)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Height)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Picture)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Picture)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CostAmount)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CostAmount)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PriceAmount)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PriceAmount)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Discount)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Discount)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Date)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Date)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Video)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Video)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Active)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Active)
-        </dd>
-
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ProductId }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+    </script>
+}

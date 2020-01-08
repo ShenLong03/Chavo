@@ -77,7 +77,7 @@ else
             </p>
         </div>
     </div>
-    <div class="col-xl-10 col-lg-9 col-md-8 col-sm-12">
+    <div id="sectionProducts" class="col-xl-10 col-lg-9 col-md-8 col-sm-12">
         <h2>Productos</h2>
         <hr />
         <div class="row justify-content-start">
@@ -85,7 +85,7 @@ else
             {
             <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 mb-4">
                 <div class="card card-product">
-                    <img src="@Url.Content(item.FullRoutePicture)" class="card-img-top img-thumbnail" style="height:300px" alt="@item.Name">
+                    <img src="@Url.Content(item.FullRoutePicture)" class="card-img-top img-thumbnail" onclick="location.href='@Url.Action("Details","Products", new { id=item.ProductId})'" style="height:300px" alt="@item.Name">
                     <div class="card-body">
                         <span class="font-weight-bold text-muted pull-right">@string.Format("{0}{1}", item.Currency.Nomenclature, item.PriceAmount)</span>
                         <h5 class="card-title">@item.Name</h5>

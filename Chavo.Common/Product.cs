@@ -54,8 +54,8 @@
 
         [AllowHtml]
         [Display(Name = "Short Description")]
-        [DataType(DataType.MultilineText)]
         [MaxLength(100)]
+        [DataType(DataType.MultilineText)]
         public string ShortDescription { get; set; }
 
         [AllowHtml]
@@ -97,6 +97,8 @@
         public virtual Currency Currency { get; set; }
 
         public virtual ICollection<CustomerProduct> Customers { get; set; }
+
+        public virtual ICollection<PicturesProduct> Pictures { get; set; }
 
         public Product()
         {

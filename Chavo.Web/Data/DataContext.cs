@@ -33,5 +33,7 @@
         public DbSet<Register> Registers { get; set; }
 
         public DbSet<Revenue> Revenues { get; set; }
+
+        public DbSet<PicturesProduct> PicturesProducts { get; set; }
     }
 }

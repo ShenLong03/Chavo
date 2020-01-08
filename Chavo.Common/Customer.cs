@@ -38,7 +38,7 @@
             {
                 if (!string.IsNullOrEmpty(Picture))
                 {
-                    return string.Concat(ConfigurationManager.AppSettings["RutComplet"], Picture.Substring(1));
+                    return string.Concat("http://djarquin01-002-site1.1tempurl.com", Picture.Substring(1));
                 }
                 return string.Empty;
             }

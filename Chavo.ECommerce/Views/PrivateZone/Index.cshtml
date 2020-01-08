@@ -6,7 +6,7 @@
 <div class="row pb-2 mb-2">
     <section id="ingresos" class="col-12">
         <span class="pull-right">
-            <button class="btn btn-lg btn-success"><i class="fa fa-user"></i>&nbsp;Inversor Asignado</button>
+            <button class="btn btn-lg btn-success" href="@Url.Action("AssignedInvestor")"><i class="fa fa-user"></i>&nbsp;Inversor Asignado</button>
             <button class="btn btn-lg btn-primary"><i class="fa fa-facebook-official"></i>&nbsp;Grupo de Facebook</button>
         </span>
         <h2>
@@ -40,13 +40,11 @@
                 </div>
             </div>
         </div>
-        <div class="pt-sm-2 mt-sm-2">
-            <span class="pull-right pt-sm-2 mt-sm-2">
-                @* TODO: Cambiar por links dinamicos *@
-                <button class="btn btn-light">Retirar dinero</button>
-                <button class="btn btn-light">Video explicativo</button>
-            </span>
-        </div>
+        <span class="pull-right">
+            @* TODO: Cambiar por links dinamicos *@
+            <button class="btn btn-lg btn-light">Retirar dinero</button>
+            <button class="btn btn-lg btn-light">Video explicativo</button>
+        </span>
     </section>
 </div>
 <hr />

@@ -1,10 +1,9 @@
-﻿
+﻿@model Chavo.Common.Customer
 @{
-    ViewBag.Title = "Inversor Asignado";
-    Layout = "~/Views/Shared/_LayoutModal.cshtml";
+    ViewBag.Title = "Inversor Asignado";   
 }
 
-<center style="padding-top:10%">
+<center style="padding-top:5%; padding-bottom:5%;">
     <div class="cuadro-login" style="border-radius:15px; width:50%">
         <div class="panel panel-primary m-4">
             <div class="panel-heading" style="border-top-left-radius:15px; border-top-right-radius:15px">
@@ -12,47 +11,66 @@
             </div>
             <div class="panel-body">
                 <section id="loginForm" style="text-align:justify">
-                    <dl class="dl-horizontal">
-                        <dt>
-                            @Html.DisplayNameFor(model => model.ID)
-                        </dt>
+                    <div class="row">
+                        <div class="col-md-6 border-right">
+                            <dl class="dl-horizontal">
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.ID)
+                                </dt>
 
-                        <dd>
-                            @Html.DisplayFor(model => model.ID)
-                        </dd>
+                                <dd>
+                                    @Html.DisplayFor(model => model.ID)
+                                </dd>
 
-                        <dt>
-                            @Html.DisplayNameFor(model => model.FirstName)
-                        </dt>
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.FirstName)
+                                </dt>
 
-                        <dd>
-                            @Html.DisplayFor(model => model.FirstName)
-                        </dd>
+                                <dd>
+                                    @Html.DisplayFor(model => model.FirstName)
+                                </dd>
 
-                        <dt>
-                            @Html.DisplayNameFor(model => model.LastName)
-                        </dt>
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.LastName)
+                                </dt>
 
-                        <dd>
-                            @Html.DisplayFor(model => model.LastName)
-                        </dd>
+                                <dd>
+                                    @Html.DisplayFor(model => model.LastName)
+                                </dd>
 
-                        <dt>
-                            @Html.DisplayNameFor(model => model.Email)
-                        </dt>
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.Email)
+                                </dt>
 
-                        <dd>
-                            @Html.DisplayFor(model => model.Email)
-                        </dd>                      
+                                <dd>
+                                    @Html.DisplayFor(model => model.Email)
+                                </dd>
 
-                        <dt>
-                            @Html.DisplayNameFor(model => model.Active)
-                        </dt>
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.Active)
+                                </dt>
 
-                        <dd>
-                            @Html.DisplayFor(model => model.Active)
-                        </dd>                      
-                    </dl>
+                                <dd>
+                                    @Html.DisplayFor(model => model.Active)
+                                </dd>
+                            </dl>
+                        </div>
+                        <div class="col-md-6">
+                            @if (!string.IsNullOrEmpty(Model.Picture))
+                            {
+                                <center>
+                                    <img src="@Url.Content(Model.FullRoutePicture)" alt="Picture Profile" class="img-thumbnail img-profile" />
+                                </center>
+                            }
+                            else
+                            {
+                                <center>
+                                    <img src="~/Content/imgs/CustomerAvatar.png" class="img-thumbnail img-profile" />
+                                </center>
+                            }
+                        </div>
+                    </div>
+                  
                     <hr />
                     <a class="btn btn-primary" href="@Url.Action("Index","Home")">Ok</a>
                 </section>

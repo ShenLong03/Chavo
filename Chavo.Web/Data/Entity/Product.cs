@@ -98,6 +98,8 @@
 
         public virtual ICollection<CustomerProduct> Customers { get; set; }
 
+        public virtual ICollection<PicturesProduct> Pictures { get; set; }
+
         public Product()
         {
             Date = DateTime.Today;
