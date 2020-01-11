@@ -28,5 +28,11 @@
         public DbSet<GeneralConfiguration> GeneralConfigurations { get; set; }
 
         public DbSet<Register> Registers { get; set; }
+
+        public DbSet<Revenue> Revenues { get; set; }
+
+        public DbSet<PicturesProduct> PicturesProducts { get; set; }
+
+        public DbSet<FirstLogin> FirstLogins { get; set; }
     }
 }

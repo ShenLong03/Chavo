@@ -1,0 +1,82 @@
+﻿@model Chavo.ECommerce.Models.CustomerViewModel
+
+@{
+    ViewBag.Title = "Details";
+}
+    <div class="container">
+        <h2>@ViewBag.Title</h2>
+        <h4>Customer</h4>
+        <ol class="breadcrumb">
+            <li><a href="@Url.Action("Index","Home")">Inicio</a></li>
+            <li><a href="@Url.Action("Index")">Customers</a></li>
+            <li class="active">@Model.AllName</li>
+        </ol>
+        <hr />
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="data-tab" data-toggle="tab" href="#data" role="tab" aria-controls="data" aria-selected="true">Data</a>
+            </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="data" role="tabpanel" aria-labelledby="data-tab">
+                <div id="myForm">
+                    @{ Html.RenderPartial("_CustomerItems", Model); }
+                </div>
+                <div class="col-md-6">
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <a href="@Url.Action("Edit",new { id=Model.CustomerId})" class="btn btn-warning"><i class="fa fa-pencil"></i>&nbsp;Edit</a>
+                            <a href="@Url.Action("ChangePassword","Manage")" class="btn btn-outline-primary"><i class="fa fa-user"></i>&nbsp;Cambiar Password</a>
+                            <a href="@Url.Action("Index")" class="btn btn-secondary"><i class="fa fa-arrow-left"></i>&nbsp;To Back</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+@section scripts
+{
+    <script type="text/javascript">
+        function ChangeAmount(value, type, id)
+        {
+            $.ajax(
+            {
+                type: "GET",
+                url: '@Url.Action("ChangeRevenue")',
+                    data: {
+                        value:convert(value),
+                        type:type,
+                        id: id,                    
+                },
+                success: function (result) {
+                    if (result) {
+                        alertify.success("<i class='fa fa-check-circle'></i>&nbsp;Change success");
+                        switch (type) {
+                            case "s":
+                                $("#shortRevenue").val("$" + convert(value).toFixed(2));
+                                break;
+                            case "m":
+                                $("#mediumRevenue").val("$" + convert(value).toFixed(2));
+                                break;
+                            case "l":
+                                $("#longRevenue").val("$" + convert(value).toFixed(2));
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                    else {
+                        alertify.success("<i class='fa fa-times-circle'></i>&nbsp;Change error");
+                    }
+                }
+            }); 
+        }
+
+        // Function to convert 
+    function convert(currency){ 
+        var temp = currency.replace(/[^0-9.-]+/g,""); 
+        return parseFloat(temp); 
+      
+    } 
+    </script>
+}

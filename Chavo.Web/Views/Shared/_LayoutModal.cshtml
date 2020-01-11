@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title -Chavito</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Content/alertifyjs/alertify.min.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-datepicker.min.css" rel="stylesheet" />
+    <link href="~/Content/DataTables/datatables.css" rel="stylesheet" />
+    <link href="~/Content/summernote-0.8.12-dist/dist/summernote-bs4.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container" style="margin-top:30px">
+        @RenderBody()
+        <hr />        
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    @Scripts.Render("~/bundles/bootstrap")
+    <script src="~/Scripts/alertify.js"></script>
+    <script src="~/Scripts/bootstrap-datepicker.min.js"></script>
+    <script src="~/Content/DataTables/datatables.js"></script>
+    <script src="~/Content/summernote-0.8.12-dist/dist/summernote-bs4.js"></script>
+    <script src="~/Scripts/site.js"></script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

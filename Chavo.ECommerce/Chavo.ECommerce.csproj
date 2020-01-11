@@ -47,10 +47,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=8.0.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.8.0.0\lib\net461\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -170,6 +176,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CustomersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LearningZoneController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -179,7 +186,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\FilesHelper.cs" />
+    <Compile Include="Helpers\MailHelper.cs" />
+    <Compile Include="Mappings\AutoMapperWebProfile.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\CustomerViewModel.cs" />
     <Compile Include="Models\HomeViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -310,6 +321,7 @@
     <Content Include="Scripts\popper.min.js" />
     <Content Include="Scripts\regular.js" />
     <Content Include="Scripts\regular.min.js" />
+    <Content Include="Scripts\site.js" />
     <Content Include="Scripts\solid.js" />
     <Content Include="Scripts\solid.min.js" />
     <Content Include="Scripts\src\index.js" />
@@ -2008,6 +2020,10 @@
     <Content Include="scss\_variables.scss" />
     <Content Include="Views\LearningZone\Index.cshtml" />
     <Content Include="Views\Products\Details.cshtml" />
+    <Content Include="Views\Home\Footer.cshtml" />
+    <Content Include="Views\Customers\_CustomerItems.cshtml" />
+    <Content Include="Views\Customers\Edit.cshtml" />
+    <Content Include="Views\Customers\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

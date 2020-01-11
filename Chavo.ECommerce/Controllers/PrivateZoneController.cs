@@ -1,10 +1,8 @@
 ﻿namespace Chavo.ECommerce.Controllers
 {
+    using Chavo.ECommerce.Models;
     using Data;
-    using System;
-    using System.Collections.Generic;
     using System.Linq;
-    using System.Web;
     using System.Web.Mvc;
 
     public class PrivateZoneController : Controller
@@ -13,7 +11,15 @@
 
         public ActionResult Index()
         {
-            return View(db.Customers.FirstOrDefault());
+            var customer = db.Customers.Where(c => c.UserName == User.Identity.Name).FirstOrDefault();
+            var view = new CustomerViewModel();
+            AutoMapper.Mapper.Map(customer, view);
+            var generalConfiguration = db.GeneralConfigurations.FirstOrDefault();
+            if (generalConfiguration!=null)
+            {
+                view.GeneralConfigurations = generalConfiguration;
+            }
+            return View(view);
         }
 
         public ActionResult AssignedInvestor()

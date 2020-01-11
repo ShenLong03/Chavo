@@ -129,16 +129,67 @@
         </div>
     </div>
     <div class="col-md-6">
-        <div class="form-horizontal">
-            <div class="form-group">
-                @Html.LabelFor(model => model.Active, htmlAttributes: new { @class = "control-label" })
-                <div>
-                    <div class="checkbox">
-                        @Html.EditorFor(model => model.Active)
-                        @Html.ValidationMessageFor(model => model.Active, "", new { @class = "text-danger" })
+        <div class="form-horizontal row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.DisplayShortRevenue, htmlAttributes: new { @class = "control-label" })
+                    <div>
+                        <div class="checkbox">
+                            @Html.EditorFor(model => model.DisplayShortRevenue)
+                            @Html.ValidationMessageFor(model => model.DisplayShortRevenue, "", new { @class = "text-danger" })
+                        </div>
                     </div>
                 </div>
-            </div>        
+                <div class="form-group">
+                    @Html.LabelFor(model => model.DisplayMediumRevenue, htmlAttributes: new { @class = "control-label" })
+                    <div>
+                        <div class="checkbox">
+                            @Html.EditorFor(model => model.DisplayMediumRevenue)
+                            @Html.ValidationMessageFor(model => model.DisplayMediumRevenue, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.DisplayLongRevenue, htmlAttributes: new { @class = "control-label" })
+                    <div>
+                        <div class="checkbox">
+                            @Html.EditorFor(model => model.DisplayLongRevenue)
+                            @Html.ValidationMessageFor(model => model.DisplayLongRevenue, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.DisplayClothes, htmlAttributes: new { @class = "control-label" })
+                    <div>
+                        <div class="checkbox">
+                            @Html.EditorFor(model => model.DisplayClothes)
+                            @Html.ValidationMessageFor(model => model.DisplayClothes, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.DisplayInversor, htmlAttributes: new { @class = "control-label" })
+                    <div>
+                        <div class="checkbox">
+                            @Html.EditorFor(model => model.DisplayInversor)
+                            @Html.ValidationMessageFor(model => model.DisplayInversor, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Active, htmlAttributes: new { @class = "control-label" })
+                    <div>
+                        <div class="checkbox">
+                            @Html.EditorFor(model => model.Active)
+                            @Html.ValidationMessageFor(model => model.Active, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <div class="w-100"></div>

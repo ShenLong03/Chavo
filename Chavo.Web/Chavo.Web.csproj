@@ -178,8 +178,8 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CurrenciesController.cs" />
     <Compile Include="Controllers\GeneralConfigurationsController.cs" />
-    <Compile Include="Controllers\PicturesProductsController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Controllers\RegistersController.cs" />
     <Compile Include="Controllers\SubCategoriesController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\FunctionariesController.cs" />
@@ -193,6 +193,7 @@
     <Compile Include="Data\Entity\Currency.cs" />
     <Compile Include="Data\Entity\Customer.cs" />
     <Compile Include="Data\Entity\CustomerProduct.cs" />
+    <Compile Include="Data\Entity\FirstLogin.cs" />
     <Compile Include="Data\Entity\Functionary.cs" />
     <Compile Include="Data\Entity\GeneralConfiguration.cs" />
     <Compile Include="Data\Entity\PicturesProduct.cs" />
@@ -305,6 +306,18 @@
     <Compile Include="Migrations\202001041953566_Update_DataBase.cs" />
     <Compile Include="Migrations\202001041953566_Update_DataBase.Designer.cs">
       <DependentUpon>202001041953566_Update_DataBase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202001111322486_Create_FirstLogin_Urls_GeneralConfigurations.cs" />
+    <Compile Include="Migrations\202001111322486_Create_FirstLogin_Urls_GeneralConfigurations.Designer.cs">
+      <DependentUpon>202001111322486_Create_FirstLogin_Urls_GeneralConfigurations.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202001111356578_Update_DataBase1.cs" />
+    <Compile Include="Migrations\202001111356578_Update_DataBase1.Designer.cs">
+      <DependentUpon>202001111356578_Update_DataBase1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202001111921257_Update_GeneralConfiguration_VideoCashing.cs" />
+    <Compile Include="Migrations\202001111921257_Update_GeneralConfiguration_VideoCashing.Designer.cs">
+      <DependentUpon>202001111921257_Update_GeneralConfiguration_VideoCashing.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -1030,15 +1043,16 @@
     <Content Include="Views\Customers\_RevenuesList.cshtml" />
     <Content Include="Views\Customers\View.cshtml" />
     <Content Include="Views\Customers\View1.cshtml" />
-    <Content Include="Views\PicturesProducts\Create.cshtml" />
-    <Content Include="Views\PicturesProducts\Delete.cshtml" />
-    <Content Include="Views\PicturesProducts\Details.cshtml" />
-    <Content Include="Views\PicturesProducts\Edit.cshtml" />
-    <Content Include="Views\PicturesProducts\Index.cshtml" />
     <Content Include="Views\Products\CreatePicturesProduct.cshtml" />
     <Content Include="Views\Products\_PicturesProductItems.cshtml" />
     <Content Include="Views\Products\_GetPicturesProduct.cshtml" />
     <Content Include="Views\Products\EditPicturesProduct.cshtml" />
+    <Content Include="Views\Registers\Create.cshtml" />
+    <Content Include="Views\Registers\Details.cshtml" />
+    <Content Include="Views\Registers\Edit.cshtml" />
+    <Content Include="Views\Registers\Index.cshtml" />
+    <Content Include="Views\Registers\_RegisterItems.cshtml" />
+    <Content Include="Views\Shared\_LayoutModal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1127,6 +1141,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202001041953566_Update_DataBase.resx">
       <DependentUpon>202001041953566_Update_DataBase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001111322486_Create_FirstLogin_Urls_GeneralConfigurations.resx">
+      <DependentUpon>202001111322486_Create_FirstLogin_Urls_GeneralConfigurations.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001111356578_Update_DataBase1.resx">
+      <DependentUpon>202001111356578_Update_DataBase1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001111921257_Update_GeneralConfiguration_VideoCashing.resx">
+      <DependentUpon>202001111921257_Update_GeneralConfiguration_VideoCashing.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

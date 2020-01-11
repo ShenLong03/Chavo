@@ -47,12 +47,13 @@
         [HandleError]
         public ActionResult Create()
         {
-            return View(new GeneralConfiguration());
+            return View(new GeneralConfigurationViewModel());
         }
 
         [HandleError]
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
         public async Task<ActionResult> Create(GeneralConfigurationViewModel view)
         {
             if (ModelState.IsValid)
@@ -98,6 +99,7 @@
         [HandleError]
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
         public async Task<ActionResult> Edit(GeneralConfigurationViewModel view)
         {
             if (ModelState.IsValid)

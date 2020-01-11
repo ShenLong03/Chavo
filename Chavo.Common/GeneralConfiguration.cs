@@ -14,5 +14,50 @@
 
         [Display(Name = "Video Banner")]
         public string VideoBanner { get; set; }
+
+        [DataType(DataType.EmailAddress)]
+        public string Email { get; set; }
+
+        public string Phone { get; set; }
+
+        public string Facebook { get; set; }
+
+        [Display(Name = "Facebook Group")]
+        public string FacebookGroup { get; set; }
+
+        public string Instagram { get; set; }
+
+        public string Twiter { get; set; }
+
+        [Display(Name = "Learning Zone")]
+        public string LearningZone { get; set; }
+
+        [Display(Name = "Acquire User Learning Zone")]
+        public string AcquireUserLearningZone { get; set; }
+
+        public string Cashing { get; set; }
+
+        [Display(Name = "Cashing Conditions")]
+        public string CashingConditions { get; set; }
+
+        [Display(Name = "Video Cashing")]
+        public string VideoCashing { get; set; }
+
+        [Display(Name = "Real Estate")]
+        public string RealEstate { get; set; }
+
+        public string Chat { get; set; }
+
+        [Display(Name = "Transacction Number")]
+        public string TransacctionNumber { get; set; }
+
+        [Display(Name = "Explication")]
+        public string DescriptionTransacctionNumber { get; set; }
+
+        [Display(Name = "Message Login")]
+        public string MessageLogin { get; set; }
+
+        [Display(Name = "Message Footer")]
+        public string MessageFooter { get; set; }
     }
 }

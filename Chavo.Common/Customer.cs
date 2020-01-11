@@ -4,8 +4,6 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
-    using System.Configuration;
-    using System.Linq;
 
     public class Customer
     {
@@ -70,22 +68,46 @@
 
         public Genero Genero { get; set; }
 
+        [Display(Name = "Display Short Revenue")]
+        public bool DisplayShortRevenue { get; set; } = true;
+
         [Display(Name = "Short Revenue")]
         public double ShortRevenue { get; set; } = 0;
+
+        [Display(Name = "Display Medium Revenue")]
+        public bool DisplayMediumRevenue { get; set; } = true;
 
         [Display(Name = "Medium Revenue")]
         public double MediumRevenue { get; set; } = 0;
 
+        [Display(Name = "Display Long Revenue")]
+        public bool DisplayLongRevenue { get; set; } = true;
+
         [Display(Name = "Long Revenue")]
         public double LongRevenue { get; set; } = 0;
+
+        [Display(Name = "Display Clothes")]
+        public bool DisplayClothes { get; set; } = true;
+
+        public bool DisplayInversor { get; set; } = true;
 
         public virtual ICollection<CustomerProduct> Products { get; set; }
 
         public virtual ICollection<Revenue> Revenues { get; set; }
 
+        public virtual ICollection<FirstLogin> FirstLogins { get; set; }
+
         public Customer()
         {
             Active = true;
+            ShortRevenue = 0;
+            MediumRevenue = 0;
+            LongRevenue = 0;
+            DisplayShortRevenue = true;
+            DisplayMediumRevenue = true;
+            DisplayLongRevenue = true;
+            DisplayClothes = true;
+            DisplayInversor = true;
         }
     }
 

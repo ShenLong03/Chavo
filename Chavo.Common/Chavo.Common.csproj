@@ -75,6 +75,7 @@
     <Compile Include="Customer.cs" />
     <Compile Include="CustomerProduct.cs" />
     <Compile Include="DataContext.cs" />
+    <Compile Include="FirstLogin.cs" />
     <Compile Include="Functionary.cs" />
     <Compile Include="GeneralConfiguration.cs" />
     <Compile Include="PicturesProduct.cs" />

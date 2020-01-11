@@ -21,6 +21,9 @@
     @Html.HiddenFor(model => model.Picture)
     @Html.HiddenFor(model => model.BirthDate)
     @Html.HiddenFor(model => model.UserName)
+    @Html.HiddenFor(model => model.ShortRevenue)
+    @Html.HiddenFor(model => model.MediumRevenue)
+    @Html.HiddenFor(model => model.LongRevenue)
 
     { Html.RenderPartial("_CustomerItems", Model); }
     <div class="col-md-6">

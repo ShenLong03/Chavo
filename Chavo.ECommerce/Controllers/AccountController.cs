@@ -11,6 +11,7 @@ using Microsoft.Owin.Security;
 using Chavo.ECommerce.Models;
 using Chavo.Common;
 using Chavo.ECommerce.Data;
+using Chavo.ECommerce.Helpers;
 
 namespace Chavo.ECommerce.Controllers
 {
@@ -70,26 +71,42 @@ namespace Chavo.ECommerce.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
         {
-            if (!ModelState.IsValid)
+            using (var db = new DataContextLocal())
             {
-                return View(model);
-            }
+                if (!ModelState.IsValid)
+                {
+                    return View(model);
+                }
+         
+                var customer = db.Customers.Where(c => c.UserName == model.Email).FirstOrDefault();
 
-            // This doesn't count login failures towards account lockout
-            // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
-            switch (result)
-            {
-                case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
-                case SignInStatus.LockedOut:
-                    return View("Lockout");
-                case SignInStatus.RequiresVerification:
-                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
-                case SignInStatus.Failure:
-                default:
+                if (customer==null)
+                {
                     ModelState.AddModelError("", "Invalid login attempt.");
                     return View(model);
+                }
+
+                if (customer.FirstLogins.Count()== 0)
+                {                 
+                    return RedirectToAction("ForgotPassword");
+                }            
+
+                // This doesn't count login failures towards account lockout
+                // To enable password failures to trigger account lockout, change to shouldLockout: true
+                var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+                switch (result)
+                {
+                    case SignInStatus.Success:
+                        return RedirectToLocal(returnUrl);
+                    case SignInStatus.LockedOut:
+                        return View("Lockout");
+                    case SignInStatus.RequiresVerification:
+                        return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
+                    case SignInStatus.Failure:
+                    default:
+                        ModelState.AddModelError("", "Invalid login attempt.");
+                        return View(model);
+                }
             }
         }
 
@@ -222,10 +239,20 @@ namespace Chavo.ECommerce.Controllers
 
                 // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                 // Send an email with this link
-                // string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
-                // var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);		
-                // await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
-                // return RedirectToAction("ForgotPasswordConfirmation", "Account");
+                 string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
+                 var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);		
+                
+                try
+                {
+                    await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                    await MailHelper.SendMail(user.Email, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                }
+                catch (Exception)
+                {
+                    await MailHelper.SendMail(user.Email, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                }
+
+                return RedirectToAction("ForgotPasswordConfirmation", "Account");
             }
 
             // If we got this far, something failed, redisplay form
@@ -268,6 +295,21 @@ namespace Chavo.ECommerce.Controllers
             var result = await UserManager.ResetPasswordAsync(user.Id, model.Code, model.Password);
             if (result.Succeeded)
             {
+                using (var db= new DataContext())
+                {
+
+                    var customer = db.Customers.Where(c => c.UserName == model.Email).FirstOrDefault();
+                    if (customer.FirstLogins.Count()==0)
+                    {
+                        db.FirstLogins.Add(new FirstLogin
+                        {
+                            CustomerId = customer.CustomerId,
+                            UserName = customer.UserName
+                        });
+                        await db.SaveChangesAsync();
+                    }
+                 
+                }
                 return RedirectToAction("ResetPasswordConfirmation", "Account");
             }
             AddErrors(result);

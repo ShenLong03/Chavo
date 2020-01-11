@@ -4,7 +4,6 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
-    using System.Configuration;
     using System.Web.Mvc;
 
     public class Product
@@ -88,6 +87,13 @@
 
         public bool Active { get; set; } = true;
 
+        [Display(Name = "Acquire Product")]
+        public string AcquireProduct { get; set; }
+
+        public int Quantity { get; set; } = 0;
+
+        public State State { get; set; }
+
         public virtual SubCategory SubCategory { get; set; }
 
         public virtual Weight WeightType { get; set; }
@@ -104,6 +110,12 @@
         {
             Date = DateTime.Today;
             Active = true;
+            Quantity = 0;
         }
+    }
+
+    public enum State
+    {
+        Disponible, Reservado, Agotado
     }
 }
