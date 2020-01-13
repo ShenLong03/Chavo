@@ -9,6 +9,7 @@
     using System.Threading.Tasks;
     using System.Web.Mvc;
 
+    [Authorize]
     public class CategoriesController : Controller
     {
         private DataContext db = new DataContext();

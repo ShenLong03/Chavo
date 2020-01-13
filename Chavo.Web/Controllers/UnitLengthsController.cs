@@ -12,6 +12,7 @@
     using Data;
     using Data.Entity;
 
+    [Authorize]
     public class UnitLengthsController : Controller
     {
         private DataContext db = new DataContext();

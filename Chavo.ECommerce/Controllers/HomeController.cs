@@ -23,7 +23,7 @@
                 }
             }
 
-            IQueryable<Product> productsSelect = db.Products;
+            IQueryable<Product> productsSelect = db.Products.Where(p=>p.State==State.Disponible && p.Active);
 
             if (categories != null && subCategories != null)
             {
@@ -87,6 +87,18 @@
             ViewBag.Message = "Your application description page.";
 
             return View();
+        }
+
+        public ActionResult TransacctionNumber()
+        {
+            if (db.GeneralConfigurations.Count() > 0)
+            {
+                return View(db.GeneralConfigurations.FirstOrDefault());
+            }
+            else
+            {
+                return View(new GeneralConfiguration());
+            }
         }
 
         public ActionResult Contact()

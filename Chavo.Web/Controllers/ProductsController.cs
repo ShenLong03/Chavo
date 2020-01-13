@@ -14,6 +14,7 @@ using Chavo.Web.Helpers;
 
 namespace Chavo.Web.Controllers
 {
+    [Authorize]
     public class ProductsController : Controller
     {
         private DataContext db = new DataContext();

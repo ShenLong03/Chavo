@@ -1,0 +1,25 @@
+﻿@model Chavo.Common.GeneralConfiguration
+
+@{
+    ViewBag.Title = "Número de Transacción";
+}
+<center style="padding-top:5%; padding-bottom:5%;">
+    <div class="cuadro-login" style="border-radius:15px; width:50%">
+        <div class="panel panel-primary m-4">
+            <div class="panel-heading" style="border-top-left-radius:15px; border-top-right-radius:15px">
+                <h5>@ViewBag.Title</h5>
+            </div>
+            <div class="panel-body">
+                <section id="loginForm">
+                   @Html.Raw(Model.DescriptionTransacctionNumber)
+                    <br />
+                    <a href="@Model.TransacctionNumber" class="btn btn-lg btn-primary">Obtener mi número de transacción</a>
+                </section>
+            </div>
+        </div>
+    </div>
+</center>
+
+
+
+

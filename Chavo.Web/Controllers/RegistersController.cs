@@ -10,6 +10,7 @@
     using System.Threading.Tasks;
     using System.Web.Mvc;
 
+    [Authorize]
     public class RegistersController : Controller
     {
         private DataContext db = new DataContext();

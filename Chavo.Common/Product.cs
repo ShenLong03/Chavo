@@ -90,7 +90,10 @@
         [Display(Name = "Acquire Product")]
         public string AcquireProduct { get; set; }
 
-        public int Quantity { get; set; } = 0;
+        public bool Unique { get; set; } = false;
+
+        [Display(Name = "Real State")]
+        public bool RealState { get; set; } = false;
 
         public State State { get; set; }
 
@@ -110,7 +113,8 @@
         {
             Date = DateTime.Today;
             Active = true;
-            Quantity = 0;
+            Unique = false;
+            RealState = false;
         }
     }
 

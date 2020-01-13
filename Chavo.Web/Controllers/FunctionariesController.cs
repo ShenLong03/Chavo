@@ -15,6 +15,7 @@
     using System.Threading.Tasks;
     using System.Web.Mvc;
 
+    [Authorize]
     public class FunctionariesController : Controller
     {
         private DataContext db = new DataContext();

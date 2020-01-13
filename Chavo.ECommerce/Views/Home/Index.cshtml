@@ -12,9 +12,9 @@
 else
 {
     <div class="jumbotron">
-        <h1>Chavito</h1>
-        <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-        <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+        <h1>Románico</h1>
+        <p class="lead">Te amo. Perdon. Lo siento.</p>
+        <p><a href="#sectionProducts" class="btn btn-primary btn-lg">Productos &raquo;</a></p>
     </div>
 }
 
@@ -23,7 +23,7 @@ else
         <div class="container" style="position: sticky;top:4em;">
             <h2>Filtros</h2>
             <hr />
-            <p>  
+            <p>
                 <div class="form-horizontal">
                     <div class="form-group">
                         <label class="control-label">Orden</label>
@@ -33,7 +33,7 @@ else
                             <option value="2">Menor a Mayor</option>
                             <option value="3">Mayor a Menor</option>
                         </select>
-                    </div>                    
+                    </div>
                 </div>
             </p>
             <hr />
@@ -81,26 +81,49 @@ else
         <h2>Productos</h2>
         <hr />
         <div class="row justify-content-start">
-            @foreach (var item in Model.Products)
+            @foreach (var item in Model.Products.Where(p=>!p.RealState))
             {
-            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 mb-4">
-                <div class="card card-product">
-                    <img src="@Url.Content(item.FullRoutePicture)" class="card-img-top img-thumbnail" onclick="location.href='@Url.Action("Details","Products", new { id=item.ProductId})'" style="height:300px" alt="@item.Name">
-                    <div class="card-body">
-                        <span class="font-weight-bold text-muted pull-right">@string.Format("{0}{1}", item.Currency.Nomenclature, item.PriceAmount)</span>
-                        <h5 class="card-title">@item.Name</h5>
-                        <p class="card-text">@Html.Raw(item.ShortDescription)</p>
-                        <div class="form-group" style="text-align:center">
-                            <a href="#" class="btn btn-warning">Seleccionar este para mi</a><br />
-                            <a href="#" class="btn btn-warning mt-2">Adquirir este producto</a>
-                        </div>
+                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 mb-4">
+                    <div class="card card-product">
+                        <img src="@Url.Content(item.FullRoutePicture)" class="card-img-top img-thumbnail" onclick="location.href='@Url.Action("Details","Products", new { id=item.ProductId})'" style="height:300px" alt="@item.Name">
+                        <div class="card-body">
+                            <span class="font-weight-bold text-muted pull-right">@string.Format("{0}{1}", item.Currency.Nomenclature, item.PriceAmount)</span>
+                            <h5 class="card-title">@item.Name</h5>
+                            <p class="card-text">@Html.Raw(item.ShortDescription)</p>
+                            <div class="form-group" style="text-align:center">
+                                <a href="@item.AcquireProduct" class="btn btn-primary">Seleccionar este para mi</a><br />
+                                <a href="@item.AcquireProduct" class="btn btn-primary mt-2">Adquirir este producto</a>
+                            </div>
 
+                        </div>
                     </div>
                 </div>
-            </div>               
             }
         </div>
-    </div>    
+        <h2>Bienes Raíces</h2>
+        <hr />
+        <div class="row justify-content-start">
+            @foreach (var item in Model.Products.Where(p=>p.RealState))
+            {
+                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 mb-4">
+                    <div class="card card-product">
+                        <img src="@Url.Content(item.FullRoutePicture)" class="card-img-top img-thumbnail" onclick="location.href='@Url.Action("Details","Products", new { id=item.ProductId})'" style="height:300px" alt="@item.Name">
+                        <div class="card-body">
+                            <span class="font-weight-bold text-muted pull-right">@string.Format("{0}{1}", item.Currency.Nomenclature, item.PriceAmount)</span>
+                            <h5 class="card-title">@item.Name</h5>
+                            <p class="card-text">@Html.Raw(item.ShortDescription)</p>
+                            <div class="form-group" style="text-align:center">
+                                <a href="@item.AcquireProduct" class="btn btn-primary">Seleccionar este para mi</a><br />
+                                <a href="@item.AcquireProduct" class="btn btn-primary mt-2">Adquirir este producto</a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    
 </div>
 
 @section scripts

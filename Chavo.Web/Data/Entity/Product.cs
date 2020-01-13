@@ -46,7 +46,7 @@
             {
                 if (!string.IsNullOrEmpty(Picture))
                 {
-                    return string.Concat(WebConfigurationManager.AppSettings["RutComplet"], Picture.Substring(1));
+                    return string.Concat("http://djarquin01-002-site1.1tempurl.com", Picture.Substring(1));
                 }
                 return string.Empty;
             }
@@ -91,9 +91,12 @@
         [Display(Name= "Acquire Product")]
         public string AcquireProduct { get; set; }
 
-        public int Quantity { get; set; } = 0;
+        public bool Unique { get; set; } = false;
 
-        public State State { get; set; }
+        [Display(Name="Real State")]
+        public bool RealState { get; set; } = false;
+
+        public State State { get; set; }       
 
         public virtual SubCategory SubCategory { get; set; }
 
@@ -111,7 +114,8 @@
         {
             Date = DateTime.Today;
             Active = true;
-            Quantity = 0;
+            Unique = false;
+            RealState = false;
         }
     }
 

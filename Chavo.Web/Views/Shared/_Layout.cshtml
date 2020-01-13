@@ -15,56 +15,60 @@
 <body>
     <nav class="navbar navbar-expand-sm sticky-top bg-dark navbar-dark">
         <div class="container">
-            <a class="navbar-brand" href="#">Chavito</a>
+            <a class="navbar-brand" href="#">Románico</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="collapsibleNavbar">
                 <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link" href="@Url.Action("Index","Home")">
-                            Home
-                        </a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span>Administration</span>
-                        </a>
-                        <div class="dropdown-menu bg-dark navbar-dark" aria-labelledby="pagesDropdown">
-                            <a class="dropdown-item text-light" href="@Url.Action("Index", "GeneralConfigurations")">General Configurations</a>
-                            <a class="dropdown-item text-light" href="@Url.Action("Index", "Functionaries")">Functionaries</a>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="@Url.Action("Index","Registers")">
-                            Registers
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="@Url.Action("Index","Customers")">
-                            Customers
-                        </a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span>Tables</span>
-                        </a>
-                        <div class="dropdown-menu bg-dark navbar-dark" aria-labelledby="pagesDropdown">
-                            <a class="dropdown-item text-light" href="@Url.Action("Index", "Weights")">Weights</a>
-                            <a class="dropdown-item text-light" href="@Url.Action("Index", "UnitLengths")">Unit Lengths</a>
-                            <a class="dropdown-item text-light" href="@Url.Action("Index", "Currencies")">Currencies</a>
-                        </div>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span>Products</span>
-                        </a>
-                        <div class="dropdown-menu bg-dark navbar-dark" aria-labelledby="pagesDropdown">
-                            <a class="dropdown-item text-light" href="@Url.Action("Index", "Categories")">Categories</a>
-                            <a class="dropdown-item text-light" href="@Url.Action("Index", "SubCategories")">SubCategories</a>
-                            <a class="dropdown-item text-light" href="@Url.Action("Index", "Products")">Products</a>
-                        </div>
-                    </li>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("Index","Home")">
+                                Home
+                            </a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span>Administration</span>
+                            </a>
+                            <div class="dropdown-menu bg-dark navbar-dark" aria-labelledby="pagesDropdown">
+                                <a class="dropdown-item text-light" href="@Url.Action("Index", "GeneralConfigurations")">General Configurations</a>
+                                <a class="dropdown-item text-light" href="@Url.Action("Index", "Functionaries")">Functionaries</a>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("Index","Registers")">
+                                Registers
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("Index","Customers")">
+                                Customers
+                            </a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span>Tables</span>
+                            </a>
+                            <div class="dropdown-menu bg-dark navbar-dark" aria-labelledby="pagesDropdown">
+                                <a class="dropdown-item text-light" href="@Url.Action("Index", "Weights")">Weights</a>
+                                <a class="dropdown-item text-light" href="@Url.Action("Index", "UnitLengths")">Unit Lengths</a>
+                                <a class="dropdown-item text-light" href="@Url.Action("Index", "Currencies")">Currencies</a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span>Products</span>
+                            </a>
+                            <div class="dropdown-menu bg-dark navbar-dark" aria-labelledby="pagesDropdown">
+                                <a class="dropdown-item text-light" href="@Url.Action("Index", "Categories")">Categories</a>
+                                <a class="dropdown-item text-light" href="@Url.Action("Index", "SubCategories")">SubCategories</a>
+                                <a class="dropdown-item text-light" href="@Url.Action("Index", "Products")">Products</a>
+                            </div>
+                        </li>
+                    }
+
                 </ul>
                 @if (User.Identity.IsAuthenticated)
                 {

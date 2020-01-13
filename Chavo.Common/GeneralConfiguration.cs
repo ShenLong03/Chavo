@@ -46,6 +46,9 @@
         [Display(Name = "Real Estate")]
         public string RealEstate { get; set; }
 
+        [Display(Name = "Select Clothes")]
+        public string SelectClothes { get; set; }
+
         public string Chat { get; set; }
 
         [Display(Name = "Transacction Number")]

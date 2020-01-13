@@ -5,6 +5,7 @@
     using System.Linq;
     using System.Web.Mvc;
 
+    [Authorize]
     public class PrivateZoneController : Controller
     {
         private DataContextLocal db = new DataContextLocal();

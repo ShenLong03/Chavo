@@ -14,6 +14,7 @@
     using Chavo.Web.Models;
     using Chavo.Web.Helpers;
 
+    [Authorize]
     public class GeneralConfigurationsController : Controller
     {
         private DataContext db = new DataContext();

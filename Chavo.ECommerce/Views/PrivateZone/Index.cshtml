@@ -13,7 +13,7 @@
             <a href="@Model.GeneralConfigurations.FacebookGroup" class="btn btn-lg btn-primary"><i class="fa fa-facebook-official"></i>&nbsp;Grupo de Facebook</a>
         </span>
         <h2>
-            Mis Ingresos <span class="small">$@((Model.ShortRevenue + Model.MediumRevenue + Model.LongRevenue).ToString("N2"))/$300.00</span>
+            Mis Ingresos <span class="small">$@((Model.ShortRevenue + Model.MediumRevenue + Model.LongRevenue).ToString("N2"))/$@(Model.MaxToWin.ToString("N2"))</span>
         </h2>
         <hr />
         <div class="row">
@@ -55,7 +55,7 @@
     <section id="productos" class="col-lg-4 col-md-5 col-sm-6">
         <h2>Productos</h2>
         <hr />
-        @foreach (var item in   Model.Products)
+        @foreach (var item in Model.Products.Where(p=>!p.Product.RealState))
         {
             <div class="card mb-2">
                 <div class="card-body">
@@ -87,7 +87,7 @@
         <section id="bienesRaices">
             <h2>Bienes Raíces</h2>
             <hr />
-            @foreach (var item in Model.Products)
+            @foreach (var item in Model.Products.Where(p=>p.Product.RealState))
             {
                 <div class="card mb-2" style="width:100%">
                     <div class="card-body">
@@ -131,7 +131,7 @@
 @* TODO: Cambiar link dinamico *@
 @if (Model.DisplayClothes)
 {
-    <a href="@Url.Action("Contact","Home")" class="btn-flotante btn-success" title="Seleccionar Prenda"> <i class="flotante-icon fa fa-tshirt"></i></a>
+    <a href="@Model.GeneralConfigurations.SelectClothes" class="btn-flotante btn-success" title="Seleccionar Prenda"> <i class="flotante-icon fa fa-tshirt"></i></a>
 }
 
 

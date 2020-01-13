@@ -89,7 +89,17 @@
         [Display(Name = "Display Clothes")]
         public bool DisplayClothes { get; set; } = true;
 
+        [Display(Name = "Display Inversor")]
         public bool DisplayInversor { get; set; } = true;
+
+        [Display(Name="Max to win")]
+        public double MaxToWin { get; set; }
+
+        [DataType(DataType.MultilineText)]
+        public string Sizes { get; set; }
+
+        [DataType(DataType.MultilineText)]
+        public string Comentaries { get; set; }
 
         public virtual ICollection<CustomerProduct> Products { get; set; }
 
