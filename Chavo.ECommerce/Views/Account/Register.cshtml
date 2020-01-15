@@ -30,6 +30,7 @@
                         </div>
                         <div class="form-group">
                             @Html.ActionLink("Cúal es mi número de transacción?","TransacctionNumber","Home")
+                            <br />
                             @Html.LabelFor(m => m.Transaction, new { @class = "control-label" })
                             <div>
                                 @Html.PasswordFor(m => m.Transaction, new { @class = "form-control" })
@@ -38,7 +39,7 @@
                         </div>
                         <div class="form-group">
                             <div>
-                                <input type="submit" value="Registrar" class="btn btn-primary" />
+                                <input type="submit" value="Registrar" class="btn btn-giroala" />
                                 <br />
                                 @Html.ActionLink("Log in", "Login")
                             </div>

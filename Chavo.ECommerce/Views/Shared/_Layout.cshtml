@@ -4,16 +4,16 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title -Chavito</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <script src="~/Scripts/modernizr-2.8.3.js"></script>
     <link href="~/Content/font-awesome.min.css" rel="stylesheet" />    
     <link href="~/Content/all.min.css" rel="stylesheet" />
     <link href="~/Content/Site.css" rel="stylesheet" />
 </head>
 <body>
-    <nav class="navbar navbar-expand-sm sticky-top bg-primary navbar-dark">
+    <nav class="navbar navbar-expand-sm sticky-top bg-giroala navbar-dark">
         <div class="container">
-            <a class="navbar-brand" href="#">Chavito</a>
+            <a class="navbar-brand" href="@Url.Action("Index","Home")">Románico</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -21,7 +21,7 @@
                 <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                     <li class="nav-item">
                         <a class="nav-link" href="@Url.Action("Index","Home")">
-                            Home
+                            Inicio
                         </a>
                     </li>
                     <li class="nav-item">
@@ -87,12 +87,13 @@
     <div>
         @RenderBody()
         <!-- Footer -->
-       @{ Html.RenderAction("Footer","Home");}
+        @{ Html.RenderAction("Footer", "Home");}
         <!-- Footer -->
     </div>
-    @Scripts.Render("~/bundles/jquery")
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
-    @Scripts.Render("~/bundles/bootstrap")
+    <script src="~/Scripts/bootstrap.js"></script>
     <script src="~/Scripts/fontawesome.js"></script>
     <script src="~/Scripts/all.js"></script>
     <script src="~/Scripts/site.js"></script>

@@ -230,3 +230,12 @@ footer.page-footer .footer-copyright {
         width:100%;
         max-width: 100%;
     }
+
+.bg-giroala {
+    background-color:#0477c5;
+}
+
+.btn-giroala {
+    background-color: #0294FF;
+    color:white !important;
+}
