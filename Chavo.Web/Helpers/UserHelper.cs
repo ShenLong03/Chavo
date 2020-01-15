@@ -1,12 +1,14 @@
 ﻿namespace Chavo.Web.Helpers
 {
     using Chavo.Web.Data;
+    using Chavo.Web.Data.Entity;
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
     using Models;
     using System;
     using System.Linq;
     using System.Threading.Tasks;
+    using System.Web.Configuration;
 
     public class UsersHelper : IDisposable
     {
@@ -53,29 +55,33 @@
        
         }
 
-        //public static void CheckSuperUser()
-        //{
-        //    var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(userContext));
-        //    var email = WebConfigurationManager.AppSettings["AdminUser"];
-        //    var password = WebConfigurationManager.AppSettings["AdminPassWord"];
-        //    var userASP = userManager.FindByName(email);
-        //    if (userASP == null)
-        //    {
-        //        CreateUserASP(email, "Administrador", password);
-        //        db.Peop.Add(new Persona
-        //        {
-        //            Nombre = "ADMINISTRADOR",
-        //            Activo = true,
-        //            Apellidos = "ADMIN",
-        //            Email = email,
-        //            FechaNacimiento = DateTime.Today,
-        //            Identificacion = "",
-        //        });
-        //        db.SaveChanges();
-        //        return;
-        //    }
-        //    userManager.AddToRole(userASP.Id, "Administrador");
-        //}
+        public static void CheckSuperUser()
+        {
+            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(userContext));
+            var email = WebConfigurationManager.AppSettings["AdminUser"];
+            var password = WebConfigurationManager.AppSettings["AdminPassWord"];
+            var userASP = userManager.FindByName(email);
+            if (userASP == null)
+            {
+                CreateUserASP(email, "Administrator", password);       
+                userManager.AddToRole(userASP.Id, "Administrator");
+                using (DataContext db = new DataContext())
+                {
+                    db.Functionaries.Add(new Functionary
+                    {
+                        FirstName = "Donovan",
+                        Active = true,
+                        LastName = "Jarquin",
+                        Email = email,
+                        UserName = email,
+                        BirthDate = DateTime.Today,
+                        CreateDate = DateTime.Today,
+                        ID = "",
+                    }) ;
+                    db.SaveChanges();
+                }
+            }
+        }    
 
         //private static Persona Persona()
         //{

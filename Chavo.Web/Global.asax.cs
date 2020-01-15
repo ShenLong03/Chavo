@@ -1,3 +1,4 @@
+using Chavo.Web.Helpers;
 using Chavo.Web.Mappings;
 using System;
 using System.Collections.Generic;
@@ -13,11 +14,19 @@ namespace Chavo.Web
     {
         protected void Application_Start()
         {
+            CheckRolesAndSuperUser();
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             AutoMapperWebProfile.Run();
+        }
+
+        private void CheckRolesAndSuperUser()
+        {
+            UsersHelper.CheckRole("Administrator");
+            UsersHelper.CheckRole("Customer");
+            UsersHelper.CheckSuperUser();
         }
     }
 }
