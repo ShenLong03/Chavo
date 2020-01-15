@@ -63,9 +63,15 @@
             var userASP = userManager.FindByName(email);
             if (userASP == null)
             {
-                CreateUserASP(email, "Administrator", password);       
+                CreateUserASP(email, "Administrator", password);
+            }
+            else
+            {
                 userManager.AddToRole(userASP.Id, "Administrator");
-                using (DataContext db = new DataContext())
+            }                       
+            using (DataContext db = new DataContext())
+            {
+                if (db.Functionaries.Where(f=>f.UserName==email).Count()==0)
                 {
                     db.Functionaries.Add(new Functionary
                     {
@@ -77,10 +83,10 @@
                         BirthDate = DateTime.Today,
                         CreateDate = DateTime.Today,
                         ID = "",
-                    }) ;
+                    });
                     db.SaveChanges();
-                }
-            }
+                }                
+            }           
         }    
 
         //private static Persona Persona()
