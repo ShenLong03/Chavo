@@ -1,5 +1,6 @@
 ﻿namespace Chavo.ECommerce.Controllers
 {
+    using Chavo.ECommerce.Data;
     using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -8,9 +9,13 @@
 
     public class LearningZoneController : Controller
     {
+        DataContextLocal db = new DataContextLocal();
+
         public ActionResult Index()
         {
-            return View();
+            var generalConfiguration = db.GeneralConfigurations.FirstOrDefault();
+           
+            return View(generalConfiguration);
         }
     }
 }

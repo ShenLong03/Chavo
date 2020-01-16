@@ -1,4 +1,4 @@
-﻿
+﻿@model Chavo.Common.GeneralConfiguration
 @{
     ViewBag.Title = "Lerning Zone";
 }
@@ -9,8 +9,8 @@
         ESTAS INTENTANTO INGRESAR A LA ZONA PRIVADA DE APRENDIZAJE DE ROMANICO GR
     </p>
     <center>
-        <button class="btn btn-lg btn-giroala" style="height:150px;width:200px;">Ya tengo Usuario para acceder a la zona de aprendizaje</button>
-        <button class="btn btn-lg btn-success" style="height:150px;width:200px;">Obtener mi usuario para acceder a la zona de aprendizaje</button>
+        <a href="@Model.LearningZone" class="btn btn-lg btn-giroala" style="height:150px;width:200px;">Ya tengo Usuario para acceder a la zona de aprendizaje</a>
+        <a href="@Model.AcquireUserLearningZone" class="btn btn-lg btn-success" style="height:150px;width:200px;">Obtener mi usuario para acceder a la zona de aprendizaje</a>
     </center>
     <p>
         <a href="@Url.Action("Index", "Home")" class="btn btn-lg btn-light"><i class="fa fa-arrow-left"></i>&nbsp;Atras</a>

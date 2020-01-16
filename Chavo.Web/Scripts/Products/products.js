@@ -8,7 +8,7 @@
         success: function (items) {
             $.each(items, function (i, item) {
                 $("#SubCategoryId").append('<option value="'
-                    + item.CategoryId + '">'
+                    + item.SubCategoryId + '">'
                     + item.Name + '</option>');
             });
         },
