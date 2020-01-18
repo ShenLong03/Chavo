@@ -61,7 +61,7 @@
         [AllowHtml]
         [Display(Name = "Description")]
         [DataType(DataType.MultilineText)]
-        public string Description { get; set; }  
+        public string Description { get; set; }
 
         [Display(Name = "Cost Amount")]
         public double CostAmount { get; set; }
@@ -88,8 +88,11 @@
 
         public bool Active { get; set; } = true;
 
-        [Display(Name= "Acquire Product")]
+        [Display(Name = "Acquire Product")]
         public string AcquireProduct { get; set; }
+
+        [Display(Name= "Display Acquiere Product")]
+        public bool DisplayAcquiereProduct { get; set; }
 
         public bool Unique { get; set; } = false;
 
@@ -109,6 +112,8 @@
         public virtual ICollection<CustomerProduct> Customers { get; set; }
 
         public virtual ICollection<PicturesProduct> Pictures { get; set; }
+
+        public virtual ICollection<InvestorProduct> InvestorsPercentages { get; set; }
 
         public Product()
         {

@@ -83,9 +83,21 @@ namespace Chavo.Web.Models
 
         public string Controller { get; set; }
 
+        [Display(Name = "Need Confirmation Email?")]
+        public bool NeedConfirmationEmail { get; set; } = true;
+
+        [Display(Name = "Need Change Password")]
+        public bool NeedChangePassword { get; set; } = true;
+
         public Customer Customer { get; set; }
 
         public Functionary Functionary { get; set; }
+
+        public RegisterViewModel()
+        {
+            NeedConfirmationEmail = true;
+            NeedChangePassword = true;
+        }
     }
 
     public class ResetPasswordViewModel

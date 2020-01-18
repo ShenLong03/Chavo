@@ -73,11 +73,14 @@
     <Compile Include="Category.cs" />
     <Compile Include="Currency.cs" />
     <Compile Include="Customer.cs" />
+    <Compile Include="CustomerInvestor.cs" />
+    <Compile Include="CustomerInvestorMap.cs" />
     <Compile Include="CustomerProduct.cs" />
     <Compile Include="DataContext.cs" />
     <Compile Include="FirstLogin.cs" />
     <Compile Include="Functionary.cs" />
     <Compile Include="GeneralConfiguration.cs" />
+    <Compile Include="InvestorProduct.cs" />
     <Compile Include="PicturesProduct.cs" />
     <Compile Include="Product.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

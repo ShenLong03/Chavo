@@ -9,5 +9,7 @@ namespace Chavo.Web.Models
     public class GeneralConfigurationViewModel : GeneralConfiguration
     {
         public HttpPostedFileBase LogoFile { get; set; }
+
+        public HttpPostedFileBase PictureFile { get; set; }
     }
 }

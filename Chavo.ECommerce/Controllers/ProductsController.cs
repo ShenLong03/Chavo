@@ -38,6 +38,28 @@
             return View(product);
         }
 
+        [Authorize]
+        public async Task<ActionResult> BuyProduct(int id)
+        {
+            var product = await db.Products.FindAsync(id);
+
+            if (product==null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            var customer = db.Customers.Where(c => c.UserName == User.Identity.Name).FirstOrDefault();
+            db.CustomerProducts.Add(new CustomerProduct
+            {
+                Active = true,
+                CustomerId = customer.CustomerId,
+                Date = DateTime.Now,
+                ProductId=product.ProductId
+            });
+            await db.SaveChangesAsync();
+
+            return RedirectToAction("Index", "PrivateZone"); 
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

@@ -9,7 +9,7 @@
         <div class="panel-primary">
             <div class="panel-heading" style="border-top-left-radius:15px; border-top-right-radius:15px">
                 <div class="img-responsive">
-                    <img src="~/Content/imgs/login.jpeg" style="width:100%;border-top-left-radius:15px; border-top-right-radius:15px" />
+                    <img src="@Url.Content(Model.GeneralConfiguration.FullRoutePicture)" style="width:100%;border-top-left-radius:15px; border-top-right-radius:15px" />
                 </div>
             </div>
             <div class="panel-body">
@@ -33,7 +33,7 @@
                             <br />
                             @Html.LabelFor(m => m.Transaction, new { @class = "control-label" })
                             <div>
-                                @Html.PasswordFor(m => m.Transaction, new { @class = "form-control" })
+                                @Html.TextBoxFor(m => m.Transaction, new { @class = "form-control" })
                                 @Html.ValidationMessageFor(m => m.Transaction, "", new { @class = "text-danger" })
                             </div>
                         </div>

@@ -1,4 +1,4 @@
-﻿@model Chavo.Common.Register
+﻿@model Chavo.ECommerce.Models.RegistersViewModel
 @{
     ViewBag.Title = "Message Register";
     Layout = "~/Views/Shared/_LayoutModal.cshtml";
@@ -12,9 +12,7 @@
             </div>
             <div class="panel-body">
                 <section id="loginForm" style="text-align:justify">
-                    Su cuenta esta siendo validada con el correo : <b>@Model.Email</b> y el número de transacción : <b>@Model.Transaction</b>.
-                    Serás notificado a este email: <b>@Model.Email</b> para acceder a su zona privada de Románico GR a más tardar en 24 horas,
-                    si tienes alguna duda puedes comunicarte a este correo soporte@miprimeringresopasivo.com
+                    @Html.Raw(Model.MessageLogin)
                     <hr />
                     <a class="btn btn-giroala" href="@Url.Action("Index","Home")">Ok</a>
                 </section>               

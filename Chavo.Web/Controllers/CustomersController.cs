@@ -460,6 +460,107 @@
         }
         #endregion
 
+        #region CustomerInvestor
+        [HandleError]
+        public async Task<ActionResult> DetailsCustomerInvestor(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            CustomerInvestor customerInvestor = await db.CustomerInvestors.FindAsync(id);
+            if (customerInvestor == null)
+            {
+                return HttpNotFound();
+            }
+            return View(customerInvestor);
+        }
+
+        [HandleError]
+        public async Task<ActionResult> CreateCustomerInvestor(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Customer customer = await db.Customers.FindAsync(id);
+            if (customer == null)
+            {
+                return HttpNotFound();
+            }
+
+            ViewBag.InvestorId = new SelectList(db.Customers, "CustomerId", "AllName");
+
+            return View(new CustomerInvestor { CustomerId=customer.CustomerId, Customer=customer });
+        }
+
+        [HandleError]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> CreateCustomerInvestor(CustomerInvestor customerInvestor)
+        {
+            if (ModelState.IsValid)
+            {
+                db.CustomerInvestors.Add(customerInvestor);
+                await db.SaveChangesAsync();
+                return RedirectToAction("Details", new { id = customerInvestor.CustomerId });
+            }
+            ViewBag.InvestorId = new SelectList(db.Customers, "CustomerId", "AllName", customerInvestor.InvestorId);
+            customerInvestor.Customer = db.Customers.Find(customerInvestor.CustomerId);
+            return View(customerInvestor);
+        }
+
+        [HandleError]
+        public async Task<ActionResult> EditCustomerInvestor(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            CustomerInvestor customerInvestor = await db.CustomerInvestors.FindAsync(id);
+            if (customerInvestor == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.InvestorId = new SelectList(db.Customers, "CustomerId", "AllName", customerInvestor.InvestorId);
+            return View(customerInvestor);
+        }
+
+        [HandleError]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> EditCustomerInvestor(CustomerInvestor customerInvestor)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(customerInvestor).State = EntityState.Modified;
+                await db.SaveChangesAsync();
+                return RedirectToAction("Details", new { id = customerInvestor.CustomerId });
+            }
+            ViewBag.InvestorId = new SelectList(db.Customers, "CustomerId", "AllName", customerInvestor.InvestorId);
+            customerInvestor.Customer = db.Customers.Find(customerInvestor.CustomerId);
+            return View(customerInvestor);
+        }
+
+        [HandleError]
+        public async Task<ActionResult> DeleteCustomerInvestor(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            CustomerInvestor customerInvestor = await db.CustomerInvestors.FindAsync(id);
+            if (customerInvestor == null)
+            {
+                return HttpNotFound();
+            }
+
+            db.CustomerInvestors.Remove(customerInvestor);
+            await db.SaveChangesAsync();
+            return RedirectToAction("Details", new { id = customerInvestor.CustomerId });
+        }
+        #endregion
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

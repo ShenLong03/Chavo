@@ -45,7 +45,7 @@
         </div>
         <span class="pull-right">
             @* TODO: Cambiar por links dinamicos *@
-            <a href="@Model.GeneralConfigurations.Cashing" class="btn btn-lg btn-light">Retirar dinero</a>
+            <a href="@Html.Action("RetirarIngresos")" class="btn btn-lg btn-light">Retirar dinero</a>
             <a href="@Model.GeneralConfigurations.VideoCashing" class="btn btn-lg btn-light">Video explicativo</a>
         </span>
     </section>
@@ -69,7 +69,14 @@
                             <div class="ml-lg-2 ml-md-3" style="margin:auto;padding: 10px;">
                                 <h3>@item.Product.Name</h3>
                                 <div style="width:100%" class="text-truncate">
-                                    @item.Product.ShortDescription
+                                    <p>@item.Product.ShortDescription</p>
+                                    <p>
+                                        @(
+                                            item.StatePurchase == Chavo.Common.StatePurchase.Comprado
+                                            ? "<span class='pull-right text-warning'>Por Entregar</span>"
+                                            : "<span class='pull-right text-success'>Entregado</span>"
+                                        )
+                                     </p>
                                 </div>
                             </div>
                         </div>
@@ -87,7 +94,7 @@
         <section id="bienesRaices">
             <h2>Bienes Raíces</h2>
             <hr />
-            @foreach (var item in Model.Products.Where(p=>p.Product.RealState))
+            @foreach (var item in Model.Products.Where(p => p.Product.RealState))
             {
                 <div class="card mb-2" style="width:100%">
                     <div class="card-body">
@@ -101,7 +108,8 @@
                                 <div class="ml-lg-2 ml-md-3" style="margin:auto;padding: 10px;">
                                     <h3>@item.Product.Name</h3>
                                     <div style="width:100%" class="text-truncate">
-                                        @item.Product.ShortDescription
+                                        <p>@item.Product.ShortDescription</p>
+                                        <p><span class="pull-right"><a class="btn btn-sm btn-light text-muted" href="@Url.Action("Deatils","Products", new { id= item.ProductId })"></a> Ver mas..</span></p>
                                     </div>
                                 </div>
                             </div>
@@ -113,6 +121,15 @@
             {
                 <h5>No tiene productos asociados</h5>
             }
+            @if (Model.DisplayMoreRealEstate)
+            {
+                <p>
+                    <span class="pull-right">
+                        <a class="btn btn-giroala-light" href="@Model.GeneralConfigurations.RealEstate">Ver más</a>
+                    </span>
+                </p>
+            }
+
         </section>
         <hr />
         <div class="pb-5">
@@ -131,7 +148,7 @@
 @* TODO: Cambiar link dinamico *@
 @if (Model.DisplayClothes)
 {
-    <a href="@Model.GeneralConfigurations.SelectClothes" class="btn-flotante btn-success" title="Seleccionar Prenda"> <i class="flotante-icon fa fa-tshirt"></i></a>
+    <a href="@Html.Action("Index", "Home", new { acquiereProduct = true })" class="btn-flotante btn-success" title="Seleccionar Prenda"> <i class="flotante-icon fa fa-tshirt"></i></a>
 }
 
 

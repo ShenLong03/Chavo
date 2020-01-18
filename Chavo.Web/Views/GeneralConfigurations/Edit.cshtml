@@ -27,6 +27,7 @@
     @Html.AntiForgeryToken()
     @Html.HiddenFor(model => model.GeneralConfigurationId)
     @Html.HiddenFor(model => model.Logo)
+    @Html.HiddenFor(model => model.Picture)
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
     { Html.RenderPartial("_GeneralConfigurationItems", Model); }

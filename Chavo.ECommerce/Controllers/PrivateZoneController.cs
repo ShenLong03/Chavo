@@ -28,5 +28,18 @@
             var customer = db.Customers.FirstOrDefault();
             return View(customer);
         }
+
+        public ActionResult RetirarIngresos()
+        {
+            var customer = db.Customers.FirstOrDefault();
+            var view = new CustomerViewModel();
+            AutoMapper.Mapper.Map(customer, view);
+            var generalConfiguration = db.GeneralConfigurations.FirstOrDefault();
+            if (generalConfiguration != null)
+            {
+                view.GeneralConfigurations = generalConfiguration;
+            }
+            return View(view);
+        }
     }
 }

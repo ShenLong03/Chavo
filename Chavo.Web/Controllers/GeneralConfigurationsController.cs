@@ -69,6 +69,14 @@
                 }
                 view.Logo = pic;
 
+                pic = string.Empty;                
+                if (view.PictureFile != null)
+                {
+                    pic = FilesHelper.UploadPhoto(view.PictureFile, folder);
+                    pic = string.Format("{0}/{1}", folder, pic);
+                }
+                view.Picture = pic;
+
                 var generalConfiguration = new GeneralConfiguration();
                 AutoMapper.Mapper.Map(view, generalConfiguration);
 
@@ -114,6 +122,14 @@
                     pic = string.Format("{0}/{1}", folder, pic);
                 }
                 view.Logo = pic;
+
+                pic = string.Empty;
+                if (view.PictureFile != null)
+                {
+                    pic = FilesHelper.UploadPhoto(view.PictureFile, folder);
+                    pic = string.Format("{0}/{1}", folder, pic);
+                }
+                view.Picture = pic;
 
                 var generalConfiguration = new GeneralConfiguration();
                 AutoMapper.Mapper.Map(view, generalConfiguration);

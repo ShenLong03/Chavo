@@ -1,5 +1,6 @@
 ﻿namespace Chavo.Web.Controllers
 {
+    using Chavo.Web.Data.Entity;
     using Data;
     using Helpers;
     using Microsoft.AspNet.Identity;
@@ -198,22 +199,47 @@
             {
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
+
+                // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
+                // Send an email with this link
+                string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+
                 if (result.Succeeded)
                 {
-                    //await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-
-                    // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
-                    // Send an email with this link
-                    string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    try
+                    if (model.NeedConfirmationEmail)
                     {
-                        await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                        var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                        try
+                        {
+                            await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                        }
+                        catch (Exception)
+                        {
+                            var mailHelper = new MailHelper();
+                            await MailHelper.SendMail(user.Email, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                        }
                     }
-                    catch (Exception)
+                    else
                     {
-                        var mailHelper = new MailHelper();
-                        await MailHelper.SendMail(user.Email, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                        ConfirmEmail(user.Id, code);
+                    }
+
+                    if (model.Controller=="Customers" && !model.NeedConfirmationEmail)
+                    {                   
+                        using (var db= new DataContext())
+                        {
+                            var customer = db.Customers.Where(c => c.UserName == user.UserName).FirstOrDefault();
+                            if (customer!=null)
+                            {
+                                var firstLogin =
+                                db.FirstLogins.Add(new FirstLogin()
+                                {
+                                    UserName = user.UserName,
+                                    CustomerId = customer.CustomerId
+                                });
+                                await db.SaveChangesAsync();
+                            }                            
+                        }
                     }
 
                     return RedirectToAction("Index", model.Controller);
@@ -230,6 +256,7 @@
                         model.Customer = db.Customers.FirstOrDefault(c => c.UserName == model.Email);
                         break;
                     default:
+                        model.Functionary = db.Functionaries.FirstOrDefault(c => c.UserName == model.Email);
                         break;
                 }
             }

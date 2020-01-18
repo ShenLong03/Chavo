@@ -13,7 +13,7 @@ namespace Chavo.Web.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "202001111356578_Update_DataBase1"; }
+            get { return "202001181659133_Update_DataBase1"; }
         }
         
         string IMigrationMetadata.Source

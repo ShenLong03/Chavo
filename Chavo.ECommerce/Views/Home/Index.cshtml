@@ -81,7 +81,7 @@ else
         <h2>Productos</h2>
         <hr />
         <div class="row justify-content-start">
-            @foreach (var item in Model.Products.Where(p=>!p.RealState))
+            @foreach (var item in Model.Products.Where(p => !p.RealState))
             {
                 <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 mb-4">
                     <div class="card card-product">
@@ -91,7 +91,10 @@ else
                             <h5 class="card-title">@item.Name</h5>
                             <p class="card-text">@Html.Raw(item.ShortDescription)</p>
                             <div class="form-group" style="text-align:center">
-                                <a href="@item.AcquireProduct" class="btn btn-giroala-light">Seleccionar este para mi</a><br />
+                                @if (item.DisplayAcquiereProduct)
+                                {
+                                    <a href="@Html.Action("BuyProduct","Products",new { id=item.ProductId })" class="btn btn-giroala-light">Seleccionar este para mi</a><br />
+                                }
                                 <a href="@item.AcquireProduct" class="btn btn-giroala mt-2">Adquirir este producto</a>
                             </div>
 
@@ -103,7 +106,7 @@ else
         <h2>Bienes Raíces</h2>
         <hr />
         <div class="row justify-content-start">
-            @foreach (var item in Model.Products.Where(p=>p.RealState))
+            @foreach (var item in Model.Products.Where(p => p.RealState))
             {
                 <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 mb-4">
                     <div class="card card-product">
@@ -113,7 +116,10 @@ else
                             <h5 class="card-title">@item.Name</h5>
                             <p class="card-text">@Html.Raw(item.ShortDescription)</p>
                             <div class="form-group" style="text-align:center">
-                                <a href="@item.AcquireProduct" class="btn btn-giroala-light">Seleccionar este para mi</a><br />
+                                @if (item.DisplayAcquiereProduct)
+                                {
+                                    <a href="@Html.Action("BuyProduct", "Products", new { id=item.ProductId })" class="btn btn-giroala-light">Seleccionar este para mi</a><br />
+                                }
                                 <a href="@item.AcquireProduct" class="btn btn-giroala mt-2">Adquirir este producto</a>
                             </div>
 
@@ -123,8 +129,12 @@ else
             }
         </div>
     </div>
-    
+
 </div>
+@if (Model.DisplayClothes)
+{
+    <a href="@Html.Action("Index", "Home", new { acquiereProduct = true })" class="btn-flotante btn-success" title="Seleccionar Prenda"> <i class="flotante-icon fa fa-tshirt"></i></a>
+}
 
 @section scripts
 {
@@ -132,60 +142,56 @@ else
         var categories = [];
         var subCategories = [];
 
-        $('input[type=checkbox]').click(function(){
-            if(this.checked){ // if checked - check all parent checkboxes
-                $(this).parents('li').children('input[type=checkbox]').prop('checked',true);
+        $('input[type=checkbox]').click(function () {
+            if (this.checked) { // if checked - check all parent checkboxes
+                $(this).parents('li').children('input[type=checkbox]').prop('checked', true);
             }
             // children checkboxes depend on current checkbox
-            $(this).parent().find('input[type=checkbox]').prop('checked',this.checked); 
+            $(this).parent().find('input[type=checkbox]').prop('checked', this.checked);
         });
 
-        
-        function Seleccionar(id, type, trans)
-        {
-            if (type==="category") {
-                if (trans==="push")
-                {
-                    var find = categories.find(f=>f===id);
-                    if (find!==id) {
+
+        function Seleccionar(id, type, trans) {
+            if (type === "category") {
+                if (trans === "push") {
+                    var find = categories.find(f => f === id);
+                    if (find !== id) {
                         categories.push(id);
-                    }                      
+                    }
                 } else {
                     categories.pop(id);
                 }
-                
+
             } else {
-                    if (trans==="push")
-                    {
-                        var find = subCategories.find(f=>f===id);
-                        if (find!==id) {
-                            subCategories.push(id);
-                        }                      
-                    } else {
-                        subCategories.pop(id);
+                if (trans === "push") {
+                    var find = subCategories.find(f => f === id);
+                    if (find !== id) {
+                        subCategories.push(id);
                     }
-            }   
+                } else {
+                    subCategories.pop(id);
+                }
+            }
         }
 
         $(".category").change(function (e) {
-               if(this.checked){ // if checked - check all parent checkboxes
-                   Seleccionar($(this).val(), "category", "push");
-               } else {
-                   Seleccionar($(this).val(), "category", "pop");
-               }
-            
+            if (this.checked) { // if checked - check all parent checkboxes
+                Seleccionar($(this).val(), "category", "push");
+            } else {
+                Seleccionar($(this).val(), "category", "pop");
+            }
+
         });
 
         $(".subCategory").change(function (e) {
-              if(this.checked){ // if checked - check all parent checkboxes
-                   Seleccionar($(this).val(), "subCategory", "push");
-               } else {
-                   Seleccionar($(this).val(), "subCategory", "pop");
-               }
+            if (this.checked) { // if checked - check all parent checkboxes
+                Seleccionar($(this).val(), "subCategory", "push");
+            } else {
+                Seleccionar($(this).val(), "subCategory", "pop");
+            }
         });
 
-        function Find()
-        {
+        function Find() {
             location.href = "/Home/Index?orden=" + $('#orden').val() +
                 "&categories=" + categories +
                 "&subCategories=" + subCategories +

@@ -10,6 +10,7 @@ namespace Chavo.Web.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
+            AutomaticMigrationDataLossAllowed = true;
         }
 
         protected override void Seed(Chavo.Web.Data.DataContext context)

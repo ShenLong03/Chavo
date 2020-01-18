@@ -7,7 +7,7 @@
 <h4>Create a new account</h4>
 <ol class="breadcrumb">
     <li><a href="@Url.Action("Index","Home")">Inicio</a></li>
-    @if (Model.Customer!=null)
+    @if (Model.Customer != null)
     {
         <li><a href="@Url.Action("Index","Customers")">Customers</a></li>
         <li><a href="@Url.Action("Details", new { id=Model.Customer.CustomerId})">@Model.Customer.AllName</a></li>
@@ -43,6 +43,18 @@
         @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
             @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.NeedConfirmationEmail, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.EditorFor(m => m.NeedConfirmationEmail)
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.NeedChangePassword, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.EditorFor(m => m.NeedChangePassword)
         </div>
     </div>
     <div class="form-group">

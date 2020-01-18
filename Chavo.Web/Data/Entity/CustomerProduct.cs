@@ -16,6 +16,9 @@
 
         public bool Active { get; set; } = true;
 
+        [Display(Name = "State Purchase")]
+        public StatePurchase StatePurchase { get; set; }
+
         public virtual Customer Customer { get; set; }
 
         public virtual Product Product { get; set; }
@@ -25,5 +28,9 @@
             Date = DateTime.Today;
             Active = true;
         }
+    }
+    public enum StatePurchase
+    {
+        Comprado, Entregado
     }
 }

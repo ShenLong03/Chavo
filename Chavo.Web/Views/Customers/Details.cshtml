@@ -22,6 +22,9 @@
     <li class="nav-item">
         <a class="nav-link" id="revenues-tab" data-toggle="tab" href="#revenues" role="tab" aria-controls="revenues" aria-selected="false">Revenues</a>
     </li>
+    <li class="nav-item">
+        <a class="nav-link" id="investors-tab" data-toggle="tab" href="#investors" role="tab" aria-controls="investors" aria-selected="false">Investors</a>
+    </li>
 </ul>
 <div class="tab-content" id="myTabContent">
     <div class="tab-pane fade show active" id="data" role="tabpanel" aria-labelledby="data-tab">
@@ -47,7 +50,7 @@
                 <div class="card">
                     <div class="card-header bg-primary text-light"><h5>Corto Plazo</h5></div>
                     <div class="card-body text-center">
-                        <input id="shortRevenue" type="text" class="form-control-lg form-control-plaintext" onchange="ChangeAmount(this.value,'s', '@Model.CustomerId');" value="@string.Format("{0}{1}","$",Model.ShortRevenue.ToString("N2"))" style="font-size:2.5em;color:#6c757d !important;text-align:center;font-weight:500" />                  
+                        <input id="shortRevenue" type="text" class="form-control-lg form-control-plaintext" onchange="ChangeAmount(this.value,'s', '@Model.CustomerId');" value="@string.Format("{0}{1}","$",Model.ShortRevenue.ToString("N2"))" style="font-size:2.5em;color:#6c757d !important;text-align:center;font-weight:500" />
                     </div>
                 </div>
                 <br />
@@ -69,7 +72,10 @@
                 @{ Html.RenderPartial("_RevenuesList", Model); }
             </div>
         </div>
-       
+
+    </div>
+    <div class="tab-pane fade" id="investors" role="tabpanel" aria-labelledby="investors-tab">
+        @{ Html.RenderPartial("_InvestorsList", Model); }
     </div>
 </div>
 

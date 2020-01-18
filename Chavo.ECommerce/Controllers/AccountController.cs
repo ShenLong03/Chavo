@@ -60,8 +60,17 @@ namespace Chavo.ECommerce.Controllers
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
-            ViewBag.ReturnUrl = returnUrl;
-            return View();
+            using (var db=new DataContextLocal())
+            {
+                ViewBag.ReturnUrl = returnUrl;
+                var view = new LoginViewModel();
+                var generalConfiguration = db.GeneralConfigurations.FirstOrDefault();
+                if (generalConfiguration != null)
+                {
+                    view.GeneralConfiguration = generalConfiguration;
+                }
+                return View(view); 
+            }
         }
 
         //
@@ -158,7 +167,16 @@ namespace Chavo.ECommerce.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            return View();
+            using (var db = new DataContextLocal())
+            {
+                var view = new RegisterViewModel();
+                var generalConfiguration = db.GeneralConfigurations.FirstOrDefault();
+                if (generalConfiguration != null)
+                {
+                    view.GeneralConfiguration = generalConfiguration;
+                }
+                return View(view);
+            }
         }
 
         //
@@ -196,7 +214,13 @@ namespace Chavo.ECommerce.Controllers
             using (DataContextLocal db= new DataContextLocal())
             {
                 var register =await db.Registers.FindAsync(id);
-                return View(register);
+                var view = new RegistersViewModel();
+                var generalConfiguration = db.GeneralConfigurations.FirstOrDefault();
+                if (generalConfiguration != null)
+                {
+                    view.MessageLogin = generalConfiguration.MessageLogin.Replace("{Email}",register.Email).Replace("{Transaction}", register.Transaction);
+                }                
+                return View(view);
             }            
         }
 

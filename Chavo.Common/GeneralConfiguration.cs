@@ -1,6 +1,7 @@
 ﻿namespace Chavo.Common
 {
     using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
 
     public class GeneralConfiguration
     {
@@ -11,6 +12,36 @@
         public string Name { get; set; }
 
         public string Logo { get; set; }
+
+
+        [NotMapped]
+        public string FullRouteLogo
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty(Picture))
+                {
+                    return string.Concat("http://djarquin01-002-site1.1tempurl.com", Picture.Substring(1));
+                }
+                return string.Empty;
+            }
+        }
+
+        public string Picture { get; set; }
+
+
+        [NotMapped]
+        public string FullRoutePicture
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty(Picture))
+                {
+                    return string.Concat("http://djarquin01-002-site1.1tempurl.com", Picture.Substring(1));
+                }
+                return string.Empty;
+            }
+        }
 
         [Display(Name = "Video Banner")]
         public string VideoBanner { get; set; }
@@ -38,16 +69,17 @@
         public string Cashing { get; set; }
 
         [Display(Name = "Cashing Conditions")]
+        [DataType(DataType.MultilineText)]
         public string CashingConditions { get; set; }
 
         [Display(Name = "Video Cashing")]
         public string VideoCashing { get; set; }
 
-        [Display(Name = "Real Estate")]
-        public string RealEstate { get; set; }
-
         [Display(Name = "Select Clothes")]
         public string SelectClothes { get; set; }
+
+        [Display(Name = "Real Estate")]
+        public string RealEstate { get; set; }
 
         public string Chat { get; set; }
 
@@ -62,5 +94,17 @@
 
         [Display(Name = "Message Footer")]
         public string MessageFooter { get; set; }
+
+        [Display(Name = "Message Contact Page")]
+        public string MessageContactPage { get; set; }
+
+        [Display(Name = "Email Register Approved")]
+        public string EmailRegisterApproved { get; set; }
+
+        [Display(Name = "Email Confirmed")]
+        public string EmailConfirmed { get; set; }
+
+        [Display(Name = "Change Password")]
+        public string ChangePassword { get; set; }
     }
 }

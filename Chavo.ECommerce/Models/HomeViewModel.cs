@@ -10,6 +10,10 @@ namespace Chavo.ECommerce.Models
     {
         public string VideoBanner { get; set; }
 
+        public bool DisplayClothes { get; set; }
+
+        public GeneralConfiguration GeneralConfiguration { get; set; }
+
         public List<Category> Categories { get; set; }
 
         public List<SubCategory> SubCategories { get; set; }

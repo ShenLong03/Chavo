@@ -90,6 +90,9 @@
         [Display(Name = "Acquire Product")]
         public string AcquireProduct { get; set; }
 
+        [Display(Name = "Display Acquiere Product")]
+        public bool DisplayAcquiereProduct { get; set; }
+
         public bool Unique { get; set; } = false;
 
         [Display(Name = "Real State")]
@@ -108,6 +111,8 @@
         public virtual ICollection<CustomerProduct> Customers { get; set; }
 
         public virtual ICollection<PicturesProduct> Pictures { get; set; }
+
+        public virtual ICollection<InvestorProduct> InvestorsPercentages { get; set; }
 
         public Product()
         {

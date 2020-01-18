@@ -11,66 +11,79 @@
             </div>
             <div class="panel-body">
                 <section id="loginForm" style="text-align:justify">
-                    <div class="row">
-                        <div class="col-md-6 border-right">
-                            <dl class="dl-horizontal">
-                                <dt>
-                                    @Html.DisplayNameFor(model => model.ID)
-                                </dt>
+                    @foreach (var item in Model.Investors)
+                    {
+                        <div class="row">
+                            <div class="col-md-6 border-right">
+                                <dl class="dl-horizontal">
+                                    <dt>
+                                        ID
+                                    </dt>
 
-                                <dd>
-                                    @Html.DisplayFor(model => model.ID)
-                                </dd>
+                                    <dd>
+                                        @Html.Display(item.Investor.ID)
+                                    </dd>
 
-                                <dt>
-                                    @Html.DisplayNameFor(model => model.FirstName)
-                                </dt>
+                                    <dt>
+                                        First Name
+                                    </dt>
 
-                                <dd>
-                                    @Html.DisplayFor(model => model.FirstName)
-                                </dd>
+                                    <dd>
+                                        @Html.Display(item.Investor.FirstName)
+                                    </dd>
 
-                                <dt>
-                                    @Html.DisplayNameFor(model => model.LastName)
-                                </dt>
+                                    <dt>
+                                        Last Name
+                                    </dt>
 
-                                <dd>
-                                    @Html.DisplayFor(model => model.LastName)
-                                </dd>
+                                    <dd>
+                                        @Html.Display(item.Investor.LastName)
+                                    </dd>
 
-                                <dt>
-                                    @Html.DisplayNameFor(model => model.Email)
-                                </dt>
+                                    <dt>
+                                        Email
+                                    </dt>
 
-                                <dd>
-                                    @Html.DisplayFor(model => model.Email)
-                                </dd>
+                                    <dd>
+                                        @Html.Display(item.Investor.Email)
+                                    </dd>
 
-                                <dt>
-                                    @Html.DisplayNameFor(model => model.Active)
-                                </dt>
+                                    <dt>
+                                        Active
+                                    </dt>
 
-                                <dd>
-                                    @Html.DisplayFor(model => model.Active)
-                                </dd>
-                            </dl>
+                                    <dd>
+                                        <input type="checkbox" checked="@(item.Active?"checked":"")" />
+                                    </dd>
+
+                                    <dt>
+                                        Ganancia
+                                    </dt>
+
+                                    <dd>
+                                        @Html.Display("$" + item.Investor.Products
+                                                            .Where(p=>p.StatePurchase==Chavo.Common.StatePurchase.Entregado)
+                                                            .Sum(p=>(p.Product.PriceAmount * (item.Products.Where(p=>p.ProductId==p.ProductId).FirstOrDefault().PercentageProfit/100) ))
+                                                            .ToString("N2"))
+                                    </dd>
+                                </dl>
+                            </div>
+                            <div class="col-md-6">
+                                @if (!string.IsNullOrEmpty(item.Investor.Picture))
+                                {
+                                    <center>
+                                        <img src="@Url.Content(item.Investor.FullRoutePicture)" alt="Picture Profile" class="img-thumbnail img-profile" />
+                                    </center>
+                                }
+                                else
+                                {
+                                    <center>
+                                        <img src="~/Content/imgs/CustomerAvatar.png" class="img-thumbnail img-profile" />
+                                    </center>
+                                }
+                            </div>
                         </div>
-                        <div class="col-md-6">
-                            @if (!string.IsNullOrEmpty(Model.Picture))
-                            {
-                                <center>
-                                    <img src="@Url.Content(Model.FullRoutePicture)" alt="Picture Profile" class="img-thumbnail img-profile" />
-                                </center>
-                            }
-                            else
-                            {
-                                <center>
-                                    <img src="~/Content/imgs/CustomerAvatar.png" class="img-thumbnail img-profile" />
-                                </center>
-                            }
-                        </div>
-                    </div>
-                  
+                    }
                     <hr />
                     <a class="btn btn-giroala" href="@Url.Action("Index","Home")">Ok</a>
                 </section>

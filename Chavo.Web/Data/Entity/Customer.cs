@@ -42,15 +42,11 @@
             }
         }
 
-        public double? Credit { get; set; } = 0;
-
         [DataType(DataType.EmailAddress)]
         [Required(ErrorMessage = "{0} is required.")]
         public string Email { get; set; }
 
         public string UserName { get; set; }
-
-        public int? Points { get; set; } = 0;
 
         public bool Active { get; set; } = true;
 
@@ -101,11 +97,18 @@
         [DataType(DataType.MultilineText)]
         public string Comentaries { get; set; }
 
+        [Display(Name = "Display more real estate")]
+        public bool DisplayMoreRealEstate { get; set; } = true;
+
         public virtual ICollection<CustomerProduct> Products { get; set; }
 
         public virtual ICollection<Revenue> Revenues { get; set; }
 
         public virtual ICollection<FirstLogin> FirstLogins { get; set; }
+
+        public virtual ICollection<CustomerInvestor> Investors { get; set; }
+
+        public virtual ICollection<CustomerInvestor> Customers { get; set; }
 
         public Customer()
         {

@@ -12,11 +12,13 @@
     {
         DataContextLocal db = new DataContextLocal();
 
-        public async Task<ActionResult> Index(int? orden, int[] categories, int[] subCategories, double? min, double? max)
+        public async Task<ActionResult> Index(int? orden, int[] categories, int[] subCategories, double? min, double? max, bool acquiereProduct = false)
         {
             var view = new HomeViewModel();
             if (db.GeneralConfigurations.Count() > 0)
             {
+                view.GeneralConfiguration = db.GeneralConfigurations.FirstOrDefault();
+
                 if (!string.IsNullOrEmpty(db.GeneralConfigurations.FirstOrDefault().VideoBanner))
                 {
                     view.VideoBanner = db.GeneralConfigurations.FirstOrDefault().VideoBanner;
@@ -24,6 +26,11 @@
             }
 
             IQueryable<Product> productsSelect = db.Products.Where(p=>p.State==State.Disponible && p.Active);
+
+            if (acquiereProduct)
+            {
+                productsSelect = productsSelect.Where(p => p.DisplayAcquiereProduct);
+            }
 
             if (categories != null && subCategories != null)
             {
@@ -67,6 +74,16 @@
             }
             view.Products = await productsSelect.ToListAsync();
             view.Categories = await db.Categories.Include(c => c.SubCategories).ToListAsync();
+            view.DisplayClothes = false;
+            if (User.Identity.IsAuthenticated)
+            {
+                var customer = db.Customers.Where(c => c.UserName == User.Identity.Name).FirstOrDefault();
+                if (customer!=null)
+                {
+                    view.DisplayClothes = customer.DisplayClothes;
+                }
+            }
+
             return View(view);
         }
 

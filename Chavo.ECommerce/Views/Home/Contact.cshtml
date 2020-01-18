@@ -1,4 +1,5 @@
-﻿@{
+﻿@model Chavo.Common.GeneralConfiguration
+@{
     ViewBag.Title = "Contact";
 }
 <center style="padding-top:5%; padding-bottom:5%;">
@@ -11,14 +12,14 @@
                 <section id="loginForm">
                     @if (User.Identity.IsAuthenticated)
                     {
-                        <p>Por favor comuníquese a <a href="mailto:Support@example.com">Support@example.com</a>. Ó al número 98052-6399 Gracias.</p>
+                        @Html.Raw(Model.MessageContactPage)
                     }
                     else
                     {
-                        <p>Déjame saber tus inquietudes por favor a  este … Email  o chatea con nosotros.</p>
-                    }                    
+                        @Html.Raw(Model.MessageContactPage)
+                    }
                     <address>
-                        <strong>Email:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
+                        <strong>Email:</strong>   <a href="mailto:@Model.Email">@Model.Email</a><br />
                     </address>
                 </section>
             </div>

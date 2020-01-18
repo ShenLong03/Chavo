@@ -10,7 +10,7 @@
         <div class="panel-primary">
             <div class="panel-heading" style="border-top-left-radius:15px; border-top-right-radius:15px">
                 <div class="img-responsive">
-                    <img src="~/Content/imgs/login.jpeg" style="width:100%;border-top-left-radius:15px; border-top-right-radius:15px" />
+                    <img src="@Url.Content(Model.GeneralConfiguration.FullRoutePicture)" style="width:100%;border-top-left-radius:15px; border-top-right-radius:15px" />
                 </div>
             </div>           
             <div class="panel-body">
@@ -48,7 +48,8 @@
                             <div>
                                 <input type="submit" value="Log in" class="btn btn-giroala" />
                                 <br />
-                                @Html.ActionLink("Registrar nueva cuenta","Register")
+                                @Html.ActionLink("Olvidate la contraseña?", "ForgotPassword")
+                                @Html.ActionLink("Registrar nueva cuenta", "Register")
                             </div>
                         </div>                      
                     }

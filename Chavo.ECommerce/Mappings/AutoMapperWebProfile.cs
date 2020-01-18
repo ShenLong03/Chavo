@@ -9,9 +9,11 @@
         public AutoMapperWebProfile()
         {
             CreateMap<Customer, CustomerViewModel>();
-           
+            CreateMap<Register, RegisterViewModel>();
+
             //Reverese mapping
-            CreateMap<CustomerViewModel, Customer>();           
+            CreateMap<CustomerViewModel, Customer>();
+            CreateMap<RegisterViewModel, Register>();
         }
         public static void Run()
         {

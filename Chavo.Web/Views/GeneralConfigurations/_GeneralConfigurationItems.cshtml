@@ -74,7 +74,28 @@
             </div>
         </div>
 
-        <div class="form-horizontal col-md-6">           
+        <div class="form-horizontal col-md-6">
+            <div class="form-group">
+                @Html.LabelFor(model => model.PictureFile, htmlAttributes: new { @class = "control-label" })
+                <div>
+                    <div class="file-input-new">
+                        <div class="input-group">
+                            <div tabindex="500" class="form-control file-caption">
+                                <div class="file-caption-name" id="NombreArchivo">
+                                </div>
+                            </div>
+                            <div class="input-group-btn" style="height:auto">
+                                <div tabindex="500" class="btn btn-file raised-button btn-info waves-effec">
+                                    <i class="fa fa-folder-open"></i>
+                                    @Html.TextBoxFor(modelo => modelo.PictureFile, new { type = "file", id = "files" })
+                                    @Html.ValidationMessageFor(model => model.PictureFile, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="form-group">
                 @Html.LabelFor(model => model.MessageLogin, htmlAttributes: new { @class = "control-label" })
                 <div>
@@ -82,14 +103,22 @@
                     @Html.ValidationMessageFor(model => model.MessageLogin, "", new { @class = "text-danger" })
                 </div>
             </div>
-           
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.MessageContactPage, htmlAttributes: new { @class = "control-label" })
+                <div>
+                    @Html.TextAreaFor(m => m.MessageContactPage, new { @class = "form-control textarea-editor" })
+                    @Html.ValidationMessageFor(model => model.MessageContactPage, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
             <div class="form-group">
                 @Html.LabelFor(model => model.MessageFooter, htmlAttributes: new { @class = "control-label" })
                 <div>
                     @Html.TextAreaFor(m => m.MessageFooter, new { @class = "form-control textarea-editor" })
                     @Html.ValidationMessageFor(model => model.MessageFooter, "", new { @class = "text-danger" })
                 </div>
-            </div>            
+            </div>
         </div>
         <div class="w-100">
             <h4>Urls</h4>
