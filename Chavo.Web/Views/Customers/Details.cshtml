@@ -79,8 +79,7 @@
     </div>
 </div>
 
-@section scripts
-{
+@section scripts{
     <script type="text/javascript">
         function ChangeAmount(value, type, id)
         {
@@ -91,7 +90,7 @@
                     data: {
                         value:convert(value),
                         type:type,
-                        id: id,                    
+                        id: id,
                 },
                 success: function (result) {
                     if (result) {
@@ -114,14 +113,60 @@
                         alertify.success("<i class='fa fa-times-circle'></i>&nbsp;Change error");
                     }
                 }
-            }); 
+            });
         }
 
-        // Function to convert 
-    function convert(currency){ 
-        var temp = currency.replace(/[^0-9.-]+/g,""); 
-        return parseFloat(temp); 
+        // Function to convert
+        function convert(currency){
+        var temp = currency.replace(/[^0-9.-]+/g,"");
+        return parseFloat(temp);
+
+        }
+
+
+
+        function format() {
       
-    } 
+
+    $.ajax({
+        url: "/Customers/GetInvestorProduct",
+        async: false,
+        data: { id: 1 },
+        success: function (data) {
+            return data;
+        }
+    });
+       return "<h1>LO ENCONTRE</h1>" }
+
+        $(document).ready(function () {
+
+            var investorList = $('#_investorList').DataTable({
+                "columnDefs": [{
+                    "targets": 0,
+                    "className": 'details-control',
+                    "orderable": false,
+                    "data": null,
+                    "defaultContent": ''
+                }],
+                "order": [[1, 'asc']]
+            });
+
+            $('#_investorList tbody').on('click', 'tr td.details-control', function () {
+                var tr = $(this).closest('tr');
+                var row = investorList.row(tr);
+
+                if (row.child.isShown()) {
+                    // This row is already open - close it
+                    row.child.hide();
+                    tr.removeClass('shown');
+                }
+                else {
+                    // Open this row
+                    row.child(format()).show();
+                    tr.addClass('shown');
+                }
+            });
+
+         });
     </script>
 }

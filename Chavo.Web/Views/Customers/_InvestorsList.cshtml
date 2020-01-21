@@ -16,9 +16,10 @@
 </div>
 <hr />
 <div class="table-responsive">
-    <table class="table table-striped table-hover listIndex">
+    <table id="_investorList" class="table table-striped table-hover">
         <thead>
             <tr>
+                <th class="details-control"></th>
                 <th>
                     @Html.DisplayNameFor(model => model.ID)
                 </th>
@@ -44,6 +45,21 @@
             @foreach (var item in Model.Investors)
             {
                 <tr>
+                    <td class="details-control">
+                        <table>
+                            <tbody>
+                                @foreach (var itemProduct in item.Products)
+                                {
+                                    <tr>
+                                        @Html.DisplayFor(modelItem => itemProduct.Product.Name)
+                                    </tr>
+                                    <tr>
+                                        @Html.DisplayFor(modelItem => itemProduct.PercentageProfit)
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Investor.ID)
                     </td>
@@ -72,9 +88,12 @@
                         <a href="@Url.Action("EditCustomerInvestor", new { id=item.CustomerInvestorId})" class="btn btn-sm btn-warning"><span class="fa fa-pencil"></span>&nbsp;Edit</a>
                         <a onclick="return alertify.confirm('Confirm', 'You want to delete the record', function(){ location.href='@Url.Action("Delete",new { id=item.CustomerInvestorId})' }
                             , function(){ alertify.error('Cancel')});" class="btn btn-sm btn-danger text-light"><span class="fa fa-remove"></span>&nbsp;Delete</a>
+                        <a href="@Url.Action("CreateInvestorProduct", new { id=item.CustomerInvestorId})" class="btn btn-sm btn-primary"><span class="fa fa-plus"></span>&nbsp;Add Product</a>
                     </td>
                 </tr>
             }
         </tbody>
     </table>
 </div>
+
+

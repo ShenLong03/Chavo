@@ -43,3 +43,43 @@ $('.filter').keyup(function () {
     table.draw();
 });
 
+/*
+var investorList = $('#_investorList').DataTable({
+    "columnDefs": [{
+        "targets": 0,
+        "className": 'details-control',
+        "orderable": false,
+        "data": null,
+        "defaultContent": ''
+    }],
+    "order": [[1, 'asc']]
+});
+
+function format(d) {
+    $.ajax({
+        url: "/Customers/GetInvestorProduct",
+        async: false,
+        data: { id: d.Email },
+        success: function (data) {
+            return data;
+        }
+    });
+}
+
+$('#_investorList tbody').on('click', 'tr td.details-control', function () {
+    var tr = $(this).closest('tr');
+    var row = investorList.row(tr);
+
+    if (row.child.isShown()) {
+        // This row is already open - close it
+        row.child.hide();
+        tr.removeClass('shown');
+    }
+    else {
+        // Open this row
+        alert(row.data().Email);
+        row.child(format(row.data())).show();
+        tr.addClass('shown');
+    }
+});
+*/

@@ -115,3 +115,12 @@
     background-color: #0294FF;
     color: white !important;
 }
+
+td.details-control {
+    background: url('imgs/details_open.png') no-repeat center center;
+    cursor: pointer;
+}
+
+tr.shown td.details-control {
+    background: url('imgs/details_close.png') no-repeat center center;
+}

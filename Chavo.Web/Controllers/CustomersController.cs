@@ -561,6 +561,154 @@
         }
         #endregion
 
+        #region InvestorProduct
+        [HandleError]
+        public async Task<ActionResult> DetailsInvestorProduct(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            InvestorProduct investorProduct = await db.InvestorProducts.FindAsync(id);
+            if (investorProduct == null)
+            {
+                return HttpNotFound();
+            }
+            return View(investorProduct);
+        }
+
+        [HandleError]
+        public async Task<ActionResult> CreateInvestorProduct(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            CustomerInvestor investor = await db.CustomerInvestors.FindAsync(id);
+            if (investor == null)
+            {
+                return HttpNotFound();
+            }
+            var investorProduct = new InvestorProduct
+            {
+                Active = true,
+                CustomerInvestorId = investor.CustomerInvestorId,
+                Investor = investor,
+                PercentageProfit = 0,                
+            };
+            ViewBag.ProductId = new SelectList(db.Products, "ProductId", "Name");
+            return View(investorProduct);
+        }
+
+        [HandleError]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> CreateInvestorProduct(InvestorProduct investorProduct)
+        {
+            if (ModelState.IsValid)
+            {
+                db.InvestorProducts.Add(investorProduct);
+                await db.SaveChangesAsync();
+                var investor = db.CustomerInvestors.Find(investorProduct.CustomerInvestorId);
+                return RedirectToAction("Details", new { id = investor.CustomerId });
+            }
+
+            ViewBag.CustomerInvestorId = new SelectList(db.CustomerInvestors, "CustomerInvestorId", "CustomerInvestorId", investorProduct.CustomerInvestorId);
+            ViewBag.ProductId = new SelectList(db.Products, "ProductId", "Name", investorProduct.ProductId);
+            return View(investorProduct);
+        }
+
+        [HandleError]
+        public async Task<ActionResult> EditInvestorProduct(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            InvestorProduct investorProduct = await db.InvestorProducts.FindAsync(id);
+            if (investorProduct == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.ProductId = new SelectList(db.Products, "ProductId", "Name", investorProduct.ProductId);
+            return View(investorProduct);
+        }
+
+        [HandleError]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> EditInvestorProduct(InvestorProduct investorProduct)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(investorProduct).State = EntityState.Modified;
+                await db.SaveChangesAsync();
+                var investor = db.CustomerInvestors.Find(investorProduct.CustomerInvestorId);
+                return RedirectToAction("Details", new { id = investor.CustomerId });
+            }
+            ViewBag.ProductId = new SelectList(db.Products, "ProductId", "Name", investorProduct.ProductId);
+            return View(investorProduct);
+        }
+
+        [HandleError]
+        public async Task<ActionResult> DeleteInvestorProduct(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            InvestorProduct investorProduct = await db.InvestorProducts.FindAsync(id);
+            if (investorProduct == null)
+            {
+                return HttpNotFound();
+            }
+
+            db.InvestorProducts.Remove(investorProduct);
+            await db.SaveChangesAsync();
+            var investor = db.CustomerInvestors.Find(investorProduct.CustomerInvestorId);
+            return RedirectToAction("Details", new { id = investor.CustomerId });
+        }
+
+        #region Function
+        public string GetInvestorProduct(int? id)
+        {
+            //var result = "<table>";
+            //if (id == null)
+            //{
+            //    return "<h2>No existen datos (" + id + ")</h2>";
+            //}
+            //var investor = await db.CustomerInvestors.FindAsync(id);
+            //if (investor==null)
+            //{
+            //    return "<h2>No existen datos  (" + id + ")</h2>";
+            //}
+            //foreach (var item in investor.Products)
+            //{
+            //    result += "<tr><td>Producto</td><td>" + item.Product.Name + "</td></tr>";
+            //    result += "<tr><td>Porcentaje</td><td>" + item.PercentageProfit + "</td></tr>";
+            //}
+
+            //result = result!= "<table>" ? (result + "</table>") : "<h2>No existen datos  (" + id + ")</h2>";
+            //return result;
+
+            return "<table cellpadding='5' cellspacing='0' border='0' style='padding-left:50px;'>" +
+        "<tr>" +
+            "<td>Full name:</td>" +
+            "<td>NAME</td>" +
+        "</tr>" +
+        "<tr>" +
+            "<td>Extension number:</td>" +
+            "<td>EXTN</td>" +
+        "</tr>" +
+        "<tr>" +
+            "<td>Extra info:</td>" +
+            "<td>And any further details here (images etc)...</td>" +
+        "</tr>" +
+    "</table>";
+        }
+        #endregion
+        #endregion
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
