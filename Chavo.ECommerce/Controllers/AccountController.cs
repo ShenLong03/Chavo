@@ -79,9 +79,15 @@ namespace Chavo.ECommerce.Controllers
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
-        {
+        {                       
             using (var db = new DataContextLocal())
             {
+                var generalConfiguration = db.GeneralConfigurations.FirstOrDefault();
+                if (generalConfiguration != null)
+                {
+                    model.GeneralConfiguration = generalConfiguration;
+                }
+
                 if (!ModelState.IsValid)
                 {
                     return View(model);

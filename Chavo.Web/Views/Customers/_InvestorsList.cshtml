@@ -86,7 +86,7 @@
                     </td>
                     <td>
                         <a href="@Url.Action("EditCustomerInvestor", new { id=item.CustomerInvestorId})" class="btn btn-sm btn-warning"><span class="fa fa-pencil"></span>&nbsp;Edit</a>
-                        <a onclick="return alertify.confirm('Confirm', 'You want to delete the record', function(){ location.href='@Url.Action("Delete",new { id=item.CustomerInvestorId})' }
+                        <a onclick="return alertify.confirm('Confirm', 'You want to delete the record', function(){ location.href='@Url.Action("DeleteInvestorProduct",new { id=item.CustomerInvestorId})' }
                             , function(){ alertify.error('Cancel')});" class="btn btn-sm btn-danger text-light"><span class="fa fa-remove"></span>&nbsp;Delete</a>
                         <a href="@Url.Action("CreateInvestorProduct", new { id=item.CustomerInvestorId})" class="btn btn-sm btn-primary"><span class="fa fa-plus"></span>&nbsp;Add Product</a>
                     </td>

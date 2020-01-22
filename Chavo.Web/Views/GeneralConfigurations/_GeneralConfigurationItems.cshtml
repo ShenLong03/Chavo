@@ -75,6 +75,12 @@
         </div>
 
         <div class="form-horizontal col-md-6">
+            @if (!string.IsNullOrEmpty(Model.Picture))
+            {
+                <center>
+                    <img src="@Url.Content(Model.Picture)" alt="Picture Profile" class="img-thumbnail rounded-circle img-profile" />
+                </center>
+            }
             <div class="form-group">
                 @Html.LabelFor(model => model.PictureFile, htmlAttributes: new { @class = "control-label" })
                 <div>

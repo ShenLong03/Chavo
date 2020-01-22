@@ -123,7 +123,7 @@
                 }
                 view.Logo = pic;
 
-                pic = string.Empty;
+                pic = view.Picture;
                 if (view.PictureFile != null)
                 {
                     pic = FilesHelper.UploadPhoto(view.PictureFile, folder);

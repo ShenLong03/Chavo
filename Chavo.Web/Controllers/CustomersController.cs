@@ -672,39 +672,30 @@
         #region Function
         public string GetInvestorProduct(int? id)
         {
-            //var result = "<table>";
-            //if (id == null)
-            //{
-            //    return "<h2>No existen datos (" + id + ")</h2>";
-            //}
-            //var investor = await db.CustomerInvestors.FindAsync(id);
-            //if (investor==null)
-            //{
-            //    return "<h2>No existen datos  (" + id + ")</h2>";
-            //}
-            //foreach (var item in investor.Products)
-            //{
-            //    result += "<tr><td>Producto</td><td>" + item.Product.Name + "</td></tr>";
-            //    result += "<tr><td>Porcentaje</td><td>" + item.PercentageProfit + "</td></tr>";
-            //}
+            var result = "<table>";
+            result += "<tr><th>Picture</th><th>Producto</th><th>% Profit</th><th></th></tr>";
+            if (id == null)
+            {
+                return "<h2>No existen datos (" + id + ")</h2>";
+            }
+            var investor =  db.CustomerInvestors.Find(id);
+            if (investor == null)
+            {
+                return "<h2>No existen datos  (" + id + ")</h2>";
+            }
+            foreach (var item in investor.Products)
+            {
+                result += "<tr>";
+                result += "<td><img src='" + item.Product.FullRoutePicture + "' alt='Picture Profile' class='img-thumbnail rounded-circle img-profile-sm' /></td>";
+                result += "<td>" + item.Product.Name + "</td>";
+                result += "<td>" + item.PercentageProfit + "% </td>";
+                result += "<td><a href='/Customers/EditInvestorProduct/" + item.CustomerInvestorId  + "' class='btn btn-sm btn-warning'><span class='fa fa-pencil'></span>&nbsp;Edit</a>" +
+                             " <a href='/Customers/DeleteInvestorProduct/" + item.CustomerInvestorId + "' class='btn btn-sm btn-danger text-light'><span class='fa fa-remove'></span>&nbsp;Delete</a></td>";
+               result += "</tr>";
+            }
 
-            //result = result!= "<table>" ? (result + "</table>") : "<h2>No existen datos  (" + id + ")</h2>";
-            //return result;
-
-            return "<table cellpadding='5' cellspacing='0' border='0' style='padding-left:50px;'>" +
-        "<tr>" +
-            "<td>Full name:</td>" +
-            "<td>NAME</td>" +
-        "</tr>" +
-        "<tr>" +
-            "<td>Extension number:</td>" +
-            "<td>EXTN</td>" +
-        "</tr>" +
-        "<tr>" +
-            "<td>Extra info:</td>" +
-            "<td>And any further details here (images etc)...</td>" +
-        "</tr>" +
-    "</table>";
+            result = result != "<table>" ? (result + "</table>") : "<h2>No existen datos  (" + id + ")</h2>";
+            return result;           
         }
         #endregion
         #endregion
