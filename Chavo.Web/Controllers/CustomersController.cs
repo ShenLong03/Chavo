@@ -277,6 +277,16 @@
             {
                 db.Entry(customerProduct).State = EntityState.Modified;
                 await db.SaveChangesAsync();
+                if (customerProduct.StatePurchase==StatePurchase.Entregado)
+                {
+                    var product = db.Products.Find(customerProduct.ProductId);
+                    if(product.Unique)
+                    {
+                        product.State = State.Agotado;
+                        db.Entry(product).State = EntityState.Modified;
+                        await db.SaveChangesAsync();
+                    }
+                }
                 return RedirectToAction("Details", new { id = customerProduct.CustomerId });
             }
         

@@ -93,7 +93,7 @@ else
                             <div class="form-group" style="text-align:center">
                                 @if (item.DisplayAcquiereProduct)
                                 {
-                                    <a href="@Html.Action("BuyProduct","Products",new { id=item.ProductId })" class="btn btn-giroala-light">Seleccionar este para mi</a><br />
+                                    <a href="@Url.Action("BuyProduct","Products",new { id=item.ProductId })" class="btn btn-giroala-light">Seleccionar este para mi</a><br />
                                 }
                                 <a href="@item.AcquireProduct" class="btn btn-giroala mt-2">Adquirir este producto</a>
                             </div>
@@ -118,7 +118,7 @@ else
                             <div class="form-group" style="text-align:center">
                                 @if (item.DisplayAcquiereProduct)
                                 {
-                                    <a href="@Html.Action("BuyProduct", "Products", new { id=item.ProductId })" class="btn btn-giroala-light">Seleccionar este para mi</a><br />
+                                    <a href="@Url.Action("BuyProduct", "Products", new { id=item.ProductId })" class="btn btn-giroala-light">Seleccionar este para mi</a><br />
                                 }
                                 <a href="@item.AcquireProduct" class="btn btn-giroala mt-2">Adquirir este producto</a>
                             </div>
@@ -131,9 +131,9 @@ else
     </div>
 
 </div>
-@if (Model.DisplayClothes)
+@if(Model.DisplayClothes)
 {
-    <a href="@Html.Action("Index", "Home", new { acquiereProduct = true })" class="btn-flotante btn-success" title="Seleccionar Prenda"> <i class="flotante-icon fa fa-tshirt"></i></a>
+    <a href="@Url.Action("Index", new { acquiereProduct = true })" class="btn-flotante btn-success" title="Seleccionar Prenda"> <i class="flotante-icon fa fa-tshirt"></i></a>
 }
 
 @section scripts

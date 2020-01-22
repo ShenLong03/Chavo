@@ -21,7 +21,7 @@
                                     </dt>
 
                                     <dd>
-                                        @Html.Display(item.Investor.ID)
+                                        @item.Investor.ID
                                     </dd>
 
                                     <dt>
@@ -29,7 +29,7 @@
                                     </dt>
 
                                     <dd>
-                                        @Html.Display(item.Investor.FirstName)
+                                        @item.Investor.FirstName
                                     </dd>
 
                                     <dt>
@@ -37,7 +37,7 @@
                                     </dt>
 
                                     <dd>
-                                        @Html.Display(item.Investor.LastName)
+                                        @item.Investor.LastName
                                     </dd>
 
                                     <dt>
@@ -45,7 +45,7 @@
                                     </dt>
 
                                     <dd>
-                                        @Html.Display(item.Investor.Email)
+                                        @item.Investor.Email
                                     </dd>
 
                                     <dt>
@@ -61,10 +61,10 @@
                                     </dt>
 
                                     <dd>
-                                        @Html.Display("$" + item.Investor.Products
-                                                            .Where(p=>p.StatePurchase==Chavo.Common.StatePurchase.Entregado)
-                                                            .Sum(p=>(p.Product.PriceAmount * (item.Products.Where(p=>p.ProductId==p.ProductId).FirstOrDefault().PercentageProfit/100) ))
-                                                            .ToString("N2"))
+                                        $ @(item.Investor.Products
+                                        .Where(p=>p.StatePurchase==Chavo.Common.StatePurchase.Entregado)
+                                        .Sum(p=>(p.Product.PriceAmount * (item.Products.Where(x=>x.ProductId==p.ProductId).FirstOrDefault().PercentageProfit/100) ))
+                                        .ToString("N2"))
                                     </dd>
                                 </dl>
                             </div>

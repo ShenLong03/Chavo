@@ -102,6 +102,10 @@
                 </div>
             </div>
 
+            <div class="alert alert-primary">
+                <b>Reserve Words : </b> {Email} {Transaction}
+            </div>
+
             <div class="form-group">
                 @Html.LabelFor(model => model.MessageLogin, htmlAttributes: new { @class = "control-label" })
                 <div>
@@ -129,7 +133,7 @@
         <div class="w-100">
             <h4>Urls</h4>
             <hr />
-        </div>        
+        </div>
         <div class="form-horizontal col-md-6">
             <div class="form-group">
                 @Html.LabelFor(model => model.Facebook, htmlAttributes: new { @class = "control-label" })
@@ -218,6 +222,39 @@
                 <div>
                     @Html.EditorFor(model => model.Chat, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.Chat, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="w-100">
+            <h4>Mails</h4>
+            <div class="alert alert-primary">
+                <b>Reserve Words : </b> {Url} {CustomerName} {CustomerEmail} {DefaultPassword}
+            </div>
+            <hr />
+        </div>
+        <div class="form-horizontal col-md-12">
+            <div class="form-group">
+                @Html.LabelFor(model => model.EmailConfirmed, htmlAttributes: new { @class = "control-label" })
+                <div>
+                    @Html.TextAreaFor(m => m.EmailConfirmed, new { @class = "form-control textarea-editor" })
+                    @Html.ValidationMessageFor(model => model.EmailConfirmed, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.EmailRegisterApproved, htmlAttributes: new { @class = "control-label" })
+                <div>
+                    @Html.TextAreaFor(m => m.EmailRegisterApproved, new { @class = "form-control textarea-editor" })
+                    @Html.ValidationMessageFor(model => model.EmailRegisterApproved, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ChangePassword, htmlAttributes: new { @class = "control-label" })
+                <div>
+                    @Html.TextAreaFor(m => m.ChangePassword, new { @class = "form-control textarea-editor" })
+                    @Html.ValidationMessageFor(model => model.ChangePassword, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>

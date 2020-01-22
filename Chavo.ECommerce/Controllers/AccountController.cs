@@ -270,18 +270,25 @@ namespace Chavo.ECommerce.Controllers
                 // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                 // Send an email with this link
                  string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
-                 var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);		
-                
-                try
+                 var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                using (var db= new DataContextLocal())
                 {
-                    await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
-                    await MailHelper.SendMail(user.Email, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                    var body = "Please reset your password by clicking ";
+                    var configuracion = db.GeneralConfigurations.FirstOrDefault();
+                    if (configuracion!=null)
+                    {
+                        body = configuracion.ChangePassword;
+                    }
+                    try
+                    {
+                        await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                        await MailHelper.SendMail(user.Email, "Reset Password", body.Replace("{Url}", "<a href=\"" + callbackUrl + "\">here</a>"));
+                    }
+                    catch (Exception)
+                    {
+                        await MailHelper.SendMail(user.Email, "Reset Password", body.Replace("{Url}", "<a href=\"" + callbackUrl + "\">here</a>"));
+                    }
                 }
-                catch (Exception)
-                {
-                    await MailHelper.SendMail(user.Email, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
-                }
-
                 return RedirectToAction("ForgotPasswordConfirmation", "Account");
             }
 

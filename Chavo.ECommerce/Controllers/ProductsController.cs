@@ -57,6 +57,11 @@
             });
             await db.SaveChangesAsync();
 
+            if (product.Unique)
+            {
+                product.State = State.Reservado;
+            }
+
             return RedirectToAction("Index", "PrivateZone"); 
         }
 

@@ -208,16 +208,28 @@
                 {
                     if (model.NeedConfirmationEmail)
                     {
+
                         var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                        try
+
+                        using (var db = new DataContext())
                         {
-                            await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                            var body = "Please confirm your account by clicking ";
+                            var configuracion = db.GeneralConfigurations.FirstOrDefault();
+                            if (configuracion != null)
+                            {
+                                body = configuracion.EmailConfirmed;
+                            }
+                            try
+                            {
+                                await UserManager.SendEmailAsync(user.Id, "Confirm Email", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                                await MailHelper.SendMail(user.Email, "Confirm Email", body.Replace("{Url}", "<a href=\"" + callbackUrl + "\">here</a>"));
+                            }
+                            catch (Exception)
+                            {
+                                await MailHelper.SendMail(user.Email, "Confir mEmail", body.Replace("{Url}", "<a href=\"" + callbackUrl + "\">here</a>"));
+                            }
                         }
-                        catch (Exception)
-                        {
-                            var mailHelper = new MailHelper();
-                            await MailHelper.SendMail(user.Email, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-                        }
+                                              
                     }
                     else
                     {

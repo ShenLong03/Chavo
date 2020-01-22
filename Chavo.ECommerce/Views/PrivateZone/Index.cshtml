@@ -45,7 +45,7 @@
         </div>
         <span class="pull-right">
             @* TODO: Cambiar por links dinamicos *@
-            <a href="@Html.Action("RetirarIngresos")" class="btn btn-lg btn-light">Retirar dinero</a>
+            <a href="@Url.Action("RetirarIngresos")" class="btn btn-lg btn-light">Retirar dinero</a>
             <a href="@Model.GeneralConfigurations.VideoCashing" class="btn btn-lg btn-light">Video explicativo</a>
         </span>
     </section>
@@ -71,12 +71,10 @@
                                 <div style="width:100%" class="text-truncate">
                                     <p>@item.Product.ShortDescription</p>
                                     <p>
-                                        @(
-                                            item.StatePurchase == Chavo.Common.StatePurchase.Comprado
-                                            ? "<span class='pull-right text-warning'>Por Entregar</span>"
-                                            : "<span class='pull-right text-success'>Entregado</span>"
-                                        )
-                                     </p>
+                                        @Html.Raw("<span class='pull-right " + (item.StatePurchase == Chavo.Common.StatePurchase.Comprado
+                                       ? "badge badge-warning" : "badge badge-success") +"'>" + (item.StatePurchase == Chavo.Common.StatePurchase.Comprado
+                                       ? "Por Entregar" : "Entregado") +"</span>")                                      
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -123,13 +121,12 @@
             }
             @if (Model.DisplayMoreRealEstate)
             {
-                <p>
+                <p class="pb-4">
                     <span class="pull-right">
                         <a class="btn btn-giroala-light" href="@Model.GeneralConfigurations.RealEstate">Ver más</a>
                     </span>
                 </p>
             }
-
         </section>
         <hr />
         <div class="pb-5">
@@ -148,7 +145,7 @@
 @* TODO: Cambiar link dinamico *@
 @if (Model.DisplayClothes)
 {
-    <a href="@Html.Action("Index", "Home", new { acquiereProduct = true })" class="btn-flotante btn-success" title="Seleccionar Prenda"> <i class="flotante-icon fa fa-tshirt"></i></a>
+    <a href="@Url.Action("Index", "Home", new { acquiereProduct = true })" class="btn-flotante btn-success" title="Seleccionar Prenda"> <i class="flotante-icon fa fa-tshirt"></i></a>
 }
 
 

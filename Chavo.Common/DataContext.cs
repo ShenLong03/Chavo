@@ -1,6 +1,7 @@
 ﻿namespace Chavo.Common
 {
     using System.Data.Entity;
+    using System.Data.Entity.ModelConfiguration.Conventions;
 
     public class DataContext : DbContext
     {
@@ -8,7 +9,13 @@
         {
 
         }
-     
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
+            modelBuilder.Configurations.Add(new CustomerInvestorMap());
+        }
+
         public DbSet<Customer> Customers { get; set; }
 
         public DbSet<Category> Categories { get; set; }

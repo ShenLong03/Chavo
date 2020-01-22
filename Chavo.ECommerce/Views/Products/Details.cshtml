@@ -35,7 +35,7 @@
                             <h2><small>Precio</small>  $ @Model.PriceAmount.ToString("N2")</h2>
                             @if (Model.DisplayAcquiereProduct)
                             {
-                                <a href="@Html.Action("BuyProduct", new { id=Model.ProductId })" class="btn btn-lg btn-giroala">Elegir para mi</a>
+                                <a href="@Url.Action("BuyProduct", new { id=Model.ProductId })" class="btn btn-lg btn-giroala">Elegir para mi</a>
                             }
                         </div>
                         <hr />

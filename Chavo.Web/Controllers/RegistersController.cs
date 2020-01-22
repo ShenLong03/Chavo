@@ -3,6 +3,7 @@
     using Chavo.Web.Helpers;
     using Data;
     using Data.Entity;
+    using System;
     using System.Data;
     using System.Data.Entity;
     using System.Linq;
@@ -84,8 +85,22 @@
                 if (register.Approved)
                 {
                     if (!string.IsNullOrEmpty(register.Email))
-                    {
-                        await MailHelper.SendMail(register.Email, "Cuenta Romanico Aprobada", "Su cuenta de Romanico.com fue aprobada. Su contraseña temporal es " + register.Password + ".");
+                    {                                               
+                        var body = "Su cuenta de Romanico.com fue aprobada. Su contraseña temporal es ";
+                        var configuracion = db.GeneralConfigurations.FirstOrDefault();
+                        if (configuracion != null)
+                        {
+                            body = configuracion.EmailRegisterApproved;
+                        }
+                        try
+                        {
+                            await MailHelper.SendMail(register.Email, "Cuenta Romanico Aprobada", body.Replace("{DefaultPassword}", register.Password));
+                        }
+                        catch (Exception)
+                        {
+                            await MailHelper.SendMail(register.Email, "Cuenta Romanico Aprobada", body.Replace("{DefaultPassword}", register.Password));
+                        }
+                                               
                     }
                 }
                 return RedirectToAction("Index");
