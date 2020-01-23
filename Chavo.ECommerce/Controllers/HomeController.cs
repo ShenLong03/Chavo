@@ -120,9 +120,14 @@
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            if (db.GeneralConfigurations.Count() > 0)
+            {
+                return View(db.GeneralConfigurations.FirstOrDefault());
+            }
+            else
+            {
+                return View(new GeneralConfiguration());
+            }
         }
     }
 }

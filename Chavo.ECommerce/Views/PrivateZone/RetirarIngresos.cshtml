@@ -3,7 +3,7 @@
     ViewBag.Title = "Retirar Ingresos";
 }
 
-    <center style="padding-top:10%">
+    <center style="padding-top:10%; padding-bottom:10%;">
         <div class="cuadro-login" style="border-radius:15px; width:50%">
             <div class="panel panel-primary m-4">
                 <div class="panel-heading" style="border-top-left-radius:15px; border-top-right-radius:15px">
@@ -14,7 +14,7 @@
                         @Html.Raw(Model.GeneralConfigurations.CashingConditions)
                         <hr />
                         <a class="btn btn-giroala-light" href="@Url.Action("Index","Home")">Inicio</a>
-                        <a class="btn btn-giroala" href="@Model.GeneralConfigurations.Cashing"></a>
+                        <a class="btn btn-giroala" href="@Model.GeneralConfigurations.Cashing">Condiciones de Retiro</a>
                     </section>
                 </div>
             </div>
