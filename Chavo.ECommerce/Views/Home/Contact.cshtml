@@ -1,31 +1,36 @@
 ﻿@model Chavo.Common.GeneralConfiguration
 @{
-    ViewBag.Title = "Contact";
+    ViewBag.Title = "Contacto";
 }
-<center style="padding-top:5%; padding-bottom:5%;">
-    <div class="cuadro-login" style="border-radius:15px; width:50%">
-        <div class="panel panel-primary m-4">
-            <div class="panel-heading" style="border-top-left-radius:15px; border-top-right-radius:15px">
-                <h5>@ViewBag.Title</h5>
-            </div>
-            <div class="panel-body">
-                <section id="loginForm">
-                    @if (User.Identity.IsAuthenticated)
-                    {
-                        @Html.Raw(Model.MessageContactPage)
-                    }
-                    else
-                    {
-                        @Html.Raw(Model.MessageContactPage)
-                    }
-                    <address>
-                        <strong>Email:</strong>   <a href="mailto:@Model.Email">@Model.Email</a><br />
-                    </address>
-                </section>
+
+
+    <div class="container">
+        <div class="row align-self-center justify-content-center">
+            <div class="col-sm-12 col-md-5 align-self-center pt-5 pb-5 justify-content-center">
+                <div class="panel container cuadro-border">
+                    <div class="panel-heading pt-2">
+                        <h5>@ViewBag.Title</h5>
+                        <hr />
+                    </div>
+                    <div class="panel-body">
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            @Html.Raw(Model.MessageContactPage)
+                        }
+                        else
+                        {
+                            @Html.Raw(Model.MessageContactPage)
+                        }
+                        <address>
+                            <strong>Email:</strong>   <a href="mailto:@Model.Email">@Model.Email</a><br />
+                        </address>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
-</center>
+
 
 
 

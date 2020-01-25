@@ -1,7 +1,7 @@
-﻿$(document).ready(function () {
+﻿/*$(document).ready(function () {
     $("#myForm :input").prop("disabled", true);
     $('.textarea-editor').summernote({ height: 120 });
-});
+});*/
 
 /*alertify.defaults.transition = "slide";
 alertify.defaults.theme.ok = "btn btn-giroala";

@@ -1,19 +1,16 @@
 ﻿@model Chavo.ECommerce.Models.RegisterViewModel
 @{
     ViewBag.Title = "Registrar";
-    Layout = "~/Views/Shared/_LayoutModal.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<center style="padding-top:10%;">
-    <div class="cuadro-login" style="border-radius:15px">
-        <div class="panel-primary">
-            <div class="panel-heading" style="border-top-left-radius:15px; border-top-right-radius:15px">
-                <div class="img-responsive">
-                    <img src="@Url.Content(Model.GeneralConfiguration.FullRoutePicture)" style="width:100%;border-top-left-radius:15px; border-top-right-radius:15px" />
-                </div>
-            </div>
-            <div class="panel-body">
-                <section id="loginForm">
+
+<div class="container">
+    <div class="row align-self-center justify-content-center">
+        <div class="col-sm-12 col-md-5 align-self-center pt-5 pb-5 justify-content-center">
+            <div class="panel cuadro-border">
+                <img src="@Url.Content(Model.GeneralConfiguration.FullRoutePicture)" style="width:100%;border-top-left-radius:15px; border-top-right-radius:15px; background-size:cover" />
+                <div class="panel-body container">
                     @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
                     {
                         @Html.AntiForgeryToken()
@@ -29,7 +26,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            @Html.ActionLink("Cúal es mi número de transacción?","TransacctionNumber","Home")
+                            @Html.ActionLink("Cúal es mi número de transacción?", "TransacctionNumber", "Home")
                             <br />
                             @Html.LabelFor(m => m.Transaction, new { @class = "control-label" })
                             <div>
@@ -38,20 +35,20 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <div>
+                            <center>
                                 <input type="submit" value="Registrar" class="btn btn-giroala" />
                                 <a href="@Url.Action("Index","Home")" class="btn btn-giroala-light"><span class="fa fa-home"></span></a>
                                 <br />
                                 @Html.ActionLink("Log in", "Login")
-                            </div>
+                            </center>
                         </div>
                     }
-                </section>
+                </div>
             </div>
 
         </div>
     </div>
-</center>
+</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

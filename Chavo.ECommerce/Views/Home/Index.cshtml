@@ -17,119 +17,185 @@ else
         <p><a href="#sectionProducts" class="btn btn-giroala btn-lg">Productos &raquo;</a></p>
     </div>
 }
-
-<div class="row">
-    <div class="d-none col-xl-2 d-xl-block col-lg-3 d-lg-block col-md-4 d-md-block border-right">
-        <div class="container" style="position: sticky;top:4em;">
-            <h2>Filtros</h2>
-            <hr />
-            <p>
-                <div class="form-horizontal">
-                    <div class="form-group">
-                        <label class="control-label">Orden</label>
-                        <select id="orden" name="orden" class="form-control">
-                            <option value="0">A-Z</option>
-                            <option value="1">Z-A</option>
-                            <option value="2">Menor a Mayor</option>
-                            <option value="3">Mayor a Menor</option>
-                        </select>
+<div class="container-girola">
+    <div class="row">
+        <div class="d-none col-xl-2 d-xl-block col-lg-3 d-lg-block col-md-4 d-md-block border-right">
+            <div class="container" style="position: sticky;top:4em;">
+                <h2>Filtros</h2>
+                <hr />
+                <p>
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <label class="control-label">Orden</label>
+                            <select id="orden" name="orden" class="form-control">
+                                <option value="0">A-Z</option>
+                                <option value="1">Z-A</option>
+                                <option value="2">Menor a Mayor</option>
+                                <option value="3">Mayor a Menor</option>
+                            </select>
+                        </div>
                     </div>
-                </div>
-            </p>
-            <hr />
-            <p>
-                <div class="form-horizontal">
-                    <div class="form-group">
-                        <label class="control-label">Máximo</label>
-                        <input name="max" id="max" class="form-control" placeholder="0.00" />
+                </p>
+                <hr />
+                <p>
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <label class="control-label">Máximo</label>
+                            <input name="max" id="max" class="form-control" placeholder="0.00" />
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Mínimo</label>
+                            <input name="min" id="min" class="form-control" placeholder="0.00" />
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label class="control-label">Mínimo</label>
-                        <input name="min" id="min" class="form-control" placeholder="0.00" />
-                    </div>
-                </div>
-            </p>
+                </p>
+                <hr />
+                <p>
+                    <label class="control-label">Categorias</label>
+                    <ul style="list-style: none;">
+                        @foreach (var category in Model.Categories)
+                        {
+                            <li>
+                                <input value="@category.CategoryId" class="category" type="checkbox" />&nbsp;@category.Name
+                                @if (category.SubCategories.Count() > 0)
+                                {
+                                    <ul style="list-style: none;">
+                                        @foreach (var subCategory in category.SubCategories)
+                                        {
+                                            <li>
+                                                <input value="@subCategory.SubCategoryId" class="subCategory" type="checkbox" />&nbsp;@subCategory.Name
+                                            </li>
+                                        }
+                                    </ul>
+                                }
+                            </li>
+                        }
+                    </ul>
+                </p>
+                <p>
+                    <button class="btn btn-light" onclick="Find();"><i class="fa fa-search"></i>&nbsp;Buscar</button>
+                </p>
+            </div>
+        </div>
+        <div id="sectionProducts" class="col-xl-10 col-lg-9 col-md-8 col-sm-12">
+            <h2>Productos</h2>
             <hr />
-            <p>
-                <label class="control-label">Categorias</label>
-                <ul style="list-style: none;">
-                    @foreach (var category in Model.Categories)
+            <div class="content">
+                <div class="row align-content-start">
+                    @foreach (var item in Model.Products.Where(p => !p.RealState))
                     {
-                        <li>
-                            <input value="@category.CategoryId" class="category" type="checkbox" />&nbsp;@category.Name
-                            @if (category.SubCategories.Count() > 0)
-                            {
-                                <ul style="list-style: none;">
-                                    @foreach (var subCategory in category.SubCategories)
-                                    {
-                                        <li>
-                                            <input value="@subCategory.SubCategoryId" class="subCategory" type="checkbox" />&nbsp;@subCategory.Name
-                                        </li>
-                                    }
-                                </ul>
-                            }
-                        </li>
+                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 mb-4 col-product">
+                            <div class="card card-product" style="width:100%">
+                                <img src="@Url.Content(item.FullRoutePicture)" class="card-img-top img-thumbnail" onclick="location.href='@Url.Action("Details","Products", new { id=item.ProductId})'" alt="@item.Name">
+                                <div class="card-body">
+                                    <span class="font-weight-bold text-muted pull-right">@string.Format("{0}{1}", item.Currency.Nomenclature, item.PriceAmount)</span>
+                                    <h5 class="card-title">@item.Name</h5>
+                                    <p class="card-text">@Html.Raw(item.ShortDescription)</p>
+                                    <div class="form-group d-none  d-lg-block d-xl-block" style="text-align:center">
+                                        @if (item.DisplayAcquiereProduct)
+                                        {
+                                            <a href="@Url.Action("BuyProduct","Products",new { id=item.ProductId })" class="btn btn-giroala-light  text-break ">Seleccionar este para mi</a><br />
+                                        }
+                                        <a href="@item.AcquireProduct" class="btn btn-giroala text-break mt-2">Adquirir este producto</a>
+                                    </div>
+                                    <div class="form-group d-block d-lg-none d-xl-none" style="text-align:center">
+                                        @if (item.DisplayAcquiereProduct)
+                                        {
+                                            <a href="@Url.Action("BuyProduct","Products",new { id=item.ProductId })" class="btn btn-giroala-light  text-break ">Seleccionar</a><br />
+                                        }
+                                        <a href="@item.AcquireProduct" class="btn btn-giroala text-break mt-2">Adquirir</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 mb-4 col-product">
+                            <div class="card card-product" style="width:100%">
+                                <img src="@Url.Content(item.FullRoutePicture)" class="card-img-top img-thumbnail" onclick="location.href='@Url.Action("Details","Products", new { id=item.ProductId})'" alt="@item.Name">
+                                <div class="card-body">
+                                    <span class="font-weight-bold text-muted pull-right">@string.Format("{0}{1}", item.Currency.Nomenclature, item.PriceAmount)</span>
+                                    <h5 class="card-title">@item.Name</h5>
+                                    <p class="card-text">@Html.Raw(item.ShortDescription)</p>
+                                    <div class="form-group d-none  d-lg-block d-xl-block" style="text-align:center">
+                                        @if (item.DisplayAcquiereProduct)
+                                        {
+                                            <a href="@Url.Action("BuyProduct","Products",new { id=item.ProductId })" class="btn btn-giroala-light  text-break ">Seleccionar este para mi</a><br />
+                                        }
+                                        <a href="@item.AcquireProduct" class="btn btn-giroala text-break mt-2">Adquirir este producto</a>
+                                    </div>
+                                    <div class="form-group d-block d-lg-none d-xl-none" style="text-align:center">
+                                        @if (item.DisplayAcquiereProduct)
+                                        {
+                                            <a href="@Url.Action("BuyProduct","Products",new { id=item.ProductId })" class="btn btn-giroala-light  text-break ">Seleccionar</a><br />
+                                        }
+                                        <a href="@item.AcquireProduct" class="btn btn-giroala text-break mt-2">Adquirir</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     }
-                </ul>
-            </p>
-            <p>
-                <button class="btn btn-light" onclick="Find();"><i class="fa fa-search"></i>&nbsp;Buscar</button>
-            </p>
-        </div>
-    </div>
-    <div id="sectionProducts" class="col-xl-10 col-lg-9 col-md-8 col-sm-12">
-        <h2>Productos</h2>
-        <hr />
-        <div class="row justify-content-start">
-            @foreach (var item in Model.Products.Where(p => !p.RealState))
-            {
-                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 mb-4">
-                    <div class="card card-product">
-                        <img src="@Url.Content(item.FullRoutePicture)" class="card-img-top img-thumbnail" onclick="location.href='@Url.Action("Details","Products", new { id=item.ProductId})'" style="height:300px" alt="@item.Name">
-                        <div class="card-body">
-                            <span class="font-weight-bold text-muted pull-right">@string.Format("{0}{1}", item.Currency.Nomenclature, item.PriceAmount)</span>
-                            <h5 class="card-title">@item.Name</h5>
-                            <p class="card-text">@Html.Raw(item.ShortDescription)</p>
-                            <div class="form-group" style="text-align:center">
-                                @if (item.DisplayAcquiereProduct)
-                                {
-                                    <a href="@Url.Action("BuyProduct","Products",new { id=item.ProductId })" class="btn btn-giroala-light">Seleccionar este para mi</a><br />
-                                }
-                                <a href="@item.AcquireProduct" class="btn btn-giroala mt-2">Adquirir este producto</a>
-                            </div>
-
-                        </div>
-                    </div>
                 </div>
-            }
-        </div>
-        <h2>Bienes Raíces</h2>
-        <hr />
-        <div class="row justify-content-start">
-            @foreach (var item in Model.Products.Where(p => p.RealState))
-            {
-                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 mb-4">
-                    <div class="card card-product">
-                        <img src="@Url.Content(item.FullRoutePicture)" class="card-img-top img-thumbnail" onclick="location.href='@Url.Action("Details","Products", new { id=item.ProductId})'" style="height:300px" alt="@item.Name">
-                        <div class="card-body">
-                            <span class="font-weight-bold text-muted pull-right">@string.Format("{0}{1}", item.Currency.Nomenclature, item.PriceAmount)</span>
-                            <h5 class="card-title">@item.Name</h5>
-                            <p class="card-text">@Html.Raw(item.ShortDescription)</p>
-                            <div class="form-group" style="text-align:center">
-                                @if (item.DisplayAcquiereProduct)
-                                {
-                                    <a href="@Url.Action("BuyProduct", "Products", new { id=item.ProductId })" class="btn btn-giroala-light">Seleccionar este para mi</a><br />
-                                }
-                                <a href="@item.AcquireProduct" class="btn btn-giroala mt-2">Adquirir este producto</a>
+            </div>
+            <h2>Bienes Raíces</h2>
+            <hr />
+            <div class="content">
+                <div class="row align-content-start">
+                    @foreach (var item in Model.Products.Where(p => p.RealState))
+                    {
+                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 mb-4 col-product">
+                            <div class="card card-product" style="width:100%">
+                                <img src="@Url.Content(item.FullRoutePicture)" class="card-img-top img-thumbnail" onclick="location.href='@Url.Action("Details","Products", new { id=item.ProductId})'" alt="@item.Name">
+                                <div class="card-body">
+                                    <span class="font-weight-bold text-muted pull-right">@string.Format("{0}{1}", item.Currency.Nomenclature, item.PriceAmount)</span>
+                                    <h5 class="card-title">@item.Name</h5>
+                                    <p class="card-text">@Html.Raw(item.ShortDescription)</p>
+                                    <div class="form-group d-none  d-lg-block d-xl-block" style="text-align:center">
+                                        @if (item.DisplayAcquiereProduct)
+                                        {
+                                            <a href="@Url.Action("BuyProduct","Products",new { id=item.ProductId })" class="btn btn-giroala-light  text-break ">Seleccionar este para mi</a><br />
+                                        }
+                                        <a href="@item.AcquireProduct" class="btn btn-giroala text-break mt-2">Adquirir este producto</a>
+                                    </div>
+                                    <div class="form-group d-block d-lg-none d-xl-none" style="text-align:center">
+                                        @if (item.DisplayAcquiereProduct)
+                                        {
+                                            <a href="@Url.Action("BuyProduct","Products",new { id=item.ProductId })" class="btn btn-giroala-light  text-break ">Seleccionar</a><br />
+                                        }
+                                        <a href="@item.AcquireProduct" class="btn btn-giroala text-break mt-2">Adquirir</a>
+                                    </div>
+                                </div>
                             </div>
-
                         </div>
-                    </div>
+                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 mb-4 col-product">
+                            <div class="card card-product" style="width:100%">
+                                <img src="@Url.Content(item.FullRoutePicture)" class="card-img-top img-thumbnail" onclick="location.href='@Url.Action("Details","Products", new { id=item.ProductId})'" alt="@item.Name">
+                                <div class="card-body">
+                                    <span class="font-weight-bold text-muted pull-right">@string.Format("{0}{1}", item.Currency.Nomenclature, item.PriceAmount)</span>
+                                    <h5 class="card-title">@item.Name</h5>
+                                    <p class="card-text">@Html.Raw(item.ShortDescription)</p>
+                                    <div class="form-group d-none  d-lg-block d-xl-block" style="text-align:center">
+                                        @if (item.DisplayAcquiereProduct)
+                                        {
+                                            <a href="@Url.Action("BuyProduct","Products",new { id=item.ProductId })" class="btn btn-giroala-light  text-break ">Seleccionar este para mi</a><br />
+                                        }
+                                        <a href="@item.AcquireProduct" class="btn btn-giroala text-break mt-2">Adquirir este producto</a>
+                                    </div>
+                                    <div class="form-group d-block d-lg-none d-xl-none" style="text-align:center">
+                                        @if (item.DisplayAcquiereProduct)
+                                        {
+                                            <a href="@Url.Action("BuyProduct","Products",new { id=item.ProductId })" class="btn btn-giroala-light  text-break ">Seleccionar</a><br />
+                                        }
+                                        <a href="@item.AcquireProduct" class="btn btn-giroala text-break mt-2">Adquirir</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    }
                 </div>
-            }
+            </div>
         </div>
-    </div>
 
+    </div>
 </div>
 @if(Model.DisplayClothes)
 {
