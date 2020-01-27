@@ -225,6 +225,7 @@ namespace Chavo.ECommerce.Controllers
                 if (generalConfiguration != null)
                 {
                     view.MessageLogin = generalConfiguration.MessageLogin.Replace("{Email}",register.Email).Replace("{Transaction}", register.Transaction);
+                    await MailHelper.SendMail(register.Email, "Registro Románico", view.MessageLogin);
                 }                
                 return View(view);
             }            

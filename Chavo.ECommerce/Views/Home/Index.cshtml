@@ -107,31 +107,7 @@ else
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 mb-4 col-product">
-                            <div class="card card-product" style="width:100%">
-                                <img src="@Url.Content(item.FullRoutePicture)" class="card-img-top img-thumbnail" onclick="location.href='@Url.Action("Details","Products", new { id=item.ProductId})'" alt="@item.Name">
-                                <div class="card-body">
-                                    <span class="font-weight-bold text-muted pull-right">@string.Format("{0}{1}", item.Currency.Nomenclature, item.PriceAmount)</span>
-                                    <h5 class="card-title">@item.Name</h5>
-                                    <p class="card-text">@Html.Raw(item.ShortDescription)</p>
-                                    <div class="form-group d-none  d-lg-block d-xl-block" style="text-align:center">
-                                        @if (item.DisplayAcquiereProduct)
-                                        {
-                                            <a href="@Url.Action("BuyProduct","Products",new { id=item.ProductId })" class="btn btn-giroala-light  text-break ">Seleccionar este para mi</a><br />
-                                        }
-                                        <a href="@item.AcquireProduct" class="btn btn-giroala text-break mt-2">Adquirir este producto</a>
-                                    </div>
-                                    <div class="form-group d-block d-lg-none d-xl-none" style="text-align:center">
-                                        @if (item.DisplayAcquiereProduct)
-                                        {
-                                            <a href="@Url.Action("BuyProduct","Products",new { id=item.ProductId })" class="btn btn-giroala-light  text-break ">Seleccionar</a><br />
-                                        }
-                                        <a href="@item.AcquireProduct" class="btn btn-giroala text-break mt-2">Adquirir</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        </div>                       
                     }
                 </div>
             </div>
@@ -164,32 +140,7 @@ else
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 mb-4 col-product">
-                            <div class="card card-product" style="width:100%">
-                                <img src="@Url.Content(item.FullRoutePicture)" class="card-img-top img-thumbnail" onclick="location.href='@Url.Action("Details","Products", new { id=item.ProductId})'" alt="@item.Name">
-                                <div class="card-body">
-                                    <span class="font-weight-bold text-muted pull-right">@string.Format("{0}{1}", item.Currency.Nomenclature, item.PriceAmount)</span>
-                                    <h5 class="card-title">@item.Name</h5>
-                                    <p class="card-text">@Html.Raw(item.ShortDescription)</p>
-                                    <div class="form-group d-none  d-lg-block d-xl-block" style="text-align:center">
-                                        @if (item.DisplayAcquiereProduct)
-                                        {
-                                            <a href="@Url.Action("BuyProduct","Products",new { id=item.ProductId })" class="btn btn-giroala-light  text-break ">Seleccionar este para mi</a><br />
-                                        }
-                                        <a href="@item.AcquireProduct" class="btn btn-giroala text-break mt-2">Adquirir este producto</a>
-                                    </div>
-                                    <div class="form-group d-block d-lg-none d-xl-none" style="text-align:center">
-                                        @if (item.DisplayAcquiereProduct)
-                                        {
-                                            <a href="@Url.Action("BuyProduct","Products",new { id=item.ProductId })" class="btn btn-giroala-light  text-break ">Seleccionar</a><br />
-                                        }
-                                        <a href="@item.AcquireProduct" class="btn btn-giroala text-break mt-2">Adquirir</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    }
+                        </div>                        
                     }
                 </div>
             </div>

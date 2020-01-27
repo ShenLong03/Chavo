@@ -338,6 +338,7 @@
     <Content Include="Views\Customers\Details.cshtml" />
     <Content Include="Views\Home\TransacctionNumber.cshtml" />
     <Content Include="Views\PrivateZone\RetirarIngresos.cshtml" />
+    <Content Include="Views\Home\BuildSite.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

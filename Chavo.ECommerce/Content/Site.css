@@ -156,9 +156,6 @@ footer.page-footer .footer-copyright {
     .d-sm-none{
         display:none;
     }
-    .card {
-        height: 150px;
-    }
     .card-product {
         MAX-HEIGHT: 350PX;
     }
@@ -208,28 +205,21 @@ footer.page-footer .footer-copyright {
 }
 
 
-.card img {
+.card-product img {
     width: 100%;
     height: 300px;
 }
 
 @media (max-width: 576px) {
-    .card img {
+    .card-product img {
         height:200px;
     }
-    .card card-body h3 {
+    .card-product card-body h3 {
         font-size: 1.17em
-    }
-    .card {
-       max-height:150px
     }
     .col-product {
         width: 50%;
     }
-    .card {
-        height: 450px;
-    }
-
     .card-product {
         MAX-HEIGHT: 450PX;
     }
@@ -241,10 +231,10 @@ footer.page-footer .footer-copyright {
 
 
 @media (min-width: 768px) {
-    .card img {
+    .card-product img {
         height: auto;
     }
-    .card card-body h3 {
+    .card-product card-body h3 {
         font-size: 1.17em
     }
     .card-product {
@@ -253,10 +243,10 @@ footer.page-footer .footer-copyright {
 }
 
 @media (min-width: 992px) {
-    .card img {
+    .card-product img {
         height: 300px;
     }
-    .card card-body h3 {
+    .card-product card-body h3 {
         font-size: 1em
     }
     .card-product {
@@ -265,14 +255,11 @@ footer.page-footer .footer-copyright {
 }
 
 @media (min-width: 1200px) {
-    .card img {
+    .card-product img {
         height: 300px;
     }
-    .card card-body h3 {
+    .card-product card-body h3 {
         font-size: 1em
-    }
-    .card {
-        min-height:500px;
     }
     .card-product {
         MIN-HEIGHT: 500px;
@@ -329,4 +316,11 @@ footer.page-footer .footer-copyright {
     width: 100%;
     padding-right: 15px;
     padding-left: 15px;
+}
+
+.img-profile-sm {
+    max-width: 75px;
+    width: 75px;
+    height: auto;
+    max-height: 100%;
 }
