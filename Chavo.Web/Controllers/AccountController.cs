@@ -232,7 +232,7 @@
                     }
                     else
                     {
-                        ConfirmEmail(user.Id, code);
+                        await ConfirmEmail(user.Id, code);
                     }
 
                     if (model.Controller=="Customers" && !model.NeedConfirmationEmail)
@@ -251,8 +251,8 @@
                                 await db.SaveChangesAsync();
                             }                            
                         }
-                    }
-
+                    }                  
+                    
                     return RedirectToAction("Index", model.Controller);
                 }
                 AddErrors(result);
@@ -337,14 +337,14 @@
                 // Send an email with this link
                 string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
                 var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-
+                var mailHelper = new MailHelper();
                 try
                 {
                     await UserManager.SendEmailAsync(user.Id, "Reset your account", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                    await MailHelper.SendMail(user.Email, "Reset your account", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
                 }
                 catch (Exception)
-                {
-                    var mailHelper = new MailHelper();
+                {                  
                     await MailHelper.SendMail(user.Email, "Reset your account", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
                 }
 
