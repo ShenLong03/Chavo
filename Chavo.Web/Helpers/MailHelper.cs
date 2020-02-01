@@ -14,7 +14,7 @@
             {
                 var message = new MailMessage();
                 message.To.Add(new MailAddress(to));
-                message.From = new MailAddress(WebConfigurationManager.AppSettings["AdminUser"]);
+                message.From = new MailAddress(WebConfigurationManager.AppSettings["AdminMail"]);
                 message.Subject = subject;
                 message.Body = body;
                 message.IsBodyHtml = true;
@@ -23,7 +23,7 @@
                 {
                     var credential = new NetworkCredential
                     {
-                        UserName = WebConfigurationManager.AppSettings["AdminUser"],
+                        UserName = WebConfigurationManager.AppSettings["AdminMail"],
                         Password = WebConfigurationManager.AppSettings["AdminPassWord"]
                     };
 
@@ -48,7 +48,7 @@
                 message.To.Add(new MailAddress(to));
             }
 
-            message.From = new MailAddress(WebConfigurationManager.AppSettings["AdminUser"]);
+            message.From = new MailAddress(WebConfigurationManager.AppSettings["AdminMail"]);
             message.Subject = subject;
             message.Body = body;
             message.IsBodyHtml = true;
@@ -57,7 +57,7 @@
             {
                 var credential = new NetworkCredential
                 {
-                    UserName = WebConfigurationManager.AppSettings["AdminUser"],
+                    UserName = WebConfigurationManager.AppSettings["AdminMail"],
                     Password = WebConfigurationManager.AppSettings["AdminPassWord"]
                 };
 

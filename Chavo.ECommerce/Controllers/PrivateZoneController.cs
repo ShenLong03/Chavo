@@ -25,7 +25,7 @@
 
         public ActionResult AssignedInvestor()
         {
-            var customer = db.Customers.FirstOrDefault();
+            var customer = db.Customers.Where(c => c.UserName == User.Identity.Name).FirstOrDefault();
             return View(customer);
         }
 
