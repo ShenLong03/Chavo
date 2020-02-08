@@ -282,12 +282,12 @@ namespace Chavo.ECommerce.Controllers
                     }
                     try
                     {
-                        await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
-                        await MailHelper.SendMail(user.Email, "Reset Password", body.Replace("{Url}", "<a href=\"" + callbackUrl + "\">here</a>"));
+                        await UserManager.SendEmailAsync(user.Id, "Restablecer la contraseña", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                        await MailHelper.SendMail(user.Email, "Restablecer la contraseña", body.Replace("{Url}", "<a href=\"" + callbackUrl + "\">here</a>"));
                     }
                     catch (Exception)
                     {
-                        await MailHelper.SendMail(user.Email, "Reset Password", body.Replace("{Url}", "<a href=\"" + callbackUrl + "\">here</a>"));
+                        await MailHelper.SendMail(user.Email, "Restablecer la contraseña", body.Replace("{Url}", "<a href=\"" + callbackUrl + "\">here</a>"));
                     }
                 }
                 return RedirectToAction("ForgotPasswordConfirmation", "Account");

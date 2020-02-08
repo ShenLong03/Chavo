@@ -11,6 +11,7 @@
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web;
+    using System.Web.Configuration;
     using System.Web.Mvc;
 
     [Authorize]
@@ -220,12 +221,12 @@
                             }
                             try
                             {
-                                await UserManager.SendEmailAsync(user.Id, "Confirm Email", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
-                                await MailHelper.SendMail(user.Email, "Confirm Email", body.Replace("{Url}", "<a href=\"" + callbackUrl + "\">here</a>"));
+                                await UserManager.SendEmailAsync(user.Id, "Confirmar Email", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                                await MailHelper.SendMail(user.Email, "Confirmar Email", body.Replace("{Url}", "<a href=\"" + callbackUrl + "\">click para confirmar</a>"));
                             }
                             catch (Exception)
                             {
-                                await MailHelper.SendMail(user.Email, "Confir mEmail", body.Replace("{Url}", "<a href=\"" + callbackUrl + "\">here</a>"));
+                                await MailHelper.SendMail(user.Email, "Confirmar Email", body.Replace("{Url}", "<a href=\"" + callbackUrl + "\">click para confirmar</a>"));
                             }
                         }
                                               
@@ -235,7 +236,7 @@
                         await ConfirmEmail(user.Id, code);
                     }
 
-                    if (model.Controller=="Customers" && !model.NeedConfirmationEmail)
+                    if (model.Controller=="Customers" && !model.NeedChangePassword)
                     {                   
                         using (var db= new DataContext())
                         {
@@ -280,12 +281,16 @@
         [AllowAnonymous]
         public async Task<ActionResult> ConfirmEmail(string userId, string code)
         {
+         
             if (userId == null || code == null)
             {
                 return View("Error");
             }
             var result = await UserManager.ConfirmEmailAsync(userId, code);
-            return View(result.Succeeded ? "ConfirmEmail" : "Error");
+
+            ViewBag.ECommercePath = WebConfigurationManager.AppSettings["ECommercePath"];
+            return View(result.Succeeded ? "ConfirmEmail" : "Error"); 
+            
         }
 
         //
@@ -340,12 +345,12 @@
                 var mailHelper = new MailHelper();
                 try
                 {
-                    await UserManager.SendEmailAsync(user.Id, "Reset your account", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
-                    await MailHelper.SendMail(user.Email, "Reset your account", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                    await UserManager.SendEmailAsync(user.Id, "Restablecer su cuenta", "Restablezca su contraseña haciendo clic <a href=\"" + callbackUrl + "\">aquí</a>");
+                    await MailHelper.SendMail(user.Email, "Restablecer su cuenta", "Restablezca su contraseña haciendo clic<a href=\"" + callbackUrl + "\">aquí</a>");
                 }
                 catch (Exception)
                 {                  
-                    await MailHelper.SendMail(user.Email, "Reset your account", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                    await MailHelper.SendMail(user.Email, "Restablecer su cuenta", "Restablezca su contraseña haciendo clic <a href=\"" + callbackUrl + "\">aquí</a>");
                 }
 
                 return RedirectToAction("ForgotPasswordConfirmation", "Account");

@@ -30,7 +30,7 @@
                     smtp.Credentials = credential;
                     smtp.Host = WebConfigurationManager.AppSettings["SMTPName"];
                     smtp.Port = int.Parse(WebConfigurationManager.AppSettings["SMTPPort"]);
-                    smtp.EnableSsl = false;
+                    smtp.EnableSsl = true;
                     await smtp.SendMailAsync(message);
                 }
             }

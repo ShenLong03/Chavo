@@ -86,7 +86,7 @@ namespace Chavo.Web.Models
         [Display(Name = "Need Confirmation Email?")]
         public bool NeedConfirmationEmail { get; set; } = true;
 
-        [Display(Name = "Need Change Password")]
+        [Display(Name = "Need Change Password?")]
         public bool NeedChangePassword { get; set; } = true;
 
         public Customer Customer { get; set; }

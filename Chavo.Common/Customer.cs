@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Configuration;
 
     public class Customer
     {
@@ -36,7 +37,7 @@
             {
                 if (!string.IsNullOrEmpty(Picture))
                 {
-                    return string.Concat("http://djarquin01-002-site1.1tempurl.com", Picture.Substring(1));
+                    return string.Concat(ConfigurationManager.AppSettings["ECommercePath"], Picture.Substring(1));
                 }
                 return string.Empty;
             }

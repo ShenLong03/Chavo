@@ -25,7 +25,7 @@
                 }
             }
 
-            IQueryable<Product> productsSelect = db.Products.Where(p=>p.State==State.Disponible && p.Active);
+            IQueryable<Product> productsSelect = db.Products.Where(p=>(p.State==State.Disponible && p.Active) || (p.State == State.Reservado && p.Active && !p.Unique));
 
             if (acquiereProduct)
             {

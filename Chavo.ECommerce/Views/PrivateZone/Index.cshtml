@@ -17,31 +17,43 @@
         </h2>
         <hr />
         <div class="row">
-            <div class="col-lg-4 col-md-4 col-sm-12 pb-sm-3">
-                <div class="card">
-                    <div class="card-header bg-primary text-light"><h5>Corto Plazo <span class="small">- Inversor Asignado</span></h5></div>
-                    <div class="card-body">
-                        @*TODO: Quitar el currency quemado*@
-                        <span style="font-size:3em;color:#6c757d !important;font-weight:500">$&nbsp;<span class="pull-right text-right">@Model.ShortRevenue.ToString("N2")</span></span>
+            @if (Model.DisplayShortRevenue)
+            {
+                <div class="col-lg-4 col-md-4 col-sm-12 pb-sm-3">
+                    <div class="card">
+                        <div class="card-header bg-primary text-light"><h5>Corto Plazo <span class="small">- Inversor Asignado</span></h5></div>
+                        <div class="card-body">
+                            @*TODO: Quitar el currency quemado*@
+                            <span style="font-size:3em;color:#6c757d !important;font-weight:500">$&nbsp;<span class="pull-right text-right">@Model.ShortRevenue.ToString("N2")</span></span>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-12 pb-sm-3">
-                <div class="card">
-                    <div class="card-header bg-success text-light"><h5>Mediano Plazo <span class="small">- GIROALA</span></h5></div>
-                    <div class="card-body">
-                        <span style="font-size:3em;color:#6c757d !important;font-weight:500">$&nbsp;<span class="pull-right text-right">@Model.MediumRevenue.ToString("N2")</span></span>
+            }
+            @if (Model.DisplayMediumRevenue)
+            {
+                <div class="col-lg-4 col-md-4 col-sm-12 pb-sm-3">
+                    <div class="card">
+                        <div class="card-header bg-success text-light"><h5>Mediano Plazo <span class="small">- GIROALA</span></h5></div>
+                        <div class="card-body">
+                            <span style="font-size:3em;color:#6c757d !important;font-weight:500">$&nbsp;<span class="pull-right text-right">@Model.MediumRevenue.ToString("N2")</span></span>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-12 pb-sm-3">
-                <div class="card">
-                    <div class="card-header bg-warning text-dark"><h5>Largo Plazo <span class="small">- Bienes Raíces Románico</span></h5></div>
-                    <div class="card-body">
-                        <span style="font-size:3em;color:#6c757d !important;font-weight:500">$&nbsp;<span class="pull-right text-right">@Model.LongRevenue.ToString("N2")</span></span>
+            }
+            @if (Model.DisplayLongRevenue)
+            {
+                <div class="col-lg-4 col-md-4 col-sm-12 pb-sm-3">
+                    <div class="card">
+                        <div class="card-header bg-warning text-dark"><h5>Largo Plazo <span class="small">- Bienes Raíces Románico</span></h5></div>
+                        <div class="card-body">
+                            <span style="font-size:3em;color:#6c757d !important;font-weight:500">$&nbsp;<span class="pull-right text-right">@Model.LongRevenue.ToString("N2")</span></span>
+                        </div>
                     </div>
                 </div>
-            </div>
+            }
+
+
+
         </div>
         <span class="pull-right">
             @* TODO: Cambiar por links dinamicos *@

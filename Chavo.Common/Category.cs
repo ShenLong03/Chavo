@@ -30,7 +30,7 @@
             {
                 if (!string.IsNullOrEmpty(Picture))
                 {
-                    return string.Concat(ConfigurationManager.AppSettings["RutComplet"], Picture.Substring(1));
+                    return string.Concat(ConfigurationManager.AppSettings["CPanelPath"], Picture.Substring(1));
                 }
                 return string.Empty;
             }

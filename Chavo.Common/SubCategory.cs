@@ -31,7 +31,7 @@
             {
                 if (!string.IsNullOrEmpty(Picture))
                 {
-                    return string.Concat("http://djarquin01-002-site1.1tempurl.com", Picture.Substring(1));
+                    return string.Concat(ConfigurationManager.AppSettings["CPanelPath"], Picture.Substring(1));
                 }
                 return string.Empty;
             }

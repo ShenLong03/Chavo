@@ -280,7 +280,7 @@
                 if (customerProduct.StatePurchase==StatePurchase.Entregado)
                 {
                     var product = db.Products.Find(customerProduct.ProductId);
-                    if(product.Unique)
+                    if(product.Unique && product.State==State.Reservado)
                     {
                         product.State = State.Agotado;
                         db.Entry(product).State = EntityState.Modified;
